@@ -36,22 +36,50 @@ namespace ProjectCDTN_63132701.Controllers
             return View(donHangVanChuyens);
         }
 
-
-
-
-
-
-
-
         public ActionResult ThuongHieu()
         {
             return View();
         }
 
-
         public ActionResult Nhan(decimal? minPrice, decimal? maxPrice, string loaiBac, string sapXep)
         {
             var sanPhams = db.san_pham.Where(s => s.id_danh_muc == 1); // ID danh mục 'Nhẫn bạc'
+
+            // 🔹 Lọc theo khoảng giá
+            if (minPrice.HasValue)
+            {
+                sanPhams = sanPhams.Where(s => s.gia >= minPrice.Value);
+            }
+            if (maxPrice.HasValue)
+            {
+                sanPhams = sanPhams.Where(s => s.gia <= maxPrice.Value);
+            }
+
+            // 🔹 Lọc theo loại bạc
+            if (!string.IsNullOrEmpty(loaiBac))
+            {
+                sanPhams = sanPhams.Where(s => s.loai_bac == loaiBac);
+            }
+
+            // 🔹 Sắp xếp sản phẩm
+            switch (sapXep)
+            {
+                case "moi-nhat":
+                    sanPhams = sanPhams.OrderByDescending(s => s.ngay_tao);
+                    break;
+                case "gia-cao":
+                    sanPhams = sanPhams.OrderByDescending(s => s.gia);
+                    break;
+                case "gia-thap":
+                    sanPhams = sanPhams.OrderBy(s => s.gia);
+                    break;
+            }
+
+            return View(sanPhams.ToList());
+        }
+        public ActionResult Lac_Tay(decimal? minPrice, decimal? maxPrice, string loaiBac, string sapXep)
+        {
+            var sanPhams = db.san_pham.Where(s => s.id_danh_muc == 3); // ID danh mục 'Nhẫn bạc'
 
             // 🔹 Lọc theo khoảng giá
             if (minPrice.HasValue)

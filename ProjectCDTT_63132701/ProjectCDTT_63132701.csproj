@@ -330,6 +330,7 @@
     <Content Include="Views\tai_khoan\Details.cshtml" />
     <Content Include="Views\tai_khoan\Edit.cshtml" />
     <Content Include="Views\tai_khoan\Index.cshtml" />
+    <Content Include="Views\san_pham\Lac_Tay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
