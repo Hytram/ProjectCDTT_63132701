@@ -22,8 +22,6 @@ namespace ProjectCDTT_63132701.Models
     
         public int id { get; set; }
         public string ten_danh_muc { get; set; }
-        public string mo_ta { get; set; }
-        public Nullable<System.DateTime> ngay_tao { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<san_pham> san_pham { get; set; }

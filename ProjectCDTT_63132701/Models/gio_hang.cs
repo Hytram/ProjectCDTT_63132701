@@ -14,19 +14,14 @@ namespace ProjectCDTT_63132701.Models
     
     public partial class gio_hang
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public gio_hang()
-        {
-            this.chi_tiet_gio_hang = new HashSet<chi_tiet_gio_hang>();
-        }
-    
         public int id { get; set; }
         public int id_khach_hang { get; set; }
-        public System.DateTime ngay_dat_hang { get; set; }
+        public int id_san_pham { get; set; }
+        public int so_luong { get; set; }
+        public decimal gia { get; set; }
         public string trang_thai { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<chi_tiet_gio_hang> chi_tiet_gio_hang { get; set; }
         public virtual khach_hang khach_hang { get; set; }
+        public virtual san_pham san_pham { get; set; }
     }
 }

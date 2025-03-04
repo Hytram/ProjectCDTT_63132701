@@ -15,10 +15,10 @@ namespace ProjectCDTT_63132701.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class Project_63132701Entities : DbContext
+    public partial class Project_63132701Entities1 : DbContext
     {
-        public Project_63132701Entities()
-            : base("name=Project_63132701Entities")
+        public Project_63132701Entities1()
+            : base("name=Project_63132701Entities1")
         {
         }
     
@@ -28,7 +28,6 @@ namespace ProjectCDTT_63132701.Models
         }
     
         public virtual DbSet<chi_tiet_don_hang> chi_tiet_don_hang { get; set; }
-        public virtual DbSet<chi_tiet_gio_hang> chi_tiet_gio_hang { get; set; }
         public virtual DbSet<chi_tiet_hoa_don> chi_tiet_hoa_don { get; set; }
         public virtual DbSet<danh_muc> danh_muc { get; set; }
         public virtual DbSet<don_hang> don_hang { get; set; }

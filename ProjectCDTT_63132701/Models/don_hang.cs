@@ -29,7 +29,6 @@ namespace ProjectCDTT_63132701.Models
         public string trang_thai { get; set; }
         public Nullable<System.DateTime> ngay_tao { get; set; }
         public string ma_van_don { get; set; }
-        public string trang_thai_van_chuyen { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<chi_tiet_don_hang> chi_tiet_don_hang { get; set; }

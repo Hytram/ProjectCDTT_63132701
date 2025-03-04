@@ -130,14 +130,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Controllers\don_hangController.cs" />
+    <Compile Include="Controllers\khach_hangController.cs" />
     <Compile Include="Controllers\san_phamController.cs" />
+    <Compile Include="Controllers\van_chuyenController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\chi_tiet_don_hang.cs">
-      <DependentUpon>Model_63132701.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\chi_tiet_gio_hang.cs">
       <DependentUpon>Model_63132701.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\chi_tiet_hoa_don.cs">
@@ -235,6 +235,7 @@
     <Content Include="Images\bia3.jpg" />
     <Content Include="Images\bia4.jpg" />
     <Content Include="Images\bongtai1.jpg" />
+    <Content Include="Images\daychuyen1.jpg" />
     <Content Include="Images\daychuyen3.jpg" />
     <Content Include="Images\daychuyen4.jpg" />
     <Content Include="Images\daychuyen5.jpg" />
@@ -244,7 +245,12 @@
     <Content Include="Images\mau1.jpg" />
     <Content Include="Images\mau10.jpg" />
     <Content Include="Images\mau11.jpg" />
+    <Content Include="Images\mau12.jpg" />
+    <Content Include="Images\mau13.jpg" />
     <Content Include="Images\mau14.jpg" />
+    <Content Include="Images\mau15.jpg" />
+    <Content Include="Images\mau17.jpg" />
+    <Content Include="Images\mau18.jpg" />
     <Content Include="Images\mau2.jpg" />
     <Content Include="Images\mau3.jpg" />
     <Content Include="Images\mau4.jpg" />
@@ -254,12 +260,24 @@
     <Content Include="Images\mau8.jpg" />
     <Content Include="Images\mau9.jpg" />
     <Content Include="Images\nhan1.jpg" />
+    <Content Include="Images\nhan10.jpg" />
+    <Content Include="Images\nhan11.jpg" />
     <Content Include="Images\nhan2.jpg" />
     <Content Include="Images\nhan3.jpg" />
+    <Content Include="Images\nhan4.jpg" />
     <Content Include="Images\nhan5.jpg" />
     <Content Include="Images\nhan6.jpg" />
+    <Content Include="Images\nhan7.jpg" />
+    <Content Include="Images\nhan8.jpg" />
+    <Content Include="Images\nhan9.jpg" />
     <Content Include="Images\shop1.jpg" />
+    <Content Include="Images\shop2.jpg" />
+    <Content Include="Images\shop3.jpg" />
+    <Content Include="Images\shop4.jpg" />
     <Content Include="Images\vongtay1.jpg" />
+    <Content Include="Images\vongtay2.jpg" />
+    <Content Include="Images\vongtay3.jpg" />
+    <Content Include="Images\vongtay4.jpg" />
     <Content Include="Models\Model_63132701.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model_63132701.edmx</DependentUpon>
@@ -276,6 +294,7 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Views\web.config" />
     <EntityDeploy Include="Models\Model_63132701.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model_63132701.Designer.cs</LastGenOutput>
@@ -283,7 +302,6 @@
     <Content Include="Models\Model_63132701.edmx.diagram">
       <DependentUpon>Model_63132701.edmx</DependentUpon>
     </Content>
-    <Content Include="Areas\Admin\Views\web.config" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -317,20 +335,38 @@
     <Content Include="Views\san_pham\Index.cshtml" />
     <Content Include="Views\san_pham\Nhan.cshtml" />
     <Content Include="Views\san_pham\QLDH.cshtml" />
-    <Content Include="Views\san_pham\QLKH.cshtml" />
+    <Content Include="Views\khach_hang\QLKH.cshtml" />
     <Content Include="Views\san_pham\QLSP.cshtml" />
     <Content Include="Views\san_pham\QLVC.cshtml" />
     <Content Include="Views\san_pham\ThuongHieu.cshtml" />
     <Content Include="Views\san_pham\YeuThich.cshtml" />
     <Content Include="Views\shared\Error.cshtml" />
     <Content Include="Views\shared\_Layout.cshtml" />
-    <Content Include="Views\shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\shared\_LayoutUser.cshtml" />
     <Content Include="Views\tai_khoan\Create.cshtml" />
     <Content Include="Views\tai_khoan\Delete.cshtml" />
     <Content Include="Views\tai_khoan\Details.cshtml" />
     <Content Include="Views\tai_khoan\Edit.cshtml" />
     <Content Include="Views\tai_khoan\Index.cshtml" />
     <Content Include="Views\san_pham\Lac_Tay.cshtml" />
+    <Content Include="Views\san_pham\Day_Chuyen.cshtml" />
+    <Content Include="Views\san_pham\Bong_Tai.cshtml" />
+    <Content Include="Views\shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\khach_hang\Create.cshtml" />
+    <Content Include="Views\khach_hang\Delete.cshtml" />
+    <Content Include="Views\khach_hang\Details.cshtml" />
+    <Content Include="Views\khach_hang\Edit.cshtml" />
+    <Content Include="Views\khach_hang\Index.cshtml" />
+    <Content Include="Views\don_hang\Create.cshtml" />
+    <Content Include="Views\don_hang\Delete.cshtml" />
+    <Content Include="Views\don_hang\Details.cshtml" />
+    <Content Include="Views\don_hang\Edit.cshtml" />
+    <Content Include="Views\don_hang\Index.cshtml" />
+    <Content Include="Views\van_chuyen\Create.cshtml" />
+    <Content Include="Views\van_chuyen\Delete.cshtml" />
+    <Content Include="Views\van_chuyen\Details.cshtml" />
+    <Content Include="Views\van_chuyen\Edit.cshtml" />
+    <Content Include="Views\van_chuyen\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

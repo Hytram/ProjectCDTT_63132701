@@ -19,6 +19,8 @@ namespace ProjectCDTT_63132701.Models
         public string don_vi_van_chuyen { get; set; }
         public string trang_thai { get; set; }
         public Nullable<System.DateTime> ngay_tao { get; set; }
+        public Nullable<System.DateTime> thoi_gian_giao { get; set; }
+        public Nullable<System.DateTime> thoi_gian_nhan { get; set; }
     
         public virtual don_hang don_hang { get; set; }
     }

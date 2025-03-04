@@ -47,16 +47,42 @@
     @foreach (var sp in Model)
     {
         <div class="product-card">
-            <img src="~/images/nhan1.jpg" alt="@sp.ten_san_pham">
+            <img src="@Url.Content("~/Images/" + sp.anh_san_pham)" alt="@sp.ten_san_pham">
             <div class="product-info">
                 <h3>@sp.ten_san_pham</h3>
                 <p class="price">@sp.gia.ToString("N0") VNĐ</p>
                 @**@              <p class="type">@sp.loai_bac</p>
-        <p class="date">@sp.ngay_tao?.ToString("dd/MM/yyyy")</p>
+   @*     <p class="date">@sp.ngay_tao?.ToString("dd/MM/yyyy")</p>*@
                 <button class="btn btn-dark">Mua ngay</button>
             </div>
         </div>
     }
 </div>
+
+@*<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                <img src="@Url.Content("~/Images/" + item.AnhSanPham)" class="card-img-top" alt="@item.TenSP">
+                <div class="card-body">
+                    <h5 class="card-title">@item.TenSP</h5>
+                    <p class="card-text">@item.MoTa</p>
+                    <p class="card-text">Giá: @item.DonGia.ToString("N0")</p>
+                    <div class="button-cart d-flex align-items-center">
+                        <a href="@Url.Action("Details", "SanPhams_64130053", new { id = item.MaSP })" class="btn btn-primary"><i class="fas fa-info-circle"></i> </a>
+                        <form method="post" action="@Url.Action("AddToCart", "SanPhams_64130053")">
+                            <input type="hidden" name="MaSP" value="@item.MaSP" />
+                            <input type="hidden" name="SoLuong" value="1" />
+                            <button type="submit" class="btn btn-success m-lg-2">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>*@
 
 

@@ -13,18 +13,14 @@ namespace ProjectCDTN_63132701.Controllers
 {
     public class san_phamController : Controller
     {
-        private Project_63132701Entities db = new Project_63132701Entities();
+        private Project_63132701Entities1 db = new Project_63132701Entities1();
 
         public ActionResult QLSP()
         {
             var sanPhams = db.san_pham.ToList();
             return View(sanPhams);
         }
-        public ActionResult QLKH()
-        {
-            var khachHangs = db.khach_hang.ToList();
-            return View(khachHangs);
-        }
+       
         public ActionResult QLDH()
         {
             var donHangs = db.don_hang.Include(h => h.khach_hang).ToList();
@@ -44,6 +40,42 @@ namespace ProjectCDTN_63132701.Controllers
         public ActionResult Nhan(decimal? minPrice, decimal? maxPrice, string loaiBac, string sapXep)
         {
             var sanPhams = db.san_pham.Where(s => s.id_danh_muc == 1); // ID danh mục 'Nhẫn bạc'
+
+            // 🔹 Lọc theo khoảng giá
+            if (minPrice.HasValue)
+            {
+                sanPhams = sanPhams.Where(s => s.gia >= minPrice.Value);
+            }
+            if (maxPrice.HasValue)
+            {
+                sanPhams = sanPhams.Where(s => s.gia <= maxPrice.Value);
+            }
+
+            // 🔹 Lọc theo loại bạc
+            if (!string.IsNullOrEmpty(loaiBac))
+            {
+                sanPhams = sanPhams.Where(s => s.loai_bac == loaiBac);
+            }
+
+            // 🔹 Sắp xếp sản phẩm
+            switch (sapXep)
+            {
+                case "moi-nhat":
+                    sanPhams = sanPhams.OrderByDescending(s => s.ngay_tao);
+                    break;
+                case "gia-cao":
+                    sanPhams = sanPhams.OrderByDescending(s => s.gia);
+                    break;
+                case "gia-thap":
+                    sanPhams = sanPhams.OrderBy(s => s.gia);
+                    break;
+            }
+
+            return View(sanPhams.ToList());
+        }
+        public ActionResult Day_Chuyen(decimal? minPrice, decimal? maxPrice, string loaiBac, string sapXep)
+        {
+            var sanPhams = db.san_pham.Where(s => s.id_danh_muc == 2); // ID danh mục 'Nhẫn bạc'
 
             // 🔹 Lọc theo khoảng giá
             if (minPrice.HasValue)
@@ -113,6 +145,43 @@ namespace ProjectCDTN_63132701.Controllers
 
             return View(sanPhams.ToList());
         }
+        
+        public ActionResult Bong_Tai(decimal? minPrice, decimal? maxPrice, string loaiBac, string sapXep)
+        {
+            var sanPhams = db.san_pham.Where(s => s.id_danh_muc == 4); // ID danh mục 'Nhẫn bạc'
+
+            // 🔹 Lọc theo khoảng giá
+            if (minPrice.HasValue)
+            {
+                sanPhams = sanPhams.Where(s => s.gia >= minPrice.Value);
+            }
+            if (maxPrice.HasValue)
+            {
+                sanPhams = sanPhams.Where(s => s.gia <= maxPrice.Value);
+            }
+
+            // 🔹 Lọc theo loại bạc
+            if (!string.IsNullOrEmpty(loaiBac))
+            {
+                sanPhams = sanPhams.Where(s => s.loai_bac == loaiBac);
+            }
+
+            // 🔹 Sắp xếp sản phẩm
+            switch (sapXep)
+            {
+                case "moi-nhat":
+                    sanPhams = sanPhams.OrderByDescending(s => s.ngay_tao);
+                    break;
+                case "gia-cao":
+                    sanPhams = sanPhams.OrderByDescending(s => s.gia);
+                    break;
+                case "gia-thap":
+                    sanPhams = sanPhams.OrderBy(s => s.gia);
+                    break;
+            }
+
+            return View(sanPhams.ToList());
+        }
 
 
 
@@ -142,8 +211,7 @@ namespace ProjectCDTN_63132701.Controllers
         // GET: san_pham
         public ActionResult Index()
         {
-            var san_pham = db.san_pham.Include(s => s.danh_muc);
-            return View(san_pham.ToList());
+            return View();
         }
 
         // GET: san_pham/Details/5

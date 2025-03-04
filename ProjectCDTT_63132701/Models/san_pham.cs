@@ -18,8 +18,8 @@ namespace ProjectCDTT_63132701.Models
         public san_pham()
         {
             this.chi_tiet_don_hang = new HashSet<chi_tiet_don_hang>();
-            this.chi_tiet_gio_hang = new HashSet<chi_tiet_gio_hang>();
             this.chi_tiet_hoa_don = new HashSet<chi_tiet_hoa_don>();
+            this.gio_hang = new HashSet<gio_hang>();
             this.lich_su_truy_cap = new HashSet<lich_su_truy_cap>();
             this.yeu_thich = new HashSet<yeu_thich>();
         }
@@ -37,10 +37,10 @@ namespace ProjectCDTT_63132701.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<chi_tiet_don_hang> chi_tiet_don_hang { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<chi_tiet_gio_hang> chi_tiet_gio_hang { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<chi_tiet_hoa_don> chi_tiet_hoa_don { get; set; }
         public virtual danh_muc danh_muc { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<gio_hang> gio_hang { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<lich_su_truy_cap> lich_su_truy_cap { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

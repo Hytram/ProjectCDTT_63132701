@@ -1,0 +1,59 @@
+﻿@model ProjectCDTT_63132701.Models.don_hang
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>don_hang</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tong_tien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tong_tien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.trang_thai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.trang_thai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ngay_tao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngay_tao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ma_van_don)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ma_van_don)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.khach_hang.ho_ten)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.khach_hang.ho_ten)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

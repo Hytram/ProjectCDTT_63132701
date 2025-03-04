@@ -1,76 +1,198 @@
-﻿@model IEnumerable<ProjectCDTT_63132701.Models.san_pham>
-
-@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/shared/_LayoutAdmin.cshtml";
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Index</h2>
+<head>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JavaScript (cần thiết cho carousel) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="~/Content/Home.css" />
+</head>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ten_san_pham)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.mo_ta)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.gia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.so_luong)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.anh_san_pham)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.loai_bac)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ngay_tao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.danh_muc.ten_danh_muc)
-        </th>
-        <th></th>
-    </tr>
+<!-- Banner -->
+<div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <!-- Slide 1 -->
+        <div class="carousel-item active" data-bs-interval="3000">
+            <img src="~/Images/bia1.jpg" alt="Trang Sức Cao Cấp" class="d-block w-100 banner-img">
+            <div class="carousel-caption d-flex flex-column align-items-start text-white">
+                <h1>WELCOME TO KIM YẾN</h1>
+                <p>Thời trang - Độc đáo - Giá trị bền vững</p>
+                <a href="@Url.Action("Shop", "SanPham")" class="btn btn-dark">XEM NGAY</a>
+            </div>
+        </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ten_san_pham)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.mo_ta)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.gia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.so_luong)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.anh_san_pham)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.loai_bac)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ngay_tao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.danh_muc.ten_danh_muc)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
+        <!-- Slide 2 -->
+        <div class="carousel-item" data-bs-interval="3000">
+            <img src="~/Images/bia2.jpg" alt="Trang Sức Hiện Đại" class="d-block w-100 banner-img">
+            <div class="carousel-caption d-flex flex-column align-items-start text-white">
+                <h1>WELCOME TO KIM YẾN</h1>
+                <p>Thời trang - Độc đáo - Giá trị bền vững</p>
+                <a href="@Url.Action("Shop", "SanPham")" class="btn btn-dark">XEM NGAY</a>
+            </div>
+        </div>
 
-</table>
+        <!-- Slide 3 -->
+        <div class="carousel-item" data-bs-interval="3000">
+            <img src="~/Images/bia3.jpg" alt="Trang Sức Sang Trọng" class="d-block w-100 banner-img">
+            <div class="carousel-caption d-flex flex-column align-items-start text-white">
+                <h1>WELCOME TO KIM YẾN</h1>
+                <p>Thời trang - Độc đáo - Giá trị bền vững</p>
+                <a href="@Url.Action("Shop", "SanPham")" class="btn btn-dark">XEM NGAY</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nút điều hướng -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
+</div>
+
+
+
+
+<!-- Danh mục nổi bật -->
+<section class="categories py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">DANH MỤC NỔI BẬT</h2>
+        <div class="row text-center">
+            <div class="col-md-3">
+                <img src="~/Images/nhan3.jpg" class="img-thumbnail" alt="Nhẫn Bạc">
+                <h3>Nhẫn</h3>
+            </div>
+            <div class="col-md-3">
+                <img src="~/Images/vongtay1.jpg" class="img-thumbnail" alt="Vòng Tay">
+                <h3>Vòng tay</h3>
+            </div>
+            <div class="col-md-3">
+                <img src="~/Images/bongtai1.jpg" class="img-thumbnail" alt="Hoa Tai">
+                <h3>Bông tai</h3>
+            </div>
+            <div class="col-md-3">
+                <img src="~/Images/mau10.jpg" class="img-thumbnail" alt="Dây Chuyền">
+                <h3>Dây chuyền</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Bộ sưu tập mới -->
+<section class="trendy-collection py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-4">BỘ SƯU TẬP MỚI</h2>
+        <div class="row text-center">
+            <!-- Sản phẩm 1 -->
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="~/Images/mau12.jpg" alt="Earrings" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Dây mảnh đính đá</h5>
+                        <p class="card-text">Giá: 850.000 đ</p>
+                        <a href="#" class="btn btn-outline-dark">Xem ngay</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Sản phẩm 2 -->
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="~/Images/mau13.jpg" alt="Bracelets" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Dây charm </h5>
+                        <p class="card-text">Giá: 1.200.000 đ</p>
+                        <a href="#" class="btn btn-outline-dark">Xem ngay</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Sản phẩm 3 -->
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="~/Images/mau14.jpg" alt="Necklace" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Combo đính nơ</h5>
+                        <p class="card-text">Giá: 1.650.000 đ</p>
+                        <a href="#" class="btn btn-outline-dark">Xem ngay</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Sản phẩm 4 -->
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="~/Images/mau4.jpg" alt="Rings" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Combo đính đá sang trọng</h5>
+                        <p class="card-text">Giá: 2.990.000 đ</p>
+                        <a href="#" class="btn btn-outline-dark">Xem ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Bộ sưu tập mùa hè -->
+<section class="autumn-collection py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">BỘ SƯU TẬP MÙA HÈ</h2>
+        <div class="row">
+            <!-- Card 1 -->
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="~/Images/mau6.jpg" alt="Rings" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Combo sang trọng</h5>
+                        <p class="card-text">Giá: 1.790.000 đ</p>
+                        <a href="#" class="btn btn-outline-dark">Xem ngay</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="~/Images/mau9.jpg" alt="Necklace" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Dây mảnh lấp lánh</h5>
+                        <p class="card-text">Giá: 1.990.000 đ</p>
+                        <a href="#" class="btn btn-outline-dark">Xem ngay</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="~/Images/anh12.jpg" alt="Bracelets" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Dây mảnh ngọc trai</h5>
+                        <p class="card-text">Giá: 990.000 đ</p>
+                        <a href="#" class="btn btn-outline-dark">Xem ngay</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="col-md-3">
+                <div class="card">
+                    <img src="~/Images/mau11.jpg" alt="Earrings" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title"> Combo ngọc trai</h5>
+                        <p class="card-text">Giá: 1.300.000 đ</p>
+                        <a href="#" class="btn btn-outline-dark">Xem ngay</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
