@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/StyleAdmin.css" rel="stylesheet" />
+    <link href="~/Content/styleAdmin.css" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+    <!-- HEADER -->
+    <div id="menu">
+        <div class="header-container">
+            <!-- Tìm kiếm -->
+            <div class="header-left">
+                <i class="fas fa-map-marker-alt"></i>
+                <input type="text" placeholder="Tìm kiếm">
+            </div>
+
+            <!-- Logo -->
+            <div class="header-center">
+
+                <a href="@Url.Action("Index", "Home")">
+                    <img src="~/Images/logo.png" alt="Logo" style="cursor: pointer;">
+                </a>
+
+            </div>
+
+            <!-- Biểu tượng yêu thích và giỏ hàng -->
+            <div class="header-right">
+                <div>
+                    <i class="far fa-heart"></i> <span>0</span>
+                </div>
+                <div>
+                    <i class="fas fa-shopping-bag"></i> <span>0</span>
+                </div>
+                <div>
+                    <i class="fa-solid fa-user"></i> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MENU NAV -->
+    <div class="nav-container">
+        <ul class="nav_menu">
+
+            <li class="nav-item">
+                @Html.ActionLink("Thương hiệu", "../san_pham/ThuongHieu", new { @class = "nav-link" })
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Sản phẩm
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li>@Html.ActionLink("Nhẫn bạc", "Nhan", "san_pham", new { }, new { @class = "dropdown-item" })</li>
+                    <li>@Html.ActionLink("Vòng tay bạc", "Create", "san_pham", new { }, new { @class = "dropdown-item" })</li>
+                    <li>@Html.ActionLink("Dây chuyền bạc", "Index", "san_pham", new { }, new { @class = "dropdown-item" })</li>
+                    <li>@Html.ActionLink("Bông tai bạc", "Index", "san_pham", new { }, new { @class = "dropdown-item" })</li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                @Html.ActionLink("Dịch vụ", "../san_pham/DichVu", new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("Khuyến mãi", "../khach_hangs_63132701/Index", new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("x", "#", new { @class = "nav-link" })
+            </li>
+        </ul>
+    </div>
+
+    <!-- CONTENT -->
+    <div id="content">
+        @RenderBody()
+    </div>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Gọi mua hàng -->
+            <div class="footer-section">
+                <h5>GỌI MUA HÀNG <span>(Phím 1) (8:00 - 21:00)</span></h5>
+                <div class="footer-contact">
+                    <i class="fas fa-phone-alt"></i>
+                    <p>1900 000 123</p>
+                </div>
+                <p>Tất cả các ngày trong tuần</p>
+
+                <h5>GÓP Ý, KHIẾU NẠI <span>(Phím 3) (8:00 - 21:00)</span></h5>
+                <div class="footer-contact">
+                    <i class="fas fa-phone-alt"></i>
+                    <p>1900 000 123</p>
+                </div>
+                <p>Tất cả các ngày trong tuần</p>
+            </div>
+
+            <!-- Hệ thống showroom -->
+            <div class="footer-section">
+                <h5>LIÊN HỆ</h5>
+                <div>
+                    <p>Email: kimyenjewelry@gmail.com</p>
+                    <p>Địa chỉ:66 Trần Quý Cáp, Diên Khánh, Khánh Hoà </p>
+                    <p>Giờ hoạt động: 8:00 ~ 21:00</p>
+                </div>
+                <div class="footer-socials">
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-youtube"></i>
+                    <i class="fab fa-zalo"></i>
+                    <i class="fab fa-tiktok"></i>
+                </div>
+
+            </div>
+
+            <!-- Fanpage -->
+            <div class="footer-section">
+                <h5>HỆ THỐNG SHOWROOM</h5>
+                <img src="~/Images/shop1.jpg" alt="Hệ thống showroom">
+
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

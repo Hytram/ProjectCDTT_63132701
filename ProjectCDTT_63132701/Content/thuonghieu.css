@@ -1,0 +1,211 @@
+﻿/* Cấu hình chung */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+/* Phần About */
+.about-section {
+    padding: 80px 0;
+    background-color: #f5f0eb; /* Màu be  */
+    border-radius: 20px;
+}
+
+
+    .about-section .container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+
+.image-container img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.text-container h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #7d5a50;
+    margin-bottom: 20px;
+}
+
+.text-container p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #555;
+}
+
+/* Phần Design Story */
+.design-story-container {
+    padding: 80px 0;
+    background-color: #f4f4f4;
+}
+
+.design-story-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+    .design-story-section.reverse {
+        flex-direction: row-reverse;
+    }
+
+    .design-story-section .text {
+        max-width: 500px;
+    }
+
+    .design-story-section h2 {
+        font-size: 26px;
+        color: #6d4c41;
+        margin-bottom: 15px;
+    }
+
+    .design-story-section p {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.6;
+    }
+
+    .design-story-section img {
+        width: 100%;
+        max-width: 450px;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+    }
+
+        .design-story-section img:hover {
+            transform: scale(1.05);
+        }
+
+/* PHẦN TRANG SỨC (High Jewelry) */
+.high-jewelry {
+    padding: 80px 0;
+    background-color: #f5f0eb;
+    text-align: center;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 0 50px;
+}
+
+.grid-item img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+    .grid-item img:hover {
+        transform: scale(1.05);
+    }
+
+.text-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    padding: 40px;
+    border-radius: 10px;
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+    /* Hover Effect */
+    .text-box:hover {
+        background-color: #6b4f41; /* Màu nâu  */
+        transform: scale(1.05); 
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Đổ bóng */
+    }
+
+
+/* FALL COLLECTION */
+.fall-collection {
+    padding: 80px 0;
+    background-color: #f4f4f4;
+}
+
+    .fall-collection .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+.large img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+
+
+.certification-warranty {
+    padding: 50px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.image-grid {
+    display: flex;
+    gap: 10px;
+}
+
+    .image-grid img {
+        width: 50%;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+        .image-grid img:hover {
+            transform: scale(1.05);
+        }
+
+.certification-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cert-item {
+    background-color: #f5f0eb;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+    .cert-item img {
+        width: 80px;
+        margin-bottom: 10px;
+    }
+
+    .cert-item:hover {
+        background-color: #7d5a50;
+        color: white;
+        transform: scale(1.05);
+    }
+
+    .cert-item h3 {
+        color: #6d4c41;
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+
+    .cert-item:hover h3 {
+        color: white;
+    }

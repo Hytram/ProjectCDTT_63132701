@@ -1,0 +1,76 @@
+﻿@model IEnumerable<ProjectCDTT_63132701.Models.san_pham>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ten_san_pham)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mo_ta)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.so_luong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.anh_san_pham)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.loai_bac)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ngay_tao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.danh_muc.ten_danh_muc)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ten_san_pham)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mo_ta)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.so_luong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.anh_san_pham)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.loai_bac)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ngay_tao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.danh_muc.ten_danh_muc)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

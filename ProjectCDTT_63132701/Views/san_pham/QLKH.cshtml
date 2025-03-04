@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ProjectCDTT_63132701.Models.khach_hang>
+@{
+    ViewBag.Title = "QLKH";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<h2>Danh sách khách hàng</h2>
+<p>
+    @Html.ActionLink("Thêm khách hàng", "Create", null, new { @class = "btn btn-success" })
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Họ và tên</th>
+            <th>Email</th>
+            <th>Số điện thoại</th>
+            <th>Địa chỉ</th>
+            <th>Vai trò</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.ho_ten)</td>
+                <td>@Html.DisplayFor(modelItem => item.email)</td>
+                <td>@Html.DisplayFor(modelItem => item.so_dien_thoai)</td>
+                <td>@Html.DisplayFor(modelItem => item.dia_chi)</td>
+                <td>
+                    @if (item.vai_tro == "quan_tri")
+                    {
+                        <span class="badge bg-danger">Quản trị</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-success">Khách hàng</span>
+                    }
+                </td>
+                <td>
+                    <a href="@Url.Action("Details", new { id = item.id })" class="btn btn-info btn-sm">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                    <a href="@Url.Action("Edit", new { id = item.id })" class="btn btn-warning btn-sm">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="@Url.Action("Delete", new { id = item.id })" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

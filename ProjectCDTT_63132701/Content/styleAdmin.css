@@ -1,0 +1,167 @@
+﻿/* Header */
+#menu {
+    background-color: #f7f7f7;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Tổng thể header */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+    height: 100px;
+}
+
+/* Tìm kiếm */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-left input {
+    padding: 7px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    width: 230px;
+}
+
+.header-left i {
+    font-size: 18px;
+    color: #333;
+}
+
+/* Chỉnh logo to hơn */
+.header-center img {
+    max-width: 350px;
+    height: auto;
+}
+
+/* Biểu tượng yêu thích và giỏ hàng */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 20px;
+}
+
+.header-right div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.header-right i {
+    color: black;
+}
+
+.header-right span {
+    background-color: #ddd;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* NAVIGATION MENU */
+.nav-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7f7f7;
+    padding: 10px 0;
+}
+
+.nav_menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    gap: 100px;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: none;
+}
+
+.nav_menu a {
+    text-decoration: none;
+    color: #333; 
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+    position: relative;
+}
+
+.nav_menu a:hover {
+    color: black;
+}
+
+.footer {
+    background-color: #fff;
+    padding: 30px 0;
+    border-top: 1px solid #ddd;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer-section {
+    flex: 1;
+    text-align: left;
+}
+
+.footer-section h3 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.footer-section span {
+    font-size: 14px;
+    color: gray;
+}
+
+.footer-contact {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.footer-contact i {
+    font-size: 24px;
+    margin-right: 10px;
+}
+
+.footer-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.footer-socials {
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.footer-socials i {
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.footer-socials i:hover {
+    color: #c0392b;
+}

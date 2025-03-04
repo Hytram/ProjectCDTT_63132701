@@ -1,0 +1,118 @@
+﻿/* Đặt màu nền be cho toàn trang */
+
+body {
+    background-color: #f7f7f7;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    padding: 0;
+}
+
+/* Tiêu đề chính */
+h2 {
+    color: #7d5a50;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 30px 0 15px;
+    text-align: center;
+}
+
+/* Bảng */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Tiêu đề cột */
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background: #7d5a50;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Nội dung ô bảng */
+td {
+    color: #333;
+    font-size: 15px;
+}
+
+/* Hiệu ứng hover */
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Chú thích bảng */
+.table-note {
+    text-align: center;
+    margin-top: 10px;
+    font-style: italic;
+    color: #777;
+}
+
+/* Lưu ý */
+.note {
+    width: 80%;
+    margin: 20px auto;
+    padding: 15px;
+}
+
+    .note h3 {
+        color: #7d5a50;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .note ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .note li {
+        margin: 5px 0;
+        font-size: 14px;
+        color: #555;
+    }
+
+/* Chữ nổi bật */
+.highlight {
+    color: red;
+    font-weight: bold;
+}
+
+/* Hiệu ứng responsive */
+@media (max-width: 768px) {
+    table {
+        width: 95%;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    th, td {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .note {
+        width: 95%;
+        padding: 10px;
+    }
+
+        .note h3 {
+            font-size: 16px;
+        }
+}

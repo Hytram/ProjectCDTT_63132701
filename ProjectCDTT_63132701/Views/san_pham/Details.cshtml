@@ -1,0 +1,83 @@
+﻿@model ProjectCDTT_63132701.Models.san_pham
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>san_pham</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ten_san_pham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ten_san_pham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mo_ta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mo_ta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.so_luong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.so_luong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.anh_san_pham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.anh_san_pham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.loai_bac)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.loai_bac)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ngay_tao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngay_tao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.danh_muc.ten_danh_muc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.danh_muc.ten_danh_muc)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

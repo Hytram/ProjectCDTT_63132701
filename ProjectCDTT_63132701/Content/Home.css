@@ -1,0 +1,127 @@
+﻿
+body {
+    font-family: 'Arial', sans-serif;
+    background: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+}
+
+
+#bannerCarousel {
+    margin-bottom: 50px;
+}
+
+.banner-img {
+    height: 500px;
+    object-fit: cover;
+}
+
+.carousel-caption {
+    
+    padding: 20px;
+    border-radius: 10px;
+    bottom: 20%;
+    left: 10%;
+    text-align: left;
+}
+
+    .carousel-caption h1 {
+        font-size: 40px;
+        font-weight: bold;
+    }
+
+    .carousel-caption p {
+        font-size: 18px;
+    }
+
+    .carousel-caption .btn {
+        background: #fff;
+        color: #222;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+
+        .carousel-caption .btn:hover {
+            background: #ddd;
+        }
+
+
+.categories .col-md-4 {
+    transition: 0.3s;
+}
+
+    .categories .col-md-4:hover {
+        transform: scale(1.05);
+    }
+
+.categories img {
+    border-radius: 10px;
+    width: 100%;
+    height: 300px; 
+    object-fit: cover; 
+}
+
+
+.categories h3 {
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .card img {
+        height: 250px;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+    }
+
+.card-body {
+    text-align: center;
+    background: #fff;
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.card-text {
+    font-size: 16px;
+    color: #d9534f;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+
+
+
+.trendy-collection .row,
+.autumn-collection .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.trendy-collection .col-md-3,
+.autumn-collection .col-md-3 {
+    flex: 0 0 23%;
+    max-width: 23%;
+    margin-bottom: 20px;
+}

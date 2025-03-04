@@ -1,0 +1,238 @@
+﻿/* ===== RESET CSS ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* ===== HEADER ===== */
+.header {
+    background: white;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+
+/* ===== Search Box ===== */
+.search-box {
+    width: 250px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: black;
+    font-size: 18px;
+}
+
+/* ===== Icons (User & Cart) ===== */
+.icon {
+    font-size: 20px;
+    color: black;
+    margin-left: 15px;
+    text-decoration: none;
+}
+
+/* ===== Navigation Menu ===== */
+.navbar {
+    background: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+    .navbar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+        .navbar ul li {
+            display: inline-block;
+            margin: 0 15px;
+        }
+
+            .navbar ul li a {
+                text-decoration: none;
+                color: black;
+                font-size: 16px;
+                font-weight: bold;
+                transition: 0.3s;
+            }
+
+                .navbar ul li a:hover {
+                    color: #555;
+                }
+
+/* ===== Banner Section ===== */
+.banner {
+    position: relative;
+    text-align: left;
+    color: white;
+}
+
+    .banner img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+.banner-text {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+}
+
+    .banner-text h1 {
+        font-size: 32px;
+        font-weight: bold;
+    }
+
+    .banner-text p {
+        font-size: 18px;
+        margin-top: 10px;
+    }
+
+/* ===== Button Styles ===== */
+.btn-primary {
+    background: white;
+    color: black;
+    border: 2px solid white;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 15px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+    .btn-primary:hover {
+        background: black;
+        color: white;
+        border-color: black;
+    }
+/* ========== CHUNG ========== */
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+h2, h3 {
+    font-weight: bold;
+}
+
+/* ========== HIGH JEWELRY ========== */
+.jewelry {
+    padding: 60px 0;
+}
+
+.text-content {
+    padding-right: 30px;
+}
+
+.image-content img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ========== GRID ========== */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 40px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.grid-item {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+    .grid-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.3s ease;
+    }
+
+    .grid-item:hover img {
+        transform: scale(1.05);
+    }
+
+/* ========== TEXT BOX ========== */
+.text-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    padding: 30px;
+    color: white;
+}
+
+.brown-bg {
+    background: #8B6F4F;
+}
+
+.beige-bg {
+    background: #EAE0D5;
+    color: #333;
+}
+
+/* ========== BUTTONS ========== */
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 2px solid black;
+    transition: all 0.3s ease;
+}
+
+.btn-discover {
+    background: white;
+    color: black;
+}
+
+    .btn-discover:hover {
+        background: black;
+        color: white;
+    }
+
+.btn-learn {
+    background: black;
+    color: white;
+}
+
+    .btn-learn:hover {
+        background: white;
+        color: black;
+    }

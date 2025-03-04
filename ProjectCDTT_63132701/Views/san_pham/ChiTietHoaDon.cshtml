@@ -1,0 +1,36 @@
+﻿@model List<ProjectCDTN_63132701.Models.chi_tiet_hoa_don>
+@{
+    ViewBag.Title = "ChiTietHoaDon";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<h2>Chi Tiết Hóa Đơn</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên Sản Phẩm</th>
+            <th>Số Lượng</th>
+            <th>Giá</th>
+            <th>Tổng Tiền</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.id</td>
+                <td>@item.san_pham.ten_san_pham</td>
+                <td>@item.so_luong</td>
+                <td>@item.gia.ToString("N0") VNĐ</td>
+                <td>@(item.so_luong * item.gia).ToString("N0") VNĐ</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

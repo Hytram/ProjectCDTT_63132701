@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d8973bc0a7de47138911d63ee2f11be0" Name="Diagram1">
+        <EntityTypeShape EntityType="Project_63132701Model.chi_tiet_don_hang" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.chi_tiet_gio_hang" Width="1.5" PointX="8.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.chi_tiet_hoa_don" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.danh_muc" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.don_hang" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.gio_hang" Width="1.5" PointX="6" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.hoa_don" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.khach_hang" Width="1.5" PointX="1.5" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.lich_su_truy_cap" Width="1.5" PointX="5.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.san_pham" Width="1.5" PointX="3" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.sysdiagram" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.thanh_toan" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.van_chuyen" Width="1.5" PointX="3" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.yeu_thich" Width="1.5" PointX="8.25" PointY="6.25" IsExpanded="true" />
+        <AssociationConnector Association="Project_63132701Model.FK__chi_tiet___id_do__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__chi_tiet___id_sa__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__chi_tiet___id_gi__7A672E12" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__chi_tiet___id_sa__7B5B524B" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__chi_tiet___id_ho__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__chi_tiet___id_sa__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__san_pham__id_dan__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__don_hang__id_kha__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__hoa_don__id_don___6D0D32F4" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__thanh_toa__id_do__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__van_chuye__id_do__01142BA1" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__gio_hang__id_kha__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__hoa_don__id_khac__6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__lich_su_t__id_kh__04E4BC85" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__yeu_thich__id_kh__09A971A2" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__lich_su_t__id_sa__05D8E0BE" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__yeu_thich__id_sa__0A9D95DB" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

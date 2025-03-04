@@ -1,0 +1,120 @@
+﻿body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+.banner-img {
+    height: 500px;
+    object-fit: cover;
+}
+
+.carousel-caption {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    text-align: left;
+    max-width: 500px;
+}
+
+    .carousel-caption h1 {
+        font-size: 42px;
+        font-weight: bold;
+    }
+
+    .carousel-caption p {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+.btn-dark {
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+    .btn-dark:hover {
+        background-color: white;
+        color: black;
+    }
+
+
+
+/* ========== BUTTONS ========== */
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 2px solid black;
+    transition: all 0.3s ease;
+}
+
+.btn-discover {
+    background: white;
+    color: black;
+}
+
+    .btn-discover:hover {
+        background: black;
+        color: white;
+    }
+
+.btn-learn {
+    background: black;
+    color: white;
+}
+
+.btn-learn:hover {
+    background: white;
+    color: black;
+}
+
+.categories img, .trendy-collection img, .autumn-collection img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.trendy-collection, .autumn-collection {
+    text-align: center;
+    padding: 50px 0;
+}
+
+.img-thumbnail {
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.img-thumbnail:hover {
+    transform: scale(1.05);
+}
+
+.card {
+    border: none;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+    border-radius: 10px; /* Bo góc */
+}
+
+.card:hover {
+     transform: scale(1.05); /* Phóng to nhẹ */
+     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Đổ bóng  */
+}
+
+.card:active {
+     transform: scale(0.98); 
+     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15); 
+}
+
+.card img {
+    border-radius: 10px 10px 0 0; 
+}
+
+
+
