@@ -12,16 +12,14 @@ namespace ProjectCDTT_63132701.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class gio_hang
+    public partial class LichSuTruyCap
     {
-        public int id { get; set; }
-        public int id_khach_hang { get; set; }
-        public int id_san_pham { get; set; }
-        public int so_luong { get; set; }
-        public decimal gia { get; set; }
-        public string trang_thai { get; set; }
+        public int MaLichSu { get; set; }
+        public Nullable<int> MaKH { get; set; }
+        public Nullable<int> MaSP { get; set; }
+        public Nullable<System.DateTime> ThoiGianTruyCap { get; set; }
     
-        public virtual khach_hang khach_hang { get; set; }
-        public virtual san_pham san_pham { get; set; }
+        public virtual KhachHang KhachHang { get; set; }
+        public virtual SanPham SanPham { get; set; }
     }
 }

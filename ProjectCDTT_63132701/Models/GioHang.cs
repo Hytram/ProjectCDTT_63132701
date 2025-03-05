@@ -12,18 +12,21 @@ namespace ProjectCDTT_63132701.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class danh_muc
+    public partial class GioHang
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public danh_muc()
+        public GioHang()
         {
-            this.san_pham = new HashSet<san_pham>();
+            this.ChiTietGioHangs = new HashSet<ChiTietGioHang>();
         }
     
-        public int id { get; set; }
-        public string ten_danh_muc { get; set; }
+        public int MaGH { get; set; }
+        public int MaKH { get; set; }
+        public Nullable<System.DateTime> NgayDatHang { get; set; }
+        public string TrangThai { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<san_pham> san_pham { get; set; }
+        public virtual ICollection<ChiTietGioHang> ChiTietGioHangs { get; set; }
+        public virtual KhachHang KhachHang { get; set; }
     }
 }

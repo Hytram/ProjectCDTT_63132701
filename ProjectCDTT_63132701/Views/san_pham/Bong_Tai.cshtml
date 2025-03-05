@@ -1,7 +1,7 @@
-﻿@model IEnumerable<ProjectCDTT_63132701.Models.san_pham>
+﻿@model IEnumerable<ProjectCDTT_63132701.Models.SanPham>
 @{
     ViewBag.Title = "Bong_Tai";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
 <head>
@@ -47,12 +47,12 @@
     @foreach (var sp in Model)
     {
         <div class="product-card">
-            <img src="@Url.Content("~/Images/" + sp.anh_san_pham)" alt="@sp.ten_san_pham">
+            <img src="@Url.Content("~/Images/" + sp.AnhSanPham)" alt="@sp.TenSP">
             <div class="product-info">
-                <h3>@sp.ten_san_pham</h3>
-                <p class="price">@sp.gia.ToString("N0") VNĐ</p>
-                @**@              <p class="type">@sp.loai_bac</p>
-                @*<p class="date">@sp.ngay_tao?.ToString("dd/MM/yyyy")</p>*@
+                <h3>@sp.TenSP</h3>
+                <p class="price">@sp.DonGia.ToString("N0") VNĐ</p>
+                @**             <p class="type">@sp.loai_bac@
+        @*<p class="date">@sp.ngay_tao?.ToString("dd/MM/yyyy")</</p>p>*@
                 <button class="btn btn-dark">Mua ngay</button>
             </div>
         </div>

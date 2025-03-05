@@ -10,112 +10,118 @@ using ProjectCDTT_63132701.Models;
 
 namespace ProjectCDTT_63132701.Controllers
 {
-    public class van_chuyenController : Controller
+    public class Van_chuyenController : Controller
     {
-        private Project_63132701Entities1 db = new Project_63132701Entities1();
+        private Project_63132701Entities2 db = new Project_63132701Entities2();
 
-        // GET: van_chuyen
-        public ActionResult Index()
+        public ActionResult QLVC()
         {
-            var van_chuyen = db.van_chuyen.Include(v => v.don_hang);
-            return View(van_chuyen.ToList());
+            var donHangVanChuyens = db.VanChuyens.Include(d => d.DonHang).ToList();
+            return View(donHangVanChuyens);
         }
 
-        // GET: van_chuyen/Details/5
+        // GET: Van_chuyen
+        public ActionResult Index()
+        {
+            var vanChuyens = db.VanChuyens.Include(v => v.DonHang);
+            return View(vanChuyens.ToList());
+        }
+
+        // GET: Van_chuyen/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            van_chuyen van_chuyen = db.van_chuyen.Find(id);
-            if (van_chuyen == null)
+            VanChuyen vanChuyen = db.VanChuyens.Find(id);
+            if (vanChuyen == null)
             {
                 return HttpNotFound();
             }
-            return View(van_chuyen);
+            return View(vanChuyen);
         }
 
-        // GET: van_chuyen/Create
+        // GET: Van_chuyen/Create
         public ActionResult Create()
         {
-            ViewBag.id_don_hang = new SelectList(db.don_hang, "id", "trang_thai");
+            ViewBag.MaDH = new SelectList(db.DonHangs, "MaDH", "TrangThai");
             return View();
         }
 
-        // POST: van_chuyen/Create
+        // POST: Van_chuyen/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,id_don_hang,don_vi_van_chuyen,trang_thai,ngay_tao,thoi_gian_giao,thoi_gian_nhan")] van_chuyen van_chuyen)
+        public ActionResult Create([Bind(Include = "MaVanChuyen,MaDH,DonViVanChuyen,TrangThai,NgayTao,ThoiGianGiao,ThoiGianNhan")] VanChuyen vanChuyen)
         {
             if (ModelState.IsValid)
             {
-                db.van_chuyen.Add(van_chuyen);
+                db.VanChuyens.Add(vanChuyen);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.id_don_hang = new SelectList(db.don_hang, "id", "trang_thai", van_chuyen.id_don_hang);
-            return View(van_chuyen);
+            ViewBag.MaDH = new SelectList(db.DonHangs, "MaDH", "TrangThai", vanChuyen.MaDH);
+            return View(vanChuyen);
         }
 
-        // GET: van_chuyen/Edit/5
+        // GET: Van_chuyen/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            van_chuyen van_chuyen = db.van_chuyen.Find(id);
-            if (van_chuyen == null)
+            VanChuyen vanChuyen = db.VanChuyens.Find(id);
+            if (vanChuyen == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.id_don_hang = new SelectList(db.don_hang, "id", "trang_thai", van_chuyen.id_don_hang);
-            return View(van_chuyen);
+            ViewBag.MaDH = new SelectList(db.DonHangs, "MaDH", "TrangThai", vanChuyen.MaDH);
+            return View(vanChuyen);
         }
 
-        // POST: van_chuyen/Edit/5
+        // POST: Van_chuyen/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,id_don_hang,don_vi_van_chuyen,trang_thai,ngay_tao,thoi_gian_giao,thoi_gian_nhan")] van_chuyen van_chuyen)
+        public ActionResult Edit([Bind(Include = "MaVanChuyen,MaDH,DonViVanChuyen,TrangThai,NgayTao,ThoiGianGiao,ThoiGianNhan")] VanChuyen vanChuyen)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(van_chuyen).State = EntityState.Modified;
+                db.Entry(vanChuyen).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.id_don_hang = new SelectList(db.don_hang, "id", "trang_thai", van_chuyen.id_don_hang);
-            return View(van_chuyen);
+            ViewBag.MaDH = new SelectList(db.DonHangs, "MaDH", "TrangThai", vanChuyen.MaDH);
+            return View(vanChuyen);
         }
 
-        // GET: van_chuyen/Delete/5
+        // GET: Van_chuyen/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            van_chuyen van_chuyen = db.van_chuyen.Find(id);
-            if (van_chuyen == null)
+            VanChuyen vanChuyen = db.VanChuyens.Find(id);
+            if (vanChuyen == null)
             {
                 return HttpNotFound();
             }
-            return View(van_chuyen);
+            return View(vanChuyen);
         }
 
-        // POST: van_chuyen/Delete/5
+        // POST: Van_chuyen/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            van_chuyen van_chuyen = db.van_chuyen.Find(id);
-            db.van_chuyen.Remove(van_chuyen);
+            VanChuyen vanChuyen = db.VanChuyens.Find(id);
+            db.VanChuyens.Remove(vanChuyen);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -12,32 +12,35 @@ namespace ProjectCDTT_63132701.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class don_hang
+    public partial class KhachHang
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public don_hang()
+        public KhachHang()
         {
-            this.chi_tiet_don_hang = new HashSet<chi_tiet_don_hang>();
-            this.hoa_don = new HashSet<hoa_don>();
-            this.thanh_toan = new HashSet<thanh_toan>();
-            this.van_chuyen = new HashSet<van_chuyen>();
+            this.DonHangs = new HashSet<DonHang>();
+            this.GioHangs = new HashSet<GioHang>();
+            this.HoaDons = new HashSet<HoaDon>();
+            this.LichSuTruyCaps = new HashSet<LichSuTruyCap>();
+            this.YeuThiches = new HashSet<YeuThich>();
         }
     
-        public int id { get; set; }
-        public Nullable<int> id_khach_hang { get; set; }
-        public decimal tong_tien { get; set; }
-        public string trang_thai { get; set; }
-        public Nullable<System.DateTime> ngay_tao { get; set; }
-        public string ma_van_don { get; set; }
+        public int MaKH { get; set; }
+        public string HoTen { get; set; }
+        public string Email { get; set; }
+        public string MatKhau { get; set; }
+        public string SoDienThoai { get; set; }
+        public string DiaChi { get; set; }
+        public string VaiTro { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<chi_tiet_don_hang> chi_tiet_don_hang { get; set; }
-        public virtual khach_hang khach_hang { get; set; }
+        public virtual ICollection<DonHang> DonHangs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<hoa_don> hoa_don { get; set; }
+        public virtual ICollection<GioHang> GioHangs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<thanh_toan> thanh_toan { get; set; }
+        public virtual ICollection<HoaDon> HoaDons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<van_chuyen> van_chuyen { get; set; }
+        public virtual ICollection<LichSuTruyCap> LichSuTruyCaps { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<YeuThich> YeuThiches { get; set; }
     }
 }

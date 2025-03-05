@@ -4,36 +4,37 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cab0367eb63a4e6b925ecb608e923962" Name="Diagram1" ZoomLevel="71">
-        <EntityTypeShape EntityType="Project_63132701Model.chi_tiet_don_hang" Width="1.5" PointX="5.25" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Project_63132701Model.chi_tiet_hoa_don" Width="1.5" PointX="8.25" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Project_63132701Model.danh_muc" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Project_63132701Model.don_hang" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Project_63132701Model.gio_hang" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Project_63132701Model.hoa_don" Width="1.5" PointX="6" PointY="14.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Project_63132701Model.khach_hang" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Project_63132701Model.lich_su_truy_cap" Width="1.5" PointX="5.25" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Project_63132701Model.san_pham" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Project_63132701Model.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Project_63132701Model.thanh_toan" Width="1.5" PointX="5.25" PointY="18" IsExpanded="true" />
-        <EntityTypeShape EntityType="Project_63132701Model.van_chuyen" Width="1.5" PointX="5.25" PointY="21.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Project_63132701Model.yeu_thich" Width="1.5" PointX="8.25" PointY="4.75" IsExpanded="true" />
-        <AssociationConnector Association="Project_63132701Model.FK__chi_tiet___id_do__01D345B0" ManuallyRouted="false" />
-        <AssociationConnector Association="Project_63132701Model.FK__chi_tiet___id_sa__02C769E9" ManuallyRouted="false" />
-        <AssociationConnector Association="Project_63132701Model.FK__chi_tiet___id_ho__13F1F5EB" ManuallyRouted="false" />
-        <AssociationConnector Association="Project_63132701Model.FK__chi_tiet___id_sa__14E61A24" ManuallyRouted="false" />
-        <AssociationConnector Association="Project_63132701Model.FK__san_pham__id_dan__7849DB76" ManuallyRouted="false" />
-        <AssociationConnector Association="Project_63132701Model.FK__don_hang__id_kha__7EF6D905" ManuallyRouted="false" />
-        <AssociationConnector Association="Project_63132701Model.FK__hoa_don__id_don___10216507" ManuallyRouted="false" />
-        <AssociationConnector Association="Project_63132701Model.FK__thanh_toa__id_do__09746778" ManuallyRouted="false" />
-        <AssociationConnector Association="Project_63132701Model.FK__van_chuye__id_do__2057CCD0" ManuallyRouted="false" />
-        <AssociationConnector Association="Project_63132701Model.FK__gio_hang__id_kha__19AACF41" ManuallyRouted="false" />
-        <AssociationConnector Association="Project_63132701Model.FK__gio_hang__id_san__1A9EF37A" ManuallyRouted="false" />
-        <AssociationConnector Association="Project_63132701Model.FK__hoa_don__id_khac__0F2D40CE" ManuallyRouted="false" />
-        <AssociationConnector Association="Project_63132701Model.FK__lich_su_t__id_kh__24285DB4" ManuallyRouted="false" />
-        <AssociationConnector Association="Project_63132701Model.FK__yeu_thich__id_kh__28ED12D1" ManuallyRouted="false" />
-        <AssociationConnector Association="Project_63132701Model.FK__lich_su_t__id_sa__251C81ED" ManuallyRouted="false" />
-        <AssociationConnector Association="Project_63132701Model.FK__yeu_thich__id_sa__29E1370A" ManuallyRouted="false" />
+      <Diagram DiagramId="6be0ec3f10da403dbc13d1746260406f" Name="Diagram1">
+        <EntityTypeShape EntityType="Project_63132701Model.ChiTietDonHang" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.ChiTietGioHang" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.ChiTietHoaDon" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.DonHang" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.GioHang" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.HoaDon" Width="1.5" PointX="3" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.KhachHang" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.LichSuTruyCap" Width="1.5" PointX="8.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.LoaiSanPham" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.SanPham" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.ThanhToan" Width="1.5" PointX="5.25" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.VanChuyen" Width="1.5" PointX="5.25" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63132701Model.YeuThich" Width="1.5" PointX="8.25" PointY="4.5" IsExpanded="true" />
+        <AssociationConnector Association="Project_63132701Model.FK__ChiTietDon__MaDH__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__ChiTietDon__MaSP__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__ChiTietGio__MaGH__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__ChiTietGio__MaSP__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__ChiTietHoa__MaDH__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__ChiTietHoa__MaSP__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__DonHang__MaKH__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__HoaDon__MaDH__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__ThanhToan__MaDH__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__VanChuyen__MaDH__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__GioHang__MaKH__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__HoaDon__MaKH__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__LichSuTruy__MaKH__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__YeuThich__MaKH__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__LichSuTruy__MaSP__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__SanPham__MaLoaiS__1920BF5C" ManuallyRouted="false" />
+        <AssociationConnector Association="Project_63132701Model.FK__YeuThich__MaSP__49C3F6B7" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -10,10 +10,17 @@
 namespace ProjectCDTT_63132701.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagramdefinition_Result
+    public partial class ThanhToan
     {
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int MaThanhToan { get; set; }
+        public Nullable<int> MaDH { get; set; }
+        public string PhuongThuc { get; set; }
+        public string TrangThai { get; set; }
+        public string MaGiaoDich { get; set; }
+        public Nullable<System.DateTime> NgayTao { get; set; }
+    
+        public virtual DonHang DonHang { get; set; }
     }
 }

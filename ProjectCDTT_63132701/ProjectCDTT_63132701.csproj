@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -47,15 +47,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Extensions, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Extensions.4.3.1\lib\net462\System.Runtime.Extensions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -130,35 +135,38 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Controllers\don_hangController.cs" />
-    <Compile Include="Controllers\khach_hangController.cs" />
-    <Compile Include="Controllers\san_phamController.cs" />
-    <Compile Include="Controllers\van_chuyenController.cs" />
+    <Compile Include="Controllers\Don_hangController.cs" />
+    <Compile Include="Controllers\Khach_hangController.cs" />
+    <Compile Include="Controllers\San_phamController.cs" />
+    <Compile Include="Controllers\Van_chuyenController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\chi_tiet_don_hang.cs">
+    <Compile Include="Models\ChiTietDonHang.cs">
       <DependentUpon>Model_63132701.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\chi_tiet_hoa_don.cs">
+    <Compile Include="Models\ChiTietGioHang.cs">
       <DependentUpon>Model_63132701.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\danh_muc.cs">
+    <Compile Include="Models\ChiTietHoaDon.cs">
       <DependentUpon>Model_63132701.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\don_hang.cs">
+    <Compile Include="Models\DonHang.cs">
       <DependentUpon>Model_63132701.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\gio_hang.cs">
+    <Compile Include="Models\GioHang.cs">
       <DependentUpon>Model_63132701.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\hoa_don.cs">
+    <Compile Include="Models\HoaDon.cs">
       <DependentUpon>Model_63132701.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\khach_hang.cs">
+    <Compile Include="Models\KhachHang.cs">
       <DependentUpon>Model_63132701.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\lich_su_truy_cap.cs">
+    <Compile Include="Models\LichSuTruyCap.cs">
+      <DependentUpon>Model_63132701.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoaiSanPham.cs">
       <DependentUpon>Model_63132701.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Model_63132701.Context.cs">
@@ -176,25 +184,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model_63132701.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\san_pham.cs">
+    <Compile Include="Models\SanPham.cs">
       <DependentUpon>Model_63132701.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+    <Compile Include="Models\ThanhToan.cs">
       <DependentUpon>Model_63132701.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+    <Compile Include="Models\VanChuyen.cs">
       <DependentUpon>Model_63132701.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>Model_63132701.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\thanh_toan.cs">
-      <DependentUpon>Model_63132701.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\van_chuyen.cs">
-      <DependentUpon>Model_63132701.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\yeu_thich.cs">
+    <Compile Include="Models\YeuThich.cs">
       <DependentUpon>Model_63132701.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -325,21 +324,19 @@
     <Content Include="Views\home\About.cshtml" />
     <Content Include="Views\home\Contact.cshtml" />
     <Content Include="Views\home\Index.cshtml" />
-    <Content Include="Views\san_pham\ChiTietHoaDon.cshtml" />
-    <Content Include="Views\san_pham\Create.cshtml" />
-    <Content Include="Views\san_pham\Delete.cshtml" />
-    <Content Include="Views\san_pham\Details.cshtml" />
-    <Content Include="Views\san_pham\DichVu.cshtml" />
-    <Content Include="Views\san_pham\Edit.cshtml" />
-    <Content Include="Views\san_pham\GioHang.cshtml" />
-    <Content Include="Views\san_pham\Index.cshtml" />
-    <Content Include="Views\san_pham\Nhan.cshtml" />
-    <Content Include="Views\san_pham\QLDH.cshtml" />
-    <Content Include="Views\khach_hang\QLKH.cshtml" />
-    <Content Include="Views\san_pham\QLSP.cshtml" />
-    <Content Include="Views\san_pham\QLVC.cshtml" />
-    <Content Include="Views\san_pham\ThuongHieu.cshtml" />
-    <Content Include="Views\san_pham\YeuThich.cshtml" />
+    <Content Include="Views\San_pham\ChiTietHoaDon.cshtml" />
+    <Content Include="Views\San_pham\Create.cshtml" />
+    <Content Include="Views\San_pham\Delete.cshtml" />
+    <Content Include="Views\San_pham\Details.cshtml" />
+    <Content Include="Views\San_pham\DichVu.cshtml" />
+    <Content Include="Views\San_pham\Edit.cshtml" />
+    <Content Include="Views\San_pham\GioHang.cshtml" />
+    <Content Include="Views\San_pham\Index.cshtml" />
+    <Content Include="Views\San_pham\Nhan.cshtml" />
+    <Content Include="Views\San_pham\QLSP.cshtml" />
+    <Content Include="Views\Khach_hang\QLKH.cshtml" />
+    <Content Include="Views\San_pham\ThuongHieu.cshtml" />
+    <Content Include="Views\San_pham\YeuThich.cshtml" />
     <Content Include="Views\shared\Error.cshtml" />
     <Content Include="Views\shared\_Layout.cshtml" />
     <Content Include="Views\shared\_LayoutUser.cshtml" />
@@ -348,25 +345,27 @@
     <Content Include="Views\tai_khoan\Details.cshtml" />
     <Content Include="Views\tai_khoan\Edit.cshtml" />
     <Content Include="Views\tai_khoan\Index.cshtml" />
-    <Content Include="Views\san_pham\Lac_Tay.cshtml" />
-    <Content Include="Views\san_pham\Day_Chuyen.cshtml" />
-    <Content Include="Views\san_pham\Bong_Tai.cshtml" />
+    <Content Include="Views\San_pham\Lac_Tay.cshtml" />
+    <Content Include="Views\San_pham\Day_Chuyen.cshtml" />
+    <Content Include="Views\San_pham\Bong_Tai.cshtml" />
     <Content Include="Views\shared\_LayoutAdmin.cshtml" />
-    <Content Include="Views\khach_hang\Create.cshtml" />
-    <Content Include="Views\khach_hang\Delete.cshtml" />
-    <Content Include="Views\khach_hang\Details.cshtml" />
-    <Content Include="Views\khach_hang\Edit.cshtml" />
-    <Content Include="Views\khach_hang\Index.cshtml" />
-    <Content Include="Views\don_hang\Create.cshtml" />
-    <Content Include="Views\don_hang\Delete.cshtml" />
-    <Content Include="Views\don_hang\Details.cshtml" />
-    <Content Include="Views\don_hang\Edit.cshtml" />
-    <Content Include="Views\don_hang\Index.cshtml" />
-    <Content Include="Views\van_chuyen\Create.cshtml" />
-    <Content Include="Views\van_chuyen\Delete.cshtml" />
-    <Content Include="Views\van_chuyen\Details.cshtml" />
-    <Content Include="Views\van_chuyen\Edit.cshtml" />
-    <Content Include="Views\van_chuyen\Index.cshtml" />
+    <Content Include="Views\Khach_hang\Create.cshtml" />
+    <Content Include="Views\Khach_hang\Delete.cshtml" />
+    <Content Include="Views\Khach_hang\Details.cshtml" />
+    <Content Include="Views\Khach_hang\Edit.cshtml" />
+    <Content Include="Views\Khach_hang\Index.cshtml" />
+    <Content Include="Views\Don_hang\Create.cshtml" />
+    <Content Include="Views\Don_hang\Delete.cshtml" />
+    <Content Include="Views\Don_hang\Details.cshtml" />
+    <Content Include="Views\Don_hang\Edit.cshtml" />
+    <Content Include="Views\Don_hang\Index.cshtml" />
+    <Content Include="Views\Van_chuyen\Create.cshtml" />
+    <Content Include="Views\Van_chuyen\Delete.cshtml" />
+    <Content Include="Views\Van_chuyen\Details.cshtml" />
+    <Content Include="Views\Van_chuyen\Edit.cshtml" />
+    <Content Include="Views\Van_chuyen\Index.cshtml" />
+    <Content Include="Views\Don_hang\QLDH.cshtml" />
+    <Content Include="Views\Van_chuyen\QLVC.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -438,10 +437,10 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
-  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

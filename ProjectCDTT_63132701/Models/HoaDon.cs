@@ -12,24 +12,23 @@ namespace ProjectCDTT_63132701.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class hoa_don
+    public partial class HoaDon
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public hoa_don()
+        public HoaDon()
         {
-            this.chi_tiet_hoa_don = new HashSet<chi_tiet_hoa_don>();
+            this.ChiTietHoaDons = new HashSet<ChiTietHoaDon>();
         }
     
-        public int id { get; set; }
-        public int id_khach_hang { get; set; }
-        public int id_don_hang { get; set; }
-        public decimal tong_tien { get; set; }
-        public Nullable<System.DateTime> ngay_tao { get; set; }
-        public string trang_thai { get; set; }
+        public int MaDH { get; set; }
+        public int MaKH { get; set; }
+        public decimal TongTien { get; set; }
+        public Nullable<System.DateTime> NgayTao { get; set; }
+        public string TrangThai { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<chi_tiet_hoa_don> chi_tiet_hoa_don { get; set; }
-        public virtual don_hang don_hang { get; set; }
-        public virtual khach_hang khach_hang { get; set; }
+        public virtual ICollection<ChiTietHoaDon> ChiTietHoaDons { get; set; }
+        public virtual DonHang DonHang { get; set; }
+        public virtual KhachHang KhachHang { get; set; }
     }
 }
