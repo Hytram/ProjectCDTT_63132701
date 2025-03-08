@@ -8,6 +8,24 @@ body {
     max-width: 1200px;
 }
 
+.breadcrumb {
+    background: none;
+    padding: 10px 0;
+    font-size: 16px;
+}
+
+.breadcrumb-item a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.breadcrumb-item a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+    color: #6c757d;
+}
 
 #bannerCarousel {
     margin-bottom: 50px;
@@ -27,35 +45,34 @@ body {
     text-align: left;
 }
 
-    .carousel-caption h1 {
-        font-size: 40px;
-        font-weight: bold;
-    }
+.carousel-caption h1 {
+    font-size: 40px;
+    font-weight: bold;
+}
 
-    .carousel-caption p {
-        font-size: 18px;
-    }
+.carousel-caption p {
+    font-size: 18px;
+}
 
-    .carousel-caption .btn {
-        background: #fff;
-        color: #222;
-        padding: 10px 20px;
-        font-size: 16px;
-        border-radius: 5px;
-    }
+.carousel-caption .btn {
+    background: #fff;
+    color: #222;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+}
 
-        .carousel-caption .btn:hover {
-            background: #ddd;
-        }
-
+.carousel-caption .btn:hover {
+    background: #ddd;
+}
 
 .categories .col-md-4 {
     transition: 0.3s;
 }
 
-    .categories .col-md-4:hover {
-        transform: scale(1.05);
-    }
+.categories .col-md-4:hover {
+    transform: scale(1.05);
+}
 
 .categories img {
     border-radius: 10px;
@@ -64,13 +81,11 @@ body {
     object-fit: cover; 
 }
 
-
 .categories h3 {
     margin-top: 15px;
     font-size: 20px;
     font-weight: bold;
 }
-
 
 .card {
     border: none;
@@ -79,16 +94,16 @@ body {
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-    .card:hover {
-        transform: scale(1.05);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    }
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
 
-    .card img {
-        height: 250px;
-        object-fit: cover;
-        border-radius: 10px 10px 0 0;
-    }
+.card img {
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
 
 .card-body {
     text-align: center;
@@ -108,9 +123,6 @@ body {
     font-weight: bold;
     margin-bottom: 10px;
 }
-
-
-
 
 .trendy-collection .row,
 .autumn-collection .row {
