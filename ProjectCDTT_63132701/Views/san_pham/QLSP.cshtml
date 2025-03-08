@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProjectCDTT_63132701.Models.san_pham>
+﻿@model IEnumerable<ProjectCDTT_63132701.Models.SanPham>
 @{
     ViewBag.Title = "QLSP";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -8,51 +8,49 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
-<h2 class="text-center">Danh sách sản phẩm</h2>
+<h2>Danh sách sản phẩm hàng</h2>
+@*<p>
+    @Html.ActionLink("Thêm khách hàng", "Create", null, new { @class = "btn btn-success" })
+</p>*@
 
-<p>
-    @Html.ActionLink("Thêm sản phẩm", "Create", null, new { @class = "btn btn-success" })
-</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Mã sản phẩm</th>
+            <th>Tên sản phẩm</th>
+            <th>Mô tả</th>
+            <th>Đơn giá</th>
+            <th>Loại sản phẩm</th>
+@*            <th>Trạng thái </th>
+            <th></th>*@
 
-@if (Model != null && Model.Any())
-{
-    <table class="table table-bordered table-hover">
-        <thead class="table">
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>Mã sản phẩm</th>
-                <th>Tên sản phẩm</th>
-                <th>Mô tả</th>
-                <th>Đơn giá</th>
-                <th>Loại sản phẩm</th>
-                <th>Hành động</th>
+                <td>@Html.DisplayFor(modelItem => item.MaSP)</td>
+                <td>@Html.DisplayFor(modelItem => item.TenSP)</td>
+                <td>@Html.DisplayFor(modelItem => item.MoTa)</td>
+                <td>@Html.DisplayFor(modelItem => item.DonGia)</td>
+                <td>@Html.DisplayFor(modelItem => item.LoaiBac)</td>
+@*                <td>@Html.DisplayFor(modelItem => item.trang_thai)</td>*@
+@*                <td>
+                    <a href="@Url.Action("ChiTietHoaDon", "SanPhams_64130053", new { id = hoaDon.SoHD })"><i class="fa-solid fa-circle-info"></i></a>
+                </td>*@
+                <td>
+                    <a href="@Url.Action("Details", new { id = item.MaSP })" class="btn btn-info btn-sm">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                    <a href="@Url.Action("Edit", new { id = item.MaSP })" class="btn btn-warning btn-sm">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="@Url.Action("Delete", new { id = item.MaSP })" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.id)</td>
-                    <td>@Html.DisplayFor(modelItem => item.ten_san_pham)</td>
-                    <td>@Html.DisplayFor(modelItem => item.mo_ta)</td>
-                    <td>@Html.DisplayFor(modelItem => item.gia)</td>
-                    <td>@Html.DisplayFor(modelItem => item.loai_bac)</td>
-                    <td>
-                        <a href="@Url.Action("Details", new { id = item.id })" class="btn btn-info btn-sm">
-                            <i class="fas fa-eye"></i>
-                        </a>
-                        <a href="@Url.Action("Edit", new { id = item.id })" class="btn btn-warning btn-sm">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <a href="@Url.Action("Delete", new { id = item.id })" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');">
-                            <i class="fas fa-trash"></i>
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-else
-{
-    <p class="text-center text-danger">Không có sản phẩm nào để hiển thị.</p>
-}
+        }
+    </tbody>
+</table>

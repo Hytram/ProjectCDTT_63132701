@@ -11,36 +11,15 @@ using EntityState = System.Data.Entity.EntityState;
 
 namespace ProjectCDTN_63132701.Controllers
 {
-    public class san_phamController : Controller
+    public class San_phamController : Controller
     {
-        private Project_63132701Entities db = new Project_63132701Entities();
+        private Project_63132701Entities2 db = new Project_63132701Entities2();
 
         public ActionResult QLSP()
         {
-            var sanPhams = db.san_pham.ToList();
+            var sanPhams = db.SanPhams.ToList();
             return View(sanPhams);
         }
-        public ActionResult QLKH()
-        {
-            var khachHangs = db.khach_hang.ToList();
-            return View(khachHangs);
-        }
-        public ActionResult QLDH()
-        {
-            var donHangs = db.don_hang.Include(h => h.khach_hang).ToList();
-            return View(donHangs);
-        }
-        public ActionResult QLVC()
-        {
-            var donHangVanChuyens = db.van_chuyen.Include(d => d.don_hang).ToList();
-            return View(donHangVanChuyens);
-        }
-
-
-
-
-
-
 
 
         public ActionResult ThuongHieu()
@@ -48,38 +27,146 @@ namespace ProjectCDTN_63132701.Controllers
             return View();
         }
 
-
         public ActionResult Nhan(decimal? minPrice, decimal? maxPrice, string loaiBac, string sapXep)
         {
-            var sanPhams = db.san_pham.Where(s => s.id_danh_muc == 1); // ID danh mục 'Nhẫn bạc'
+            var sanPhams = db.SanPhams.Where(s => s.MaLoaiSP == 1); // ID danh mục 'Nhẫn bạc'
 
             // 🔹 Lọc theo khoảng giá
             if (minPrice.HasValue)
             {
-                sanPhams = sanPhams.Where(s => s.gia >= minPrice.Value);
+                sanPhams = sanPhams.Where(s => s.DonGia >= minPrice.Value);
             }
             if (maxPrice.HasValue)
             {
-                sanPhams = sanPhams.Where(s => s.gia <= maxPrice.Value);
+                sanPhams = sanPhams.Where(s => s.DonGia <= maxPrice.Value);
             }
 
             // 🔹 Lọc theo loại bạc
             if (!string.IsNullOrEmpty(loaiBac))
             {
-                sanPhams = sanPhams.Where(s => s.loai_bac == loaiBac);
+                sanPhams = sanPhams.Where(s => s.LoaiBac == loaiBac);
             }
 
             // 🔹 Sắp xếp sản phẩm
             switch (sapXep)
             {
                 case "moi-nhat":
-                    sanPhams = sanPhams.OrderByDescending(s => s.ngay_tao);
+                    sanPhams = sanPhams.OrderByDescending(s => s.NgayTao);
                     break;
                 case "gia-cao":
-                    sanPhams = sanPhams.OrderByDescending(s => s.gia);
+                    sanPhams = sanPhams.OrderByDescending(s => s.DonGia);
                     break;
                 case "gia-thap":
-                    sanPhams = sanPhams.OrderBy(s => s.gia);
+                    sanPhams = sanPhams.OrderBy(s => s.DonGia);
+                    break;
+            }
+
+            return View(sanPhams.ToList());
+        }
+        public ActionResult Day_Chuyen(decimal? minPrice, decimal? maxPrice, string loaiBac, string sapXep)
+        {
+            var sanPhams = db.SanPhams.Where(s => s.MaLoaiSP == 2); // ID danh mục 'Nhẫn bạc'
+
+            // 🔹 Lọc theo khoảng giá
+            if (minPrice.HasValue)
+            {
+                sanPhams = sanPhams.Where(s => s.DonGia >= minPrice.Value);
+            }
+            if (maxPrice.HasValue)
+            {
+                sanPhams = sanPhams.Where(s => s.DonGia <= maxPrice.Value);
+            }
+
+            // 🔹 Lọc theo loại bạc
+            if (!string.IsNullOrEmpty(loaiBac))
+            {
+                sanPhams = sanPhams.Where(s => s.LoaiBac == loaiBac);
+            }
+
+            // 🔹 Sắp xếp sản phẩm
+            switch (sapXep)
+            {
+                case "moi-nhat":
+                    sanPhams = sanPhams.OrderByDescending(s => s.NgayTao);
+                    break;
+                case "gia-cao":
+                    sanPhams = sanPhams.OrderByDescending(s => s.DonGia);
+                    break;
+                case "gia-thap":
+                    sanPhams = sanPhams.OrderBy(s => s.DonGia);
+                    break;
+            }
+
+            return View(sanPhams.ToList());
+        }
+        public ActionResult Lac_Tay(decimal? minPrice, decimal? maxPrice, string loaiBac, string sapXep)
+        {
+            var sanPhams = db.SanPhams.Where(s => s.MaLoaiSP == 3); // ID danh mục 'Nhẫn bạc'
+
+            // 🔹 Lọc theo khoảng giá
+            if (minPrice.HasValue)
+            {
+                sanPhams = sanPhams.Where(s => s.DonGia >= minPrice.Value);
+            }
+            if (maxPrice.HasValue)
+            {
+                sanPhams = sanPhams.Where(s => s.DonGia <= maxPrice.Value);
+            }
+
+            // 🔹 Lọc theo loại bạc
+            if (!string.IsNullOrEmpty(loaiBac))
+            {
+                sanPhams = sanPhams.Where(s => s.LoaiBac == loaiBac);
+            }
+
+            // 🔹 Sắp xếp sản phẩm
+            switch (sapXep)
+            {
+                case "moi-nhat":
+                    sanPhams = sanPhams.OrderByDescending(s => s.NgayTao);
+                    break;
+                case "gia-cao":
+                    sanPhams = sanPhams.OrderByDescending(s => s.DonGia);
+                    break;
+                case "gia-thap":
+                    sanPhams = sanPhams.OrderBy(s => s.DonGia);
+                    break;
+            }
+
+            return View(sanPhams.ToList());
+        }
+        
+        public ActionResult Bong_Tai(decimal? minPrice, decimal? maxPrice, string loaiBac, string sapXep)
+        {
+            var sanPhams = db.SanPhams.Where(s => s.MaLoaiSP == 4); // ID danh mục 'Nhẫn bạc'
+
+            // 🔹 Lọc theo khoảng giá
+            if (minPrice.HasValue)
+            {
+                sanPhams = sanPhams.Where(s => s.DonGia >= minPrice.Value);
+            }
+            if (maxPrice.HasValue)
+            {
+                sanPhams = sanPhams.Where(s => s.DonGia <= maxPrice.Value);
+            }
+
+            // 🔹 Lọc theo loại bạc
+            if (!string.IsNullOrEmpty(loaiBac))
+            {
+                sanPhams = sanPhams.Where(s => s.LoaiBac == loaiBac);
+            }
+
+            // 🔹 Sắp xếp sản phẩm
+            switch (sapXep)
+            {
+                case "moi-nhat":
+                    sanPhams = sanPhams.OrderByDescending(s => s.NgayTao);
+                    break;
+                case "gia-cao":
+                    sanPhams = sanPhams.OrderByDescending(s => s.DonGia);
+                    break;
+                case "gia-thap":
+                    sanPhams = sanPhams.OrderBy(s => s.DonGia);
                     break;
             }
 
@@ -114,8 +201,7 @@ namespace ProjectCDTN_63132701.Controllers
         // GET: san_pham
         public ActionResult Index()
         {
-            var san_pham = db.san_pham.Include(s => s.danh_muc);
-            return View(san_pham.ToList());
+            return View();
         }
 
         // GET: san_pham/Details/5
@@ -125,7 +211,7 @@ namespace ProjectCDTN_63132701.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            san_pham san_pham = db.san_pham.Find(id);
+            SanPham san_pham = db.SanPhams.Find(id);
             if (san_pham == null)
             {
                 return HttpNotFound();
@@ -136,7 +222,7 @@ namespace ProjectCDTN_63132701.Controllers
         // GET: san_pham/Create
         public ActionResult Create()
         {
-            ViewBag.id_danh_muc = new SelectList(db.danh_muc, "id", "ten_danh_muc");
+            ViewBag.MaLoaiSP = new SelectList(db.LoaiSanPhams, "id", "ten_danh_muc");
             return View();
         }
 
@@ -145,16 +231,16 @@ namespace ProjectCDTN_63132701.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,ten_san_pham,mo_ta,gia,so_luong,id_danh_muc,anh_san_pham,loai_bac,ngay_tao")] san_pham san_pham)
+        public ActionResult Create([Bind(Include = "id,ten_san_pham,mo_ta,gia,so_luong,id_danh_muc,anh_san_pham,loai_bac,ngay_tao")] SanPham san_pham)
         {
             if (ModelState.IsValid)
             {
-                db.san_pham.Add(san_pham);
+                db.SanPhams.Add(san_pham);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.id_danh_muc = new SelectList(db.danh_muc, "id", "ten_danh_muc", san_pham.id_danh_muc);
+            ViewBag.id_danh_muc = new SelectList(db.LoaiSanPhams, "id", "ten_danh_muc", san_pham);
             return View(san_pham);
         }
 
@@ -165,12 +251,12 @@ namespace ProjectCDTN_63132701.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            san_pham san_pham = db.san_pham.Find(id);
+            SanPham san_pham = db.SanPhams.Find(id);
             if (san_pham == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.id_danh_muc = new SelectList(db.danh_muc, "id", "ten_danh_muc", san_pham.id_danh_muc);
+            ViewBag.id_danh_muc = new SelectList(db.LoaiSanPhams, "id", "ten_danh_muc", san_pham.MaLoaiSP);
             return View(san_pham);
         }
 
@@ -179,7 +265,7 @@ namespace ProjectCDTN_63132701.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,ten_san_pham,mo_ta,gia,so_luong,id_danh_muc,anh_san_pham,loai_bac,ngay_tao")] san_pham san_pham)
+        public ActionResult Edit([Bind(Include = "id,ten_san_pham,mo_ta,gia,so_luong,id_danh_muc,anh_san_pham,loai_bac,ngay_tao")] SanPham san_pham)
         {
             if (ModelState.IsValid)
             {
@@ -187,7 +273,7 @@ namespace ProjectCDTN_63132701.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.id_danh_muc = new SelectList(db.danh_muc, "id", "ten_danh_muc", san_pham.id_danh_muc);
+            ViewBag.id_danh_muc = new SelectList(db.LoaiSanPhams, "id", "ten_danh_muc", san_pham.MaLoaiSP);
             return View(san_pham);
         }
 
@@ -198,7 +284,7 @@ namespace ProjectCDTN_63132701.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            san_pham san_pham = db.san_pham.Find(id);
+            SanPham san_pham = db.SanPhams.Find(id);
             if (san_pham == null)
             {
                 return HttpNotFound();
@@ -211,8 +297,8 @@ namespace ProjectCDTN_63132701.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            san_pham san_pham = db.san_pham.Find(id);
-            db.san_pham.Remove(san_pham);
+            SanPham san_pham = db.SanPhams.Find(id);
+            db.SanPhams.Remove(san_pham);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

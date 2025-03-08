@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ProjectCDTT_63132701.Models.VanChuyen>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DonViVanChuyen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayTao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThoiGianGiao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThoiGianNhan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DonHang.TrangThai)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DonViVanChuyen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrangThai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayTao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThoiGianGiao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ThoiGianNhan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DonHang.TrangThai)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MaVanChuyen }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MaVanChuyen }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MaVanChuyen })
+        </td>
+    </tr>
+}
+
+</table>

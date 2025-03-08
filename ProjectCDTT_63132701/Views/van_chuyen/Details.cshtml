@@ -1,0 +1,67 @@
+﻿@model ProjectCDTT_63132701.Models.VanChuyen
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>VanChuyen</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DonViVanChuyen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DonViVanChuyen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrangThai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayTao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayTao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThoiGianGiao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThoiGianGiao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThoiGianNhan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThoiGianNhan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DonHang.TrangThai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DonHang.TrangThai)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaVanChuyen }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
