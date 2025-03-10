@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<ProjectCDTT_63132701.Models.SanPham>
 @{
-    ViewBag.Title = "lac_Tay";
+    ViewBag.Title = "Lac_Tay";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 
@@ -57,12 +57,13 @@
             <div class="product-info">
                 <h3>@sp.TenSP</h3>
                 <p class="price">@sp.DonGia.ToString("N0") VNĐ</p>
-
+                @*             <p class="type">@sp.loai_bac</p>*@
                 @*<p class="date">@sp.ngay_tao?.ToString("dd/MM/yyyy")</p>*@
                 <button class="btn btn-dark">Mua ngay</button>
             </div>
         </div>
     }
 </div>
+
 
 

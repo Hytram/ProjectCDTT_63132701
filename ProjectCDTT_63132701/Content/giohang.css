@@ -1,0 +1,18 @@
+﻿.cart-item {
+    background-color: #fff;
+    transition: 0.3s;
+}
+
+    .cart-item:hover {
+        background-color: #f8f9fa;
+    }
+
+button.update-quantity, button.remove-item {
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+    button.update-quantity:hover, button.remove-item:hover {
+        background-color: #ddd;
+    }

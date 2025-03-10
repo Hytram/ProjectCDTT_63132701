@@ -1,0 +1,21 @@
+﻿@model ProjectCDTT_63132701.Models.SanPham
+
+@{
+    ViewBag.Title = Model.TenSP;
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="product-detail">
+    <div class="product-image">
+        <img src="@Url.Content("~/Images/" + Model.AnhSanPham)" alt="@Model.TenSP">
+    </div>
+    <div class="product-info">
+        <h2>@Model.TenSP</h2>
+        <p class="price">@Model.DonGia.ToString("N0") VNĐ</p>
+        <p class="description">@Model.MoTa</p>
+        <p class="stock">Số lượng còn lại: @Model.SoLuong</p>
+        <p class="type">Loại bạc: @Model.LoaiBac</p>
+        <button class="btn btn-primary">Thêm vào giỏ hàng</button>
+    </div>
+</div>
+

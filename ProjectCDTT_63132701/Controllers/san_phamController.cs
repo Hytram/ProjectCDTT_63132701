@@ -175,6 +175,25 @@ namespace ProjectCDTN_63132701.Controllers
 
 
 
+        public ActionResult ChiTietSanPham(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Index"); 
+            }
+
+            var sanPham = db.SanPhams.Find(id);
+            if (sanPham == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(sanPham);
+        }
+
+
+
+
 
 
         public ActionResult GioHang()

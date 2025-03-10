@@ -1,11 +1,29 @@
-﻿/* Container của bộ lọc và sắp xếp */
+﻿/* Căn giữa tiêu đề */
+h2 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* Điều chỉnh breadcrumb */
+.breadcrumb-container {
+    display: flex;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 20px;
+}
 .filter-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 0;
+    padding: 10px 20px;
     border-bottom: 1px solid #ddd;
     margin-bottom: 10px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Bộ lọc */
@@ -27,8 +45,6 @@
         color: gray;
         cursor: pointer;
     }
-
-/* Sắp xếp */
 .sort-container {
     display: flex;
     align-items: center;
@@ -62,7 +78,6 @@
             color: black;
         }
 
-/* Định dạng table */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -83,7 +98,6 @@ table {
     table img {
         border-radius: 5px;
     }
-/* Container chứa tất cả sản phẩm */
 .product-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -140,4 +154,26 @@ table {
     }
 
 
+/* Bỏ gạch chân mặc định của link */
+.product-card a {
+    text-decoration: none !important; /* Đảm bảo loại bỏ hoàn toàn */
+    color: inherit; /* Giữ màu chữ mặc định */
+}
 
+    /* Bỏ hiệu ứng khi click vào link */
+    .product-card a:focus,
+    .product-card a:active {
+        outline: none !important; /* Loại bỏ viền xanh */
+        box-shadow: none !important; /* Bỏ hiệu ứng khi nhấn */
+    }
+
+/* Kiểm tra xem có bị ảnh hưởng bởi thẻ a mặc định không */
+a {
+    text-decoration: none !important;
+}
+
+    a:focus,
+    a:active {
+        outline: none !important;
+        box-shadow: none !important;
+    }
