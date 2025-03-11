@@ -9,10 +9,10 @@ h2 {
 /* Điều chỉnh breadcrumb */
 .breadcrumb-container {
     display: flex;
-    justify-content: center;
     max-width: 1200px;
     margin: 0 auto;
     padding: 10px 20px;
+    justify-content: flex-start; 
 }
 .filter-container {
     display: flex;

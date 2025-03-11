@@ -215,6 +215,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\chitietsanpham.css" />
     <Content Include="Content\dichvu.css" />
     <Content Include="Content\giohang.css" />
     <Content Include="Content\Home.css" />
