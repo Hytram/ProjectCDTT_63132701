@@ -19,6 +19,25 @@
         <p class="description">@Model.MoTa</p>
         <p class="stock">Số lượng còn lại: @Model.SoLuong</p>
         <p class="type">Loại bạc: @Model.LoaiBac</p>
-        <button class="btn btn-dark">Thêm vào giỏ hàng</button>
+        <form method="post" action="@Url.Action("AddToCart", "San_pham")">
+            <input type="hidden" name="MaSP" value="@Model.MaSP" />
+            <input type="hidden" name="returnUrl" value="@Request.QueryString["returnUrl"]" />
+            <label for="SoLuong">Số lượng:</label>
+            <input type="number" name="SoLuong" value="1" min="1" required />
+            <button class="btn btn-dark">Thêm vào giỏ hàng</button>
+        </form>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <text>
+            Swal.fire({
+                icon: 'error',
+                text: '@Html.Raw(TempData["ErrorMessage"])',
+                confirmButtonText: 'Đóng'
+            });
+        </text>
+    }
+</script>

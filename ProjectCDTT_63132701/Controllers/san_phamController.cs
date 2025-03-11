@@ -192,13 +192,68 @@ namespace ProjectCDTN_63132701.Controllers
         }
 
 
-
-
-
-
         public ActionResult GioHang()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddToCart(int MaSP, int SoLuong, string returnUrl)
+        {
+            if (Session["UserRole"] == null || Session["UserRole"].ToString().Trim() != "Khách hàng")
+            {
+                return RedirectToAction("Login", "Tai_khoan");
+            }
+
+            var maKhachHang = (int)Session["UserId"];
+            var gioHang = db.GioHangs.FirstOrDefault(g => g.MaKH == maKhachHang && g.TrangThai == "Chưa duyệt");
+            var sanPham = db.SanPhams.Find(MaSP);
+
+            if (gioHang == null)
+            {
+                gioHang = new GioHang
+                {
+                    MaKH = maKhachHang,
+                    TrangThai = "Chưa duyệt",
+                    NgayDatHang = DateTime.Now
+                };
+                db.GioHangs.Add(gioHang);
+                db.SaveChanges();
+            }
+
+            var chiTiet = db.ChiTietGioHangs.FirstOrDefault(c => c.MaGH == gioHang.MaGH && c.MaSP == MaSP);
+            if (chiTiet != null)
+            {
+                if (sanPham.SoLuong < chiTiet.SoLuong + SoLuong)
+                {
+                    TempData["ErrorMessage"] = "Số lượng sản phẩm trong kho không đủ!";
+                    return Redirect(Request.UrlReferrer?.ToString());
+                }
+                chiTiet.SoLuong += SoLuong;
+            }
+            else
+            {
+                db.ChiTietGioHangs.Add(new ChiTietGioHang
+                {
+                    MaGH = gioHang.MaGH,
+                    MaSP = MaSP,
+                    SoLuong = SoLuong,
+                    DonGia = sanPham.DonGia
+                });
+            }
+
+            sanPham.SoLuong -= SoLuong;
+            db.SaveChanges();
+
+            if (!string.IsNullOrEmpty(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+
+            int? cartCount = db.ChiTietGioHangs.Where(c => c.MaGH == gioHang.MaGH).Sum(c => c.SoLuong);
+            Session["CartCount"] = cartCount;
+
+            return RedirectToAction("San_Pham");
         }
 
         public ActionResult YeuThich()

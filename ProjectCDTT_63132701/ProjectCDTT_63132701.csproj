@@ -138,6 +138,7 @@
     <Compile Include="Controllers\Don_hangController.cs" />
     <Compile Include="Controllers\Khach_hangController.cs" />
     <Compile Include="Controllers\San_phamController.cs" />
+    <Compile Include="Controllers\Tai_khoanController.cs" />
     <Compile Include="Controllers\Van_chuyenController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -402,11 +403,6 @@
     <Content Include="Views\shared\Error.cshtml" />
     <Content Include="Views\shared\_Layout.cshtml" />
     <Content Include="Views\shared\_LayoutUser.cshtml" />
-    <Content Include="Views\tai_khoan\Create.cshtml" />
-    <Content Include="Views\tai_khoan\Delete.cshtml" />
-    <Content Include="Views\tai_khoan\Details.cshtml" />
-    <Content Include="Views\tai_khoan\Edit.cshtml" />
-    <Content Include="Views\tai_khoan\Index.cshtml" />
     <Content Include="Views\San_pham\Day_Chuyen.cshtml" />
     <Content Include="Views\San_pham\Bong_Tai.cshtml" />
     <Content Include="Views\shared\_LayoutAdmin.cshtml" />
@@ -429,6 +425,7 @@
     <Content Include="Views\Van_chuyen\QLVC.cshtml" />
     <Content Include="Views\San_pham\Lac_Tay.cshtml" />
     <Content Include="Views\San_pham\ChiTietSanPham.cshtml" />
+    <Content Include="Views\tai_khoan\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

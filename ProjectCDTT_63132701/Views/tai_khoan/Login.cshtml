@@ -1,0 +1,36 @@
+﻿@model ProjectCDTT_63132701.Models.KhachHang
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/shared/_LayoutUser.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/login.css" />
+
+
+<div class="container">
+    <div class="form-box">
+        <h2>Đăng nhập</h2>
+        @using (Html.BeginForm("Login", "Tai_khoan", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" class="form-control" id="email" placeholder="Nhập email" required />
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mật khẩu</label>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Nhập mật khẩu" required />
+            </div>
+
+            <div class="button-container">
+                <button type="submit" class="btn btn-primary">Đăng nhập</button>
+
+            </div>
+        }
+
+@*        <p>Bạn chưa có tài khoản? <a href="/Account_64130053/Register">Đăng ký</a></p>*@
+    </div>
+</div>
+
