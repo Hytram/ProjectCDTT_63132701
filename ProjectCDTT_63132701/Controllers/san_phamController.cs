@@ -194,6 +194,26 @@ namespace ProjectCDTN_63132701.Controllers
 
         public ActionResult GioHang()
         {
+            if (Session["UserRole"] == null || Session["UserRole"].ToString().Trim() != "Khách hàng")
+            {
+                return RedirectToAction("Login", "Tai_khoan");
+            }
+            var maKhachHang = (int)Session["UserId"];
+            var gioHang = db.GioHangs.FirstOrDefault(g => g.MaKH == maKhachHang && g.TrangThai == "Chưa duyệt");
+
+            if (gioHang != null)
+            {
+                var chiTietGioHang = db.ChiTietGioHangs
+                    .Where(c => c.MaGH == gioHang.MaGH)
+                    .Include(c => c.SanPham)
+                    .ToList();
+
+                ViewBag.Cart = chiTietGioHang;
+            }
+            else
+            {
+                ViewBag.Cart = new List<ChiTietGioHang>();
+            }
             return View();
         }
 
@@ -255,6 +275,30 @@ namespace ProjectCDTN_63132701.Controllers
 
             return RedirectToAction("San_Pham");
         }
+
+        [HttpPost]
+        public ActionResult RemoveFromCart(int MaSP)
+        {
+            if (Session["UserRole"] == null || Session["UserRole"].ToString().Trim() != "Khách hàng")
+            {
+                TempData["Message"] = "Ban can dang nhap de thao tac tren gio hang";
+                return RedirectToAction("Login", "Tai_khoan");
+            }
+            var maKhachHang = (int)Session["UserId"];
+            var gioHang = db.GioHangs.FirstOrDefault(g => g.MaKH == maKhachHang && g.TrangThai == "Chưa duyệt");
+
+            if (gioHang != null)
+            {
+                var chiTiet = db.ChiTietGioHangs.FirstOrDefault(c => c.MaGH == gioHang.MaGH && c.MaSP == MaSP);
+                if (chiTiet != null)
+                {
+                    db.ChiTietGioHangs.Remove(chiTiet);
+                    db.SaveChanges();
+                }
+            }
+            return RedirectToAction("GioHang");
+        }
+
 
         public ActionResult YeuThich()
         {

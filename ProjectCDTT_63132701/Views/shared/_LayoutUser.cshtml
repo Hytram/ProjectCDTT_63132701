@@ -40,10 +40,12 @@
                     <i class="far fa-heart"></i> <span>0</span>
                 </div>
                 <div>
-                    <i class="fas fa-shopping-bag"></i>  
+                    <a href="@Url.Action("GioHang", "San_pham")" style="text-decoration: none; color: inherit;">
+                        <i class="fas fa-shopping-bag"></i>
                         <span style="@(Session["CartCount"] != null && (int)Session["CartCount"] > 0 ? "background-color: red; color: white;" : "background-color: #ddd; color: black;")">
                             @(Session["CartCount"] ?? 0)
                         </span>
+                    </a>
                 </div>
                 <div>
                     @if (Session["UserId"] == null)
