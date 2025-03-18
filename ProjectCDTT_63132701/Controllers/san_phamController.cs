@@ -173,8 +173,6 @@ namespace ProjectCDTN_63132701.Controllers
             return View(sanPhams.ToList());
         }
 
-
-
         public ActionResult ChiTietSanPham(int? id)
         {
             if (id == null)
@@ -190,7 +188,6 @@ namespace ProjectCDTN_63132701.Controllers
 
             return View(sanPham);
         }
-
 
         public ActionResult GioHang()
         {
@@ -297,6 +294,92 @@ namespace ProjectCDTN_63132701.Controllers
                 }
             }
             return RedirectToAction("GioHang");
+        }
+
+        [HttpPost]
+        public ActionResult DatHang()
+        {
+            int maKhachHang = (int)Session["UserId"];
+            var gioHang = db.GioHangs.Include("ChiTietGioHangs.SanPham")
+                                     .FirstOrDefault(g => g.MaKH == maKhachHang && g.TrangThai == "Chưa duyệt");
+            if (gioHang == null || !gioHang.ChiTietGioHangs.Any())
+            {
+                TempData["Message"] = "Giỏ hàng của bạn trống";
+                return RedirectToAction("Index", "San_pham");
+            }
+
+            string GenerateTrackingNumber()
+            {
+                return "DH-" + DateTime.Now.ToString("yyyyMMdd") + "-" + new Random().Next(100000, 999999);
+            }
+
+            DonHang donHang = new DonHang
+            {
+                MaKH = maKhachHang,
+                TongTien = gioHang.ChiTietGioHangs.Sum(ct => (ct.SoLuong ?? 0) * (ct.SanPham.DonGia)),
+                NgayTao = DateTime.Now,
+                MaVanDon = GenerateTrackingNumber()
+            };
+
+            db.DonHangs.Add(donHang);
+            db.SaveChanges(); 
+
+            HoaDon hoaDon = new HoaDon
+            {
+                MaDH = donHang.MaDH, 
+                MaKH = maKhachHang,
+                NgayTao = DateTime.Now,
+  /*              TrangThai = "Chờ thanh toán",*/
+                TongTien = donHang.TongTien
+            };
+            db.HoaDons.Add(hoaDon);
+            db.SaveChanges(); 
+
+            foreach (var item in gioHang.ChiTietGioHangs)
+            {
+                ChiTietHoaDon chiTiet = new ChiTietHoaDon
+                {
+                    MaDH = hoaDon.MaDH, 
+                    MaSP = item.MaSP,
+                    SoLuong = item.SoLuong ?? 0,
+                    Gia = item.SanPham.DonGia
+                };
+                db.ChiTietHoaDons.Add(chiTiet);
+            }
+
+            db.SaveChanges();
+
+            db.ChiTietGioHangs.RemoveRange(gioHang.ChiTietGioHangs);
+            db.GioHangs.Remove(gioHang);
+            db.SaveChanges();
+
+            TempData["Message"] = "Đặt hàng thành công";
+            return RedirectToAction("Index", "San_pham");
+        }
+
+
+        public ActionResult ChiTietHoaDon(int? id)
+        {
+            var hoaDon = db.HoaDons
+                .Where(h => h.MaDH == id)
+                .Include(h => h.KhachHang)
+                .Include(h => h.ChiTietHoaDons)
+                .Include(h => h.ChiTietHoaDons.Select(ct => ct.SanPham))
+                .FirstOrDefault();
+            if (hoaDon == null)
+            {
+                return HttpNotFound();
+            }
+            return View(hoaDon);
+        }
+
+        [HttpPost]
+        public ActionResult DuyetDonHang(int MaDH)
+        {
+            var hoaDon = db.HoaDons.FirstOrDefault(h => h.MaDH == MaDH);
+            hoaDon.TrangThai = "Đã duyệt";
+            db.SaveChanges();
+            return RedirectToAction("ChiTietHoaDon", new { id = MaDH });
         }
 
 
