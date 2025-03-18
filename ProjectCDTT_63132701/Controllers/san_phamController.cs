@@ -393,7 +393,10 @@ namespace ProjectCDTN_63132701.Controllers
             return View();
         }
 
-
+        public ActionResult KhuyenMai()
+        {
+            return View();
+        }
 
 
 

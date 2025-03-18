@@ -220,6 +220,7 @@
     <Content Include="Content\dichvu.css" />
     <Content Include="Content\giohang.css" />
     <Content Include="Content\Home.css" />
+    <Content Include="Content\khuyenmai.css" />
     <Content Include="Content\rootcss.css" />
     <Content Include="Content\sanpham.css" />
     <Content Include="Content\Style.css" />
@@ -275,6 +276,15 @@
     <Content Include="Images\daychuyen8.jpg" />
     <Content Include="Images\daychuyen9.jpg" />
     <Content Include="Images\duychuyen2.jpg" />
+    <Content Include="Images\khuyenmai1.jpg" />
+    <Content Include="Images\khuyenmai2.jpg" />
+    <Content Include="Images\khuyenmai3.jpg" />
+    <Content Include="Images\khuyenmai4.jpg" />
+    <Content Include="Images\khuyenmai5.jpg" />
+    <Content Include="Images\khuyenmai6.jpg" />
+    <Content Include="Images\khuyenmai7.jpg" />
+    <Content Include="Images\khuyenmai8.jpg" />
+    <Content Include="Images\khuyenmai9.jpg" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\mau0.jpg" />
     <Content Include="Images\mau1.jpg" />
@@ -286,6 +296,7 @@
     <Content Include="Images\mau15.jpg" />
     <Content Include="Images\mau17.jpg" />
     <Content Include="Images\mau18.jpg" />
+    <Content Include="Images\mau19.jpg" />
     <Content Include="Images\mau2.jpg" />
     <Content Include="Images\mau3.jpg" />
     <Content Include="Images\mau4.jpg" />
@@ -426,6 +437,7 @@
     <Content Include="Views\San_pham\Lac_Tay.cshtml" />
     <Content Include="Views\San_pham\ChiTietSanPham.cshtml" />
     <Content Include="Views\tai_khoan\Login.cshtml" />
+    <Content Include="Views\San_pham\KhuyenMai.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

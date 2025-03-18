@@ -48,11 +48,6 @@ td {
     font-size: 15px;
 }
 
-/* Hiệu ứng hover */
-tr:hover {
-    background-color: #f1f1f1;
-}
-
 /* Chú thích bảng */
 .table-note {
     text-align: center;

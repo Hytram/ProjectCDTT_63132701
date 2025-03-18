@@ -1,0 +1,67 @@
+﻿.container {
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.promo-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.row {
+    margin-bottom: 20px;
+}
+
+.promo-card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+
+
+    .promo-card img {
+        height: 220px;
+        object-fit: cover;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .promo-card .card-body {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .promo-card .card-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #444;
+    }
+
+    .promo-card .card-text {
+        font-size: 14px;
+        color: #666;
+    }
+
+.text-muted {
+    font-size: 12px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .col-md-4 {
+        margin-bottom: 20px;
+    }
+}
