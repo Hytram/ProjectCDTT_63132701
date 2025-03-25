@@ -43,7 +43,18 @@
                     <i class="fas fa-shopping-bag"></i> <span>0</span>
                 </div>
                 <div>
-                    <i class="fa-solid fa-user"></i>
+                    @if (Session["UserId"] == null)
+                    {
+                        <a href="@Url.Action("Login", "Tai_khoan")" style="text-decoration: none; color: inherit;">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Logout", "Tai_khoan")" style="text-decoration: none; color: inherit;">
+                            <i class="fa-solid fa-sign-out-alt"></i>
+                        </a>
+                    }
                 </div>
             </div>
         </div>

@@ -29,10 +29,17 @@ namespace ProjectCDTT_63132701.Controllers
                 Session["UserRole"] = user.VaiTro.Trim();
                 Session["UserEmail"] = user.Email;
                 Session["UserId"] = user.MaKH;
-                var gioHang = db.GioHangs.FirstOrDefault(g => g.MaKH == user.MaKH && g.TrangThai == "Chưa duyệt");
+                var gioHang = db.GioHangs.FirstOrDefault(g => g.MaKH == user.MaKH && g.TrangThai == "Pending");
                 Session["CartCount"] = gioHang != null ? db.ChiTietGioHangs.Where(c => c.MaGH == gioHang.MaGH).Sum(c => c.SoLuong) : 0;
 
-                return RedirectToAction("Index", "San_pham");
+                if(user.VaiTro == "Admin")
+                {
+                    return RedirectToAction("QLSP", "San_pham");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "San_pham");
+                }
 
             }
 
