@@ -32,11 +32,7 @@ namespace ProjectCDTT_63132701.Controllers
                 var gioHang = db.GioHangs.FirstOrDefault(g => g.MaKH == user.MaKH && g.TrangThai == "Pending");
                 Session["CartCount"] = gioHang != null ? db.ChiTietGioHangs.Where(c => c.MaGH == gioHang.MaGH).Sum(c => c.SoLuong) : 0;
 
-<<<<<<< HEAD
                 if (user.VaiTro == "Admin")
-=======
-                if(user.VaiTro == "Admin")
->>>>>>> 3cc5d5c67337ef894980c7361f08aa74d14266b7
                 {
                     return RedirectToAction("QLSP", "San_pham");
                 }
