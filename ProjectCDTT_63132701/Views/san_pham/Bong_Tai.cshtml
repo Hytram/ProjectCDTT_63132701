@@ -53,17 +53,26 @@
 <div class="product-container">
     @foreach (var sp in Model)
     {
-        <div class="product-card">
+        <a href="@Url.Action("ChiTietSanPham", "San_pham", new { id = sp.MaSP })" class="product-card">
+            <!-- Nút yêu thích -->
+            <div class="favorite-button">
+                <form method="post" action="@Url.Action("AddToWishlist", "San_pham")">
+                    <input type="hidden" name="MaSP" value="@sp.MaSP" />
+                    <button type="submit" class="btn-favorite">
+                        <i class="fa-regular fa-heart"></i>
+                    </button>
+                </form>
+            </div>
+
             <img src="@Url.Content("~/Images/" + sp.AnhSanPham)" alt="@sp.TenSP">
             <div class="product-info">
                 <h3>@sp.TenSP</h3>
                 <p class="price">@sp.DonGia.ToString("N0") VNĐ</p>
-                @**             <p class="type">@sp.loai_bac@
-        @*<p class="date">@sp.ngay_tao?.ToString("dd/MM/yyyy")</</p>p>*@
-            
             </div>
-        </div>
+        </a>
     }
 </div>
+
+
 
 

@@ -221,6 +221,7 @@
     <Content Include="Content\giohang.css" />
     <Content Include="Content\Home.css" />
     <Content Include="Content\khuyenmai.css" />
+    <Content Include="Content\login.css" />
     <Content Include="Content\rootcss.css" />
     <Content Include="Content\sanpham.css" />
     <Content Include="Content\Style.css" />

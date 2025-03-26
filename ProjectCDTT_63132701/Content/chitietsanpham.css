@@ -1,4 +1,4 @@
-﻿/* Reset CSS */
+﻿/* ========== Reset CSS ========== */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -7,12 +7,12 @@
 
 body {
     font-family: Arial, sans-serif;
-    line-height: 1.6;
     background-color: #f8f8f8;
 }
 
-/* ======= Bố cục trang chi tiết sản phẩm ======= */
+/* ========== Bố cục chi tiết sản phẩm ========== */
 .product-detail {
+    position: relative; /* Cần có để nút yêu thích căn chỉnh đúng */
     max-width: 900px;
     margin: 30px auto;
     background: #fff;
@@ -22,8 +22,6 @@ body {
     display: flex;
     gap: 30px;
 }
-
-/* ======= Hình ảnh sản phẩm ======= */
 .product-image {
     flex: 1;
     max-width: 50%;
@@ -40,7 +38,7 @@ body {
             transform: scale(1.05);
         }
 
-/* ======= Thông tin sản phẩm ======= */
+/* ========== Thông tin sản phẩm ========== */
 .product-info {
     flex: 1;
     display: flex;
@@ -67,61 +65,17 @@ body {
         margin-bottom: 15px;
         line-height: 1.5;
     }
-
-    .product-info .stock {
-        font-size: 14px;
-        color: #27ae60;
-        margin-bottom: 10px;
-    }
-
-    .product-info .type {
-        font-size: 14px;
-        color: #555;
-        margin-bottom: 20px;
-    }
-
-/* ======= Input số lượng ======= */
-.quantity-container {
-    margin-bottom: 10px; /* Giảm khoảng cách nếu đang quá xa */
+.btn-add-to-cart {
+    margin-top: 30px;
 }
 
-    .quantity-container label {
-        font-size: 16px;
-        margin-right: 10px;
-    }
-
-    .quantity-container input {
-        width: 60px;
-        padding: 6px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        text-align: center;
-    }
-
-
-
-.btn-dark {
-    background-color: #2c3e50;
-    color: #fff;
-    padding: 10px 18px; /* Giảm padding nếu nút quá to */
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    margin-top: 10px; /* Giảm khoảng cách trên để nút gần hơn */
-}
-
-    /* Khi hover, làm màu nhẹ nhàng hơn */
-    .btn-dark:hover {
-        background-color: #3b4b5a;
-    }
-
-/* Điều chỉnh trên màn hình nhỏ */
+/* ========== Responsive: Điều chỉnh trên màn hình nhỏ ========== */
 @media (max-width: 768px) {
+    .product-detail {
+        flex-direction: column;
+    }
+
     .btn-dark {
         width: 100%;
-        margin-top: 15px; /* Trên mobile, có thể tăng chút khoảng cách */
     }
 }

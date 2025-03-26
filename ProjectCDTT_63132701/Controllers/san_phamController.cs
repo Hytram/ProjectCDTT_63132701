@@ -29,9 +29,9 @@ namespace ProjectCDTN_63132701.Controllers
 
         public ActionResult Nhan(decimal? minPrice, decimal? maxPrice, string loaiBac, string sapXep)
         {
-            var sanPhams = db.SanPhams.Where(s => s.MaLoaiSP == 1); // ID danh mục 'Nhẫn bạc'
+            var sanPhams = db.SanPhams.Where(s => s.MaLoaiSP == 1); 
 
-            // 🔹 Lọc theo khoảng giá
+           
             if (minPrice.HasValue)
             {
                 sanPhams = sanPhams.Where(s => s.DonGia >= minPrice.Value);
@@ -41,13 +41,13 @@ namespace ProjectCDTN_63132701.Controllers
                 sanPhams = sanPhams.Where(s => s.DonGia <= maxPrice.Value);
             }
 
-            // 🔹 Lọc theo loại bạc
+            
             if (!string.IsNullOrEmpty(loaiBac))
             {
                 sanPhams = sanPhams.Where(s => s.LoaiBac == loaiBac);
             }
 
-            // 🔹 Sắp xếp sản phẩm
+            
             switch (sapXep)
             {
                 case "moi-nhat":
@@ -65,9 +65,9 @@ namespace ProjectCDTN_63132701.Controllers
         }
         public ActionResult Day_Chuyen(decimal? minPrice, decimal? maxPrice, string loaiBac, string sapXep)
         {
-            var sanPhams = db.SanPhams.Where(s => s.MaLoaiSP == 2); // ID danh mục 'Nhẫn bạc'
+            var sanPhams = db.SanPhams.Where(s => s.MaLoaiSP == 2); 
 
-            // 🔹 Lọc theo khoảng giá
+            
             if (minPrice.HasValue)
             {
                 sanPhams = sanPhams.Where(s => s.DonGia >= minPrice.Value);
@@ -77,13 +77,12 @@ namespace ProjectCDTN_63132701.Controllers
                 sanPhams = sanPhams.Where(s => s.DonGia <= maxPrice.Value);
             }
 
-            // 🔹 Lọc theo loại bạc
+           
             if (!string.IsNullOrEmpty(loaiBac))
             {
                 sanPhams = sanPhams.Where(s => s.LoaiBac == loaiBac);
             }
 
-            // 🔹 Sắp xếp sản phẩm
             switch (sapXep)
             {
                 case "moi-nhat":
@@ -101,9 +100,8 @@ namespace ProjectCDTN_63132701.Controllers
         }
         public ActionResult Lac_Tay(decimal? minPrice, decimal? maxPrice, string loaiBac, string sapXep)
         {
-            var sanPhams = db.SanPhams.Where(s => s.MaLoaiSP == 3); // ID danh mục 'Nhẫn bạc'
+            var sanPhams = db.SanPhams.Where(s => s.MaLoaiSP == 3); 
 
-            // 🔹 Lọc theo khoảng giá
             if (minPrice.HasValue)
             {
                 sanPhams = sanPhams.Where(s => s.DonGia >= minPrice.Value);
@@ -113,13 +111,13 @@ namespace ProjectCDTN_63132701.Controllers
                 sanPhams = sanPhams.Where(s => s.DonGia <= maxPrice.Value);
             }
 
-            // 🔹 Lọc theo loại bạc
+           
             if (!string.IsNullOrEmpty(loaiBac))
             {
                 sanPhams = sanPhams.Where(s => s.LoaiBac == loaiBac);
             }
 
-            // 🔹 Sắp xếp sản phẩm
+            
             switch (sapXep)
             {
                 case "moi-nhat":
@@ -138,9 +136,9 @@ namespace ProjectCDTN_63132701.Controllers
         
         public ActionResult Bong_Tai(decimal? minPrice, decimal? maxPrice, string loaiBac, string sapXep)
         {
-            var sanPhams = db.SanPhams.Where(s => s.MaLoaiSP == 4); // ID danh mục 'Nhẫn bạc'
+            var sanPhams = db.SanPhams.Where(s => s.MaLoaiSP == 4); 
 
-            // 🔹 Lọc theo khoảng giá
+            
             if (minPrice.HasValue)
             {
                 sanPhams = sanPhams.Where(s => s.DonGia >= minPrice.Value);
@@ -150,13 +148,13 @@ namespace ProjectCDTN_63132701.Controllers
                 sanPhams = sanPhams.Where(s => s.DonGia <= maxPrice.Value);
             }
 
-            // 🔹 Lọc theo loại bạc
+            
             if (!string.IsNullOrEmpty(loaiBac))
             {
                 sanPhams = sanPhams.Where(s => s.LoaiBac == loaiBac);
             }
 
-            // 🔹 Sắp xếp sản phẩm
+            
             switch (sapXep)
             {
                 case "moi-nhat":
@@ -191,12 +189,12 @@ namespace ProjectCDTN_63132701.Controllers
 
         public ActionResult GioHang()
         {
-            if (Session["UserRole"] == null || Session["UserRole"].ToString().Trim() != "Khách hàng")
+            if (Session["UserRole"] == null || Session["UserRole"].ToString().Trim() != "User")
             {
                 return RedirectToAction("Login", "Tai_khoan");
             }
             var maKhachHang = (int)Session["UserId"];
-            var gioHang = db.GioHangs.FirstOrDefault(g => g.MaKH == maKhachHang && g.TrangThai == "Chưa duyệt");
+            var gioHang = db.GioHangs.FirstOrDefault(g => g.MaKH == maKhachHang && g.TrangThai == "Pending");
 
             if (gioHang != null)
             {
@@ -217,13 +215,13 @@ namespace ProjectCDTN_63132701.Controllers
         [HttpPost]
         public ActionResult AddToCart(int MaSP, int SoLuong, string returnUrl)
         {
-            if (Session["UserRole"] == null || Session["UserRole"].ToString().Trim() != "Khách hàng")
+            if (Session["UserRole"] == null || Session["UserRole"].ToString().Trim() != "User")
             {
                 return RedirectToAction("Login", "Tai_khoan");
             }
 
             var maKhachHang = (int)Session["UserId"];
-            var gioHang = db.GioHangs.FirstOrDefault(g => g.MaKH == maKhachHang && g.TrangThai == "Chưa duyệt");
+            var gioHang = db.GioHangs.FirstOrDefault(g => g.MaKH == maKhachHang && g.TrangThai == "Pending");
             var sanPham = db.SanPhams.Find(MaSP);
 
             if (gioHang == null)
@@ -231,7 +229,7 @@ namespace ProjectCDTN_63132701.Controllers
                 gioHang = new GioHang
                 {
                     MaKH = maKhachHang,
-                    TrangThai = "Chưa duyệt",
+                    TrangThai = "Pending",
                     NgayDatHang = DateTime.Now
                 };
                 db.GioHangs.Add(gioHang);
@@ -270,19 +268,19 @@ namespace ProjectCDTN_63132701.Controllers
             int? cartCount = db.ChiTietGioHangs.Where(c => c.MaGH == gioHang.MaGH).Sum(c => c.SoLuong);
             Session["CartCount"] = cartCount;
 
-            return RedirectToAction("San_Pham");
+            return RedirectToAction("GioHang", "San_pham");
         }
 
         [HttpPost]
         public ActionResult RemoveFromCart(int MaSP)
         {
-            if (Session["UserRole"] == null || Session["UserRole"].ToString().Trim() != "Khách hàng")
+            if (Session["UserRole"] == null || Session["UserRole"].ToString().Trim() != "User")
             {
                 TempData["Message"] = "Ban can dang nhap de thao tac tren gio hang";
                 return RedirectToAction("Login", "Tai_khoan");
             }
             var maKhachHang = (int)Session["UserId"];
-            var gioHang = db.GioHangs.FirstOrDefault(g => g.MaKH == maKhachHang && g.TrangThai == "Chưa duyệt");
+            var gioHang = db.GioHangs.FirstOrDefault(g => g.MaKH == maKhachHang && g.TrangThai == "Pending");
 
             if (gioHang != null)
             {
@@ -301,7 +299,7 @@ namespace ProjectCDTN_63132701.Controllers
         {
             int maKhachHang = (int)Session["UserId"];
             var gioHang = db.GioHangs.Include("ChiTietGioHangs.SanPham")
-                                     .FirstOrDefault(g => g.MaKH == maKhachHang && g.TrangThai == "Chưa duyệt");
+                                     .FirstOrDefault(g => g.MaKH == maKhachHang && g.TrangThai == "Pending");
             if (gioHang == null || !gioHang.ChiTietGioHangs.Any())
             {
                 TempData["Message"] = "Giỏ hàng của bạn trống";
@@ -318,6 +316,7 @@ namespace ProjectCDTN_63132701.Controllers
                 MaKH = maKhachHang,
                 TongTien = gioHang.ChiTietGioHangs.Sum(ct => (ct.SoLuong ?? 0) * (ct.SanPham.DonGia)),
                 NgayTao = DateTime.Now,
+                TrangThai = "Pending",
                 MaVanDon = GenerateTrackingNumber()
             };
 
@@ -329,7 +328,7 @@ namespace ProjectCDTN_63132701.Controllers
                 MaDH = donHang.MaDH, 
                 MaKH = maKhachHang,
                 NgayTao = DateTime.Now,
-  /*              TrangThai = "Chờ thanh toán",*/
+                TrangThai = "Pending",
                 TongTien = donHang.TongTien
             };
             db.HoaDons.Add(hoaDon);
@@ -383,10 +382,84 @@ namespace ProjectCDTN_63132701.Controllers
         }
 
 
+
+        [HttpPost]
+        public ActionResult AddToWishlist(int MaSP)
+        {
+            if (Session["UserRole"] == null || Session["UserRole"].ToString().Trim() != "User")
+            {
+                return RedirectToAction("Login", "Tai_khoan");
+            }
+
+            var maKhachHang = Session["UserId"] as int?;
+            if (!maKhachHang.HasValue)
+            {
+                return RedirectToAction("Login", "Tai_khoan");
+            }
+
+            var exist = db.YeuThiches.FirstOrDefault(y => y.MaKH == maKhachHang.Value && y.MaSP == MaSP);
+            if (exist == null)
+            {
+                var yeuThich = new YeuThich
+                {
+                    MaKH = maKhachHang.Value,
+                    MaSP = MaSP,
+                    NgayThem = DateTime.Now
+                };
+                db.YeuThiches.Add(yeuThich);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("YeuThich", "San_pham");
+        }
+
         public ActionResult YeuThich()
         {
-            return View();
+            if (Session["UserRole"] == null || Session["UserRole"].ToString().Trim() != "User")
+            {
+                return RedirectToAction("Login", "Tai_khoan");
+            }
+
+            int maKhachHang = (int)Session["UserId"];
+
+            var yeuThichList = db.YeuThiches
+                .Where(y => y.MaKH == maKhachHang)
+                .Include(y => y.SanPham) 
+                .ToList();
+
+            return View(yeuThichList); 
         }
+
+        [HttpPost]
+        public ActionResult RemoveFromWishlist(int MaSP)
+        {
+            if (Session["UserRole"] == null || Session["UserRole"].ToString().Trim() != "User")
+            {
+                return RedirectToAction("Login", "Tai_khoan");
+            }
+
+            var maKhachHang = Session["UserId"] as int?;
+            if (!maKhachHang.HasValue)
+            {
+                return RedirectToAction("Login", "Tai_khoan");
+            }
+
+            var yeuThich = db.YeuThiches.FirstOrDefault(y => y.MaKH == maKhachHang.Value && y.MaSP == MaSP);
+            if (yeuThich != null)
+            {
+                db.YeuThiches.Remove(yeuThich);
+                db.SaveChanges();
+            }
+
+          
+
+            return RedirectToAction("YeuThich");
+        }
+
+
+
+
+
 
         public ActionResult DichVu()
         {

@@ -1,0 +1,56 @@
+﻿/* Định dạng tổng thể */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: white;
+}
+
+/* Hộp đăng nhập */
+.form-box {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 350px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Nhãn và ô nhập */
+.form-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+/* Link đăng ký */
+p {
+    margin-top: 10px;
+}
+
+    p a {
+        color: red;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+        p a:hover {
+            text-decoration: underline;
+        }

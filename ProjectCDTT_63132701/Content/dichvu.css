@@ -1,15 +1,14 @@
 ﻿/* Đặt màu nền be cho toàn trang */
 
 body {
-    background-color: #f7f7f7;
+    background-color: #FFFFFF;
     color: #333;
-    font-family: 'Arial', sans-serif;
     padding: 0;
 }
 
 /* Tiêu đề chính */
 h2 {
-    color: #7d5a50;
+    color: #000000;
     font-size: 24px;
     font-weight: bold;
     text-transform: uppercase;
