@@ -29,9 +29,14 @@ namespace ProjectCDTN_63132701.Controllers
 
         public ActionResult Nhan(decimal? minPrice, decimal? maxPrice, string loaiBac, string sapXep)
         {
+<<<<<<< HEAD
             var sanPhams = db.SanPhams.Where(s => s.MaLoaiSP == 1); 
 
            
+=======
+            var sanPhams = db.SanPhams.Where(s => s.MaLoaiSP == 1);
+
+>>>>>>> 3cc5d5c67337ef894980c7361f08aa74d14266b7
             if (minPrice.HasValue)
             {
                 sanPhams = sanPhams.Where(s => s.DonGia >= minPrice.Value);
@@ -41,13 +46,15 @@ namespace ProjectCDTN_63132701.Controllers
                 sanPhams = sanPhams.Where(s => s.DonGia <= maxPrice.Value);
             }
 
+<<<<<<< HEAD
             
+=======
+>>>>>>> 3cc5d5c67337ef894980c7361f08aa74d14266b7
             if (!string.IsNullOrEmpty(loaiBac))
             {
                 sanPhams = sanPhams.Where(s => s.LoaiBac == loaiBac);
             }
 
-            
             switch (sapXep)
             {
                 case "moi-nhat":
@@ -65,9 +72,14 @@ namespace ProjectCDTN_63132701.Controllers
         }
         public ActionResult Day_Chuyen(decimal? minPrice, decimal? maxPrice, string loaiBac, string sapXep)
         {
+<<<<<<< HEAD
             var sanPhams = db.SanPhams.Where(s => s.MaLoaiSP == 2); 
 
             
+=======
+            var sanPhams = db.SanPhams.Where(s => s.MaLoaiSP == 2);
+
+>>>>>>> 3cc5d5c67337ef894980c7361f08aa74d14266b7
             if (minPrice.HasValue)
             {
                 sanPhams = sanPhams.Where(s => s.DonGia >= minPrice.Value);
@@ -77,7 +89,10 @@ namespace ProjectCDTN_63132701.Controllers
                 sanPhams = sanPhams.Where(s => s.DonGia <= maxPrice.Value);
             }
 
+<<<<<<< HEAD
            
+=======
+>>>>>>> 3cc5d5c67337ef894980c7361f08aa74d14266b7
             if (!string.IsNullOrEmpty(loaiBac))
             {
                 sanPhams = sanPhams.Where(s => s.LoaiBac == loaiBac);
@@ -111,13 +126,19 @@ namespace ProjectCDTN_63132701.Controllers
                 sanPhams = sanPhams.Where(s => s.DonGia <= maxPrice.Value);
             }
 
+<<<<<<< HEAD
            
+=======
+>>>>>>> 3cc5d5c67337ef894980c7361f08aa74d14266b7
             if (!string.IsNullOrEmpty(loaiBac))
             {
                 sanPhams = sanPhams.Where(s => s.LoaiBac == loaiBac);
             }
 
+<<<<<<< HEAD
             
+=======
+>>>>>>> 3cc5d5c67337ef894980c7361f08aa74d14266b7
             switch (sapXep)
             {
                 case "moi-nhat":
@@ -138,7 +159,10 @@ namespace ProjectCDTN_63132701.Controllers
         {
             var sanPhams = db.SanPhams.Where(s => s.MaLoaiSP == 4); 
 
+<<<<<<< HEAD
             
+=======
+>>>>>>> 3cc5d5c67337ef894980c7361f08aa74d14266b7
             if (minPrice.HasValue)
             {
                 sanPhams = sanPhams.Where(s => s.DonGia >= minPrice.Value);
@@ -148,13 +172,19 @@ namespace ProjectCDTN_63132701.Controllers
                 sanPhams = sanPhams.Where(s => s.DonGia <= maxPrice.Value);
             }
 
+<<<<<<< HEAD
             
+=======
+>>>>>>> 3cc5d5c67337ef894980c7361f08aa74d14266b7
             if (!string.IsNullOrEmpty(loaiBac))
             {
                 sanPhams = sanPhams.Where(s => s.LoaiBac == loaiBac);
             }
 
+<<<<<<< HEAD
             
+=======
+>>>>>>> 3cc5d5c67337ef894980c7361f08aa74d14266b7
             switch (sapXep)
             {
                 case "moi-nhat":
