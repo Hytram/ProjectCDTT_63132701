@@ -50,19 +50,14 @@
     <button type="submit" class="btn btn-light">Lọc</button>
 </div>
 
-
 <div class="product-container">
     @foreach (var sp in Model)
     {
         <a href="@Url.Action("ChiTietSanPham", "San_pham", new { id = sp.MaSP })" class="product-card">
-            <!-- Nút yêu thích -->
             <div class="favorite-button">
-                <form method="post" action="@Url.Action("AddToWishlist", "San_pham")">
-                    <input type="hidden" name="MaSP" value="@sp.MaSP" />
-                    <button type="submit" class="btn-favorite">
-                        <i class="fa-regular fa-heart"></i>
-                    </button>
-                </form>
+                <button type="button" class="btn-favorite" data-id="@sp.MaSP">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
             </div>
 
             <img src="@Url.Content("~/Images/" + sp.AnhSanPham)" alt="@sp.TenSP">
@@ -75,30 +70,6 @@
 </div>
 
 
-@*<div class="row">
-        @foreach (var item in Model)
-        {
-            <div class="col-md-3 mb-3">
-                <div class="card">
-                    <img src="@Url.Content("~/Images/" + item.AnhSanPham)" class="card-img-top" alt="@item.TenSP">
-                    <div class="card-body">
-                        <h5 class="card-title">@item.TenSP</h5>
-                        <p class="card-text">@item.MoTa</p>
-                        <p class="card-text">Giá: @item.DonGia.ToString("N0")</p>
-                        <div class="button-cart d-flex align-items-center">
-                            <a href="@Url.Action("Details", "SanPhams_64130053", new { id = item.MaSP })" class="btn btn-primary"><i class="fas fa-info-circle"></i> </a>
-                            <form method="post" action="@Url.Action("AddToCart", "SanPhams_64130053")">
-                                <input type="hidden" name="MaSP" value="@item.MaSP" />
-                                <input type="hidden" name="SoLuong" value="1" />
-                                <button type="submit" class="btn btn-success m-lg-2">
-                                    <i class="fas fa-shopping-cart"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>*@
+
 
 

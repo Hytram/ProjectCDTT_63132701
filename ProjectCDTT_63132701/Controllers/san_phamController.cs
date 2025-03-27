@@ -283,10 +283,17 @@ namespace ProjectCDTN_63132701.Controllers
                 var chiTiet = db.ChiTietGioHangs.FirstOrDefault(c => c.MaGH == gioHang.MaGH && c.MaSP == MaSP);
                 if (chiTiet != null)
                 {
+                    var sanPham = db.SanPhams.FirstOrDefault(p => p.MaSP == MaSP);
+                    if (sanPham != null)
+                    {
+                        sanPham.SoLuong += chiTiet.SoLuong ?? 0;
+                    }
                     db.ChiTietGioHangs.Remove(chiTiet);
                     db.SaveChanges();
+                    Session["CartCount"] = db.ChiTietGioHangs.Where(c => c.MaGH == gioHang.MaGH).Sum(c => c.SoLuong) ?? 0;
                 }
             }
+
             return RedirectToAction("GioHang");
         }
 
@@ -347,9 +354,10 @@ namespace ProjectCDTN_63132701.Controllers
             db.ChiTietGioHangs.RemoveRange(gioHang.ChiTietGioHangs);
             db.GioHangs.Remove(gioHang);
             db.SaveChanges();
-
-            TempData["Message"] = "Đặt hàng thành công";
-            return RedirectToAction("Index", "San_pham");
+            int remainingCartCount = db.GioHangs.Count(c => c.MaKH == maKhachHang);
+            Session["CartCount"] = remainingCartCount;
+            TempData["Message"] = "Đặt hàng thành công!";
+            return RedirectToAction("GioHang", "San_pham");
         }
 
 
@@ -384,13 +392,13 @@ namespace ProjectCDTN_63132701.Controllers
         {
             if (Session["UserRole"] == null || Session["UserRole"].ToString().Trim() != "User")
             {
-                return RedirectToAction("Login", "Tai_khoan");
+                return Json(new { success = false, message = "Bạn cần đăng nhập để thêm vào wishlist." });
             }
 
             var maKhachHang = Session["UserId"] as int?;
             if (!maKhachHang.HasValue)
             {
-                return RedirectToAction("Login", "Tai_khoan");
+                return Json(new { success = false, message = "Bạn cần đăng nhập để thêm vào wishlist." });
             }
 
             var exist = db.YeuThiches.FirstOrDefault(y => y.MaKH == maKhachHang.Value && y.MaSP == MaSP);
@@ -406,8 +414,12 @@ namespace ProjectCDTN_63132701.Controllers
                 db.SaveChanges();
             }
 
-            return RedirectToAction("YeuThich", "San_pham");
+            int wishlistCount = db.YeuThiches.Count(y => y.MaKH == maKhachHang.Value);
+            Session["FavoriteCount"] = wishlistCount;
+
+            return Json(new { success = true, count = wishlistCount });
         }
+
 
         public ActionResult YeuThich()
         {
@@ -447,14 +459,27 @@ namespace ProjectCDTN_63132701.Controllers
                 db.SaveChanges();
             }
 
+            int wishlistCount = db.YeuThiches.Count(y => y.MaKH == maKhachHang.Value);
+            Session["FavoriteCount"] = wishlistCount;
 
-
-            return RedirectToAction("YeuThich");
+            return Json(new { success = true, count = wishlistCount });
         }
 
+        public JsonResult GetWishlistInfo()
+        {
+            var maKhachHang = Session["UserId"] as int?;
 
+            if (!maKhachHang.HasValue)
+            {
+                return Json(new { success = false, wishlist = new List<int>(), count = 0 }, JsonRequestBehavior.AllowGet);
+            }
 
+            var wishlist = db.YeuThiches.Where(y => y.MaKH == maKhachHang.Value)
+                                        .Select(y => y.MaSP)
+                                        .ToList();
 
+            return Json(new { success = true, wishlist, count = wishlist.Count }, JsonRequestBehavior.AllowGet);
+        }
 
 
         public ActionResult DichVu()

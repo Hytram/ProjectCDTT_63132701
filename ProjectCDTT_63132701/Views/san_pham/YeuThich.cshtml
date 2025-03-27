@@ -42,7 +42,9 @@
                         <td>
                             <form action="@Url.Action("RemoveFromWishlist", "San_pham")" method="post">
                                 <input type="hidden" name="MaSP" value="@item.SanPham.MaSP" />
-                                <button type="submit" class="btn btn-light"><i class="fa-solid fa-trash-can"></i></button>
+                                <button class="remove-from-wishlist btn btn-danger" data-id="@item.MaSP">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
                             </form>
                         </td>
                     </tr>
@@ -51,3 +53,31 @@
         </tbody>
     </table>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $(".remove-from-wishlist").click(function (e) {
+            e.preventDefault();
+            var maSP = $(this).data("id");
+            var row = $(this).closest("tr"); 
+            $.ajax({
+                url: '@Url.Action("RemoveFromWishlist", "San_pham")',
+                type: 'POST',
+                data: { MaSP: maSP },
+                success: function (response) {
+                    row.fadeOut(300, function () { $(this).remove(); });
+                    $("#wishlist-count").text(response.count);
+                    if (response.count > 0) {
+                        $("#wishlist-count").css("background-color", "red").css("color", "white");
+                    } else {
+                        $("#wishlist-count").css("background-color", "#ddd").css("color", "black");
+                    }
+                },
+                error: function () {
+                    alert("Có lỗi xảy ra, vui lòng thử lại.");
+                }
+            });
+        });
+    });
+</script>

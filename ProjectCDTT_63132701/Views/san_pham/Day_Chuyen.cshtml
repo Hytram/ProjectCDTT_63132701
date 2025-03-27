@@ -56,12 +56,9 @@
         <a href="@Url.Action("ChiTietSanPham", "San_pham", new { id = sp.MaSP })" class="product-card">
             <!-- Nút yêu thích -->
             <div class="favorite-button">
-                <form method="post" action="@Url.Action("AddToWishlist", "San_pham")">
-                    <input type="hidden" name="MaSP" value="@sp.MaSP" />
-                    <button type="submit" class="btn-favorite">
-                        <i class="fa-regular fa-heart"></i>
-                    </button>
-                </form>
+                <button type="button" class="btn-favorite" data-id="@sp.MaSP">
+                    <i class="fa-regular fa-heart"></i>
+                </button>
             </div>
 
             <img src="@Url.Content("~/Images/" + sp.AnhSanPham)" alt="@sp.TenSP">
@@ -72,6 +69,7 @@
         </a>
     }
 </div>
+
 
 
 
