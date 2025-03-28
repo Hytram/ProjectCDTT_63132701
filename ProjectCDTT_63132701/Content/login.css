@@ -1,4 +1,4 @@
-﻿/* Định dạng tổng thể */
+﻿
 .container {
     display: flex;
     justify-content: center;
@@ -7,7 +7,6 @@
     background-color: white;
 }
 
-/* Hộp đăng nhập */
 .form-box {
     background: white;
     padding: 30px;
@@ -21,8 +20,6 @@ h2 {
     font-size: 24px;
     margin-bottom: 20px;
 }
-
-/* Nhãn và ô nhập */
 .form-group {
     text-align: left;
     margin-bottom: 15px;
@@ -40,7 +37,7 @@ input {
     border: 1px solid #ccc;
     border-radius: 10px;
 }
-/* Link đăng ký */
+
 p {
     margin-top: 10px;
 }
