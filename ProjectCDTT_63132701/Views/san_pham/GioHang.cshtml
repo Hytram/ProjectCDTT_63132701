@@ -16,63 +16,64 @@
     }
 </style>
 
-<div class="container">
-    <a href="javascript:history.back()" class="back-button">
-        <i class="fa-solid fa-chevron-left"></i> Quay lại
-    </a>
-    <h2>Giỏ Hàng</h2>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Ảnh sản phẩm</th>
-                <th>Tên sản phẩm</th>
-                <th>Giá</th>
-                <th>Số lượng</th>
-                <th>Tổng tiền</th>
-                <th>Xóa</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (cart == null || !cart.Any())
-            {
+<div class="container cart-container">
+    <div class="cart-items">
+        <a href="javascript:history.back()" class="back-button">
+            <i class="fa-solid fa-chevron-left"></i> Quay lại
+        </a>
+        <h2>Giỏ hàng của bạn</h2>
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <td colspan="5" class="text-center">Giỏ hàng trống</td>
+                    <th>Ảnh sản phẩm</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
+                    <th>Tổng tiền</th>
+                    <th>Xóa</th>
                 </tr>
-            }
-            else
-            {
-                foreach (var item in cart)
+            </thead>
+            <tbody>
+                @if (cart == null || !cart.Any())
                 {
                     <tr>
-                        <td><img src="@Url.Content("~/Images/" + item.SanPham.AnhSanPham)" alt="@item.SanPham.TenSP"></td>
-                        <td>@item.SanPham.TenSP</td>
-                        <td>@item.DonGia.ToString("N0") đ</td>
-                        <td>@item.SoLuong</td>
-                        <td>@(((item.SoLuong ?? 0) * item.DonGia).ToString("N0")) đ</td>
-                        <td>
-                            <form action="@Url.Action("RemoveFromCart", "San_pham")" method="post">
-                                <input type="hidden" name="MaSP" value="@item.MaSP" />
-                                <button type="submit" class="btn btn-light"><i class="fa-solid fa-trash-can"></i></button>
-                            </form>
-                        </td>
+                        <td colspan="5" class="text-center">Giỏ hàng trống</td>
                     </tr>
                 }
-            }
-        </tbody>
-    </table>
-    <div class="d-flex justify-content-end">
-        <h3>Tổng thanh toán: @((cart?.Sum(x => (x.SoLuong ?? 0) * x.DonGia) ?? 0).ToString("N0")) đ</h3>
+                else
+                {
+                    foreach (var item in cart)
+                    {
+                        <tr>
+                            <td><img src="@Url.Content("~/Images/" + item.SanPham.AnhSanPham)" alt="@item.SanPham.TenSP"></td>
+                            <td>@item.SanPham.TenSP</td>
+                            <td>@item.DonGia.ToString("N0") đ</td>
+                            <td>@item.SoLuong</td>
+                            <td>@(((item.SoLuong ?? 0) * item.DonGia).ToString("N0")) đ</td>
+                            <td>
+                                <form action="@Url.Action("RemoveFromCart", "San_pham")" method="post">
+                                    <input type="hidden" name="MaSP" value="@item.MaSP" />
+                                    <button type="submit" class="btn btn-light"><i class="fa-solid fa-trash-can"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-end">
+            <h3>Tổng thanh toán: @((cart?.Sum(x => (x.SoLuong ?? 0) * x.DonGia) ?? 0).ToString("N0")) đ</h3>
 
-    </div>
-    @if (cart != null && cart.Any())
-    {
-        <form action="@Url.Action("DatHang", "San_pham")" method="post" class="d-flex justify-content-center align-items-center">
-            <button type="submit" class="btn btn-dark">Đặt hàng</button>
-        </form>
-    }
-    @if (TempData["Message"] != null)
-    {
-        <script>
+        </div>
+        @if (cart != null && cart.Any())
+        {
+            <form action="@Url.Action("DatHang", "San_pham")" method="post" class="d-flex justify-content-center align-items-center">
+                <button type="submit" class="btn btn-dark">Đặt hàng</button>
+            </form>
+        }
+        @if (TempData["Message"] != null)
+        {
+            <script>
         document.addEventListener("DOMContentLoaded", function() {
             if (typeof toastr !== "undefined") {
                 toastr.options = {
@@ -85,9 +86,9 @@
                 console.error("Toastr chưa được tải!");
             }
         });
-        </script>
-    }
+            </script>
+        }
 
+    </div>
 </div>
-
 
