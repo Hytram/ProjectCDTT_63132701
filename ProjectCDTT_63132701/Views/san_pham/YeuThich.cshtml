@@ -6,7 +6,7 @@
 <head>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="~/Content/giohang.css" />
+    <link rel="stylesheet" href="~/Content/yeuthich.css" />
 </head>
 
 <div class="container">
@@ -15,59 +15,70 @@
     </a>
     <h2>Danh sách yêu thích</h2>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Ảnh sản phẩm</th>
-                <th>Tên sản phẩm</th>
-                <th>Giá</th>
-                <th>Xóa</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (wishlist == null || !wishlist.Any())
+    @if (wishlist == null || !wishlist.Any())
+    {
+        <p class="text-center">Chưa có sản phẩm yêu thích nào.</p>
+    }
+    else
+    {
+        <div class="wishlist-grid">
+            @foreach (var item in wishlist)
             {
-                <tr>
-                    <td colspan="4" class="text-center">Chưa có sản phẩm yêu thích nào.</td>
-                </tr>
-            }
-            else
-            {
-                foreach (var item in wishlist)
-                {
-                    <tr>
-                        <td><img src="@Url.Content("~/Images/" + item.SanPham.AnhSanPham)" alt="@item.SanPham.TenSP" width="50"></td>
-                        <td>@item.SanPham.TenSP</td>
-                        <td>@item.SanPham.DonGia.ToString("N0") VNĐ</td>
-                        <td>
-                            <form action="@Url.Action("RemoveFromWishlist", "San_pham")" method="post">
+                <div class="wishlist-card">
+                    <div class="wishlist-image">
+                        <img src="@Url.Content("~/Images/" + item.SanPham.AnhSanPham)" alt="@item.SanPham.TenSP">
+                    </div>
+                    <div class="wishlist-details">
+                        <p class="product-name">@item.SanPham.TenSP</p>
+                        <span class="price">@item.SanPham.DonGia.ToString("N0") VNĐ</span>
+                        <div class="price-add-cart">
+
+                            <form action="@Url.Action("AddToCart", "San_pham")" method="post" class="add-to-cart-form">
                                 <input type="hidden" name="MaSP" value="@item.SanPham.MaSP" />
-                                <button class="remove-from-wishlist btn btn-danger" data-id="@item.MaSP">
-                                    <i class="fa-solid fa-trash-can"></i>
+                                <input type="hidden" name="SoLuong" value="1" /> <!-- Cần dòng này -->
+                                <button type="submit" class="btn btn-add-to-cart">
+                                    <i class="fa fa-shopping-bag"></i>
+                                    <span>Thêm vào giỏ</span>
                                 </button>
                             </form>
-                        </td>
-                    </tr>
-                }
+
+                        </div>
+
+                        <form action="@Url.Action("RemoveFromWishlist", "San_pham")" method="post">
+                            <input type="hidden" name="MaSP" value="@item.SanPham.MaSP" />
+                            <button class="wishlist-toggle active" data-id="@item.SanPham.MaSP" title="Bỏ yêu thích">
+                                <i class="fa-solid fa-heart"></i>
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+
             }
-        </tbody>
-    </table>
+        </div>
+    }
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
     $(document).ready(function () {
-        $(".remove-from-wishlist").click(function (e) {
+        $(".wishlist-toggle").click(function (e) {
             e.preventDefault();
-            var maSP = $(this).data("id");
-            var row = $(this).closest("tr"); 
+
+            var button = $(this);
+            var maSP = button.data("id");
+
             $.ajax({
                 url: '@Url.Action("RemoveFromWishlist", "San_pham")',
                 type: 'POST',
                 data: { MaSP: maSP },
                 success: function (response) {
-                    row.fadeOut(300, function () { $(this).remove(); });
+                    button.closest(".wishlist-card").fadeOut(300, function () {
+                        $(this).remove();
+                    });
+
                     $("#wishlist-count").text(response.count);
+
                     if (response.count > 0) {
                         $("#wishlist-count").css("background-color", "red").css("color", "white");
                     } else {

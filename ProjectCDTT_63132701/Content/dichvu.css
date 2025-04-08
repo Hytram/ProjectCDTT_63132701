@@ -1,17 +1,8 @@
-﻿/* Đặt màu nền be cho toàn trang */
-
-body {
-    background-color: #FFFFFF;
-    color: #333;
-    padding: 0;
-}
-
-/* Tiêu đề chính */
+﻿/* Tiêu đề chính */
 h2 {
     color: #000000;
     font-size: 24px;
     font-weight: bold;
-    text-transform: uppercase;
     margin: 30px 0 15px;
     text-align: center;
 }
@@ -25,6 +16,7 @@ table {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Đổ bóng cho bảng */
 }
 
 /* Tiêu đề cột */
@@ -35,7 +27,7 @@ th, td {
 }
 
 th {
-    background: #7d5a50;
+    background: #ed8383;
     color: white;
     font-size: 16px;
     font-weight: bold;
@@ -60,6 +52,7 @@ td {
     width: 80%;
     margin: 20px auto;
     padding: 15px;
+
 }
 
     .note h3 {

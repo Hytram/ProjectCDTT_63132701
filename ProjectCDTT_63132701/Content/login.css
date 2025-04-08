@@ -34,12 +34,22 @@ label {
     margin-bottom: 5px;
 }
 
-input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
+/* ====== NÚT ĐĂNG NHẬP ====== */
+.btn-login {
+    background-color: #ed8383 !important;
+    color: white !important;
+    border: none;
+    padding: 8px 12px; 
+    font-size: 14px; 
+    font-weight: bold;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
 }
+
+    .btn-login:hover {
+        background-color: #d46a6a !important;
+    }
+
 /* Link đăng ký */
 p {
     margin-top: 10px;

@@ -10,7 +10,7 @@
 </head>
 <div class="container">
     <div class="form-box">
-        <h2>Đăng nhập</h2>
+        <h2>ĐĂNG NHẬP</h2>
         @using (Html.BeginForm("Login", "Tai_khoan", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
@@ -26,7 +26,8 @@
             </div>
 
             <div class="button-container">
-                <button type="submit" class="btn btn-dark">ĐĂNG NHẬP</button>
+                <button type="submit" class="btn btn-login">ĐĂNG NHẬP</button>
+
             </div>
         }
 

@@ -137,3 +137,19 @@ body {
     max-width: 23%;
     margin-bottom: 20px;
 }
+.category-btn {
+    display: inline-block;
+    text-align: center;
+    border: 2px solid #ED8383;
+    color: #ED8383;
+    background-color: #fff;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a.category-btn:hover {
+    background-color: #ED8383;
+    color: #fff;
+}
+

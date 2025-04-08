@@ -228,12 +228,14 @@
     <Content Include="Content\styleAdmin.css" />
     <Content Include="Content\table.css" />
     <Content Include="Content\thuonghieu.css" />
+    <Content Include="Content\yeuthich.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\11.jpg" />
     <Content Include="Images\12.jpg" />
     <Content Include="Images\anh12.jpg" />
+    <Content Include="Images\banner.jpg" />
     <Content Include="Images\bia1.jpg" />
     <Content Include="Images\bia2.jpg" />
     <Content Include="Images\bia3.jpg" />
