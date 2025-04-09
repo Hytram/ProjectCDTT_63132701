@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -520,29 +521,45 @@ namespace ProjectCDTN_63132701.Controllers
         // GET: san_pham/Create
         public ActionResult Create()
         {
-            ViewBag.MaLoaiSP = new SelectList(db.LoaiSanPhams, "id", "ten_danh_muc");
+            ViewBag.MaLoaiSP = new SelectList(db.LoaiSanPhams, "MaLoaiSP", "TenLoaiSP");
             return View();
         }
+
 
         // POST: san_pham/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,ten_san_pham,mo_ta,gia,so_luong,id_danh_muc,anh_san_pham,loai_bac,ngay_tao")] SanPham san_pham)
+        public ActionResult Create(
+    [Bind(Include = "TenSP,MoTa,DonGia,SoLuong,MaLoaiSP,LoaiBac,NgayTao")] SanPham san_pham,
+    HttpPostedFileBase AnhSanPhamUpload)
         {
             if (ModelState.IsValid)
             {
+                if (AnhSanPhamUpload != null && AnhSanPhamUpload.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(AnhSanPhamUpload.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Content/images"), fileName);
+
+                    AnhSanPhamUpload.SaveAs(path);
+
+                    san_pham.AnhSanPham = fileName;
+                }
+
                 db.SanPhams.Add(san_pham);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.id_danh_muc = new SelectList(db.LoaiSanPhams, "id", "ten_danh_muc", san_pham);
+            ViewBag.MaLoaiSP = new SelectList(db.LoaiSanPhams, "MaLoaiSP", "TenLoaiSP", san_pham.MaLoaiSP);
             return View(san_pham);
         }
 
+
+
         // GET: san_pham/Edit/5
+        // GET: SanPham/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -554,16 +571,15 @@ namespace ProjectCDTN_63132701.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.id_danh_muc = new SelectList(db.LoaiSanPhams, "id", "ten_danh_muc", san_pham.MaLoaiSP);
+
+            ViewBag.MaLoaiSP = new SelectList(db.LoaiSanPhams, "MaLoaiSP", "TenLoaiSP", san_pham.MaLoaiSP);
             return View(san_pham);
         }
 
-        // POST: san_pham/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: SanPham/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,ten_san_pham,mo_ta,gia,so_luong,id_danh_muc,anh_san_pham,loai_bac,ngay_tao")] SanPham san_pham)
+        public ActionResult Edit([Bind(Include = "MaSP,TenSP,MoTa,DonGia,SoLuong,MaLoaiSP,AnhSanPham,LoaiBac,NgayTao")] SanPham san_pham)
         {
             if (ModelState.IsValid)
             {
@@ -571,9 +587,11 @@ namespace ProjectCDTN_63132701.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.id_danh_muc = new SelectList(db.LoaiSanPhams, "id", "ten_danh_muc", san_pham.MaLoaiSP);
+
+            ViewBag.MaLoaiSP = new SelectList(db.LoaiSanPhams, "MaLoaiSP", "TenLoaiSP", san_pham.MaLoaiSP);
             return View(san_pham);
         }
+
 
         // GET: san_pham/Delete/5
         public ActionResult Delete(int? id)

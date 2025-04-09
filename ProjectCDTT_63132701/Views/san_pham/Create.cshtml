@@ -1,93 +1,76 @@
-﻿@*@model ProjectCDTT_63132701.Models.san_pham
+﻿@model ProjectCDTT_63132701.Models.SanPham
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Create</h2>
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="~/Content/create.css" />
+</head>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "san_pham", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>san_pham</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.ten_san_pham, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ten_san_pham, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ten_san_pham, "", new { @class = "text-danger" })
+
+    <div class="form-wrapper">
+        <a href="javascript:history.back()" class="back-button">
+            <i class="fa-solid fa-chevron-left"></i> Quay lại
+        </a>
+        <h2 class="form-title">Thêm sản phẩm mới</h2>
+
+        <div class="form-row">
+            <div class="form-group">
+                @Html.LabelFor(m => m.TenSP, "Tên sản phẩm :")
+                @Html.TextBoxFor(m => m.TenSP, new { @class = "long-input" })
+
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.mo_ta, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.mo_ta, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.mo_ta, "", new { @class = "text-danger" })
+        <div class="form-row">
+            <div class="form-group">
+                @Html.LabelFor(m => m.MoTa, "Mô tả :")
+                @Html.TextAreaFor(m => m.MoTa, new { rows = 2 })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.AnhSanPham, "Ảnh:")
+                <input type="file" name="AnhSanPhamUpload" class="form-control" />
+
+
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.gia, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.gia, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.gia, "", new { @class = "text-danger" })
+        <div class="form-row">
+            <div class="form-group">
+                @Html.LabelFor(m => m.MaLoaiSP, "Loại sản phẩm :")
+                @Html.DropDownListFor(m => m.MaLoaiSP, (SelectList)ViewBag.MaLoaiSP, "-- Chọn danh mục --")
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.SoLuong, "Số lượng :")
+                @Html.TextBoxFor(m => m.SoLuong, new { type = "number", min = "1" })
+
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.so_luong, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.so_luong, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.so_luong, "", new { @class = "text-danger" })
+        <div class="form-row">
+            <div class="form-group radio-group">
+                @Html.Label("Loại bạc :")
+                <label>
+                    @Html.RadioButtonFor(m => m.LoaiBac, "Italy") Italy
+                </label>
+                <label>
+                    @Html.RadioButtonFor(m => m.LoaiBac, "Thailand") Thailand
+                </label>
             </div>
+            @*<div class="form-group">
+                @Html.LabelFor(m => m.NgayTao, "Ngày tạo :")
+                @Html.TextBoxFor(m => m.NgayTao, "{0:yyyy-MM-dd}", new { type = "date" })
+            </div>*@
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.id_danh_muc, "id_danh_muc", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("id_danh_muc", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.id_danh_muc, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.anh_san_pham, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.anh_san_pham, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.anh_san_pham, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.loai_bac, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.loai_bac, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.loai_bac, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ngay_tao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ngay_tao, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ngay_tao, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+        <button type="submit" class="btn-submit">Thêm sản phẩm</button>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-*@

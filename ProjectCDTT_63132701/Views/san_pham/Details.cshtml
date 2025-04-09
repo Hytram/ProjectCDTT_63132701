@@ -2,82 +2,49 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/shared/_LayoutAdmin.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml"; 
 }
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="~/Content/details.css" />
+</head>
+    <div class="form-wrapper">
+    <a href="javascript:history.back()" class="back-button">
+        <i class="fa-solid fa-chevron-left"></i> Quay lại
+    </a>
+    <h2 class="mb-4">Chi tiết sản phẩm</h2>
 
-<h2>Details</h2>
+    <div class="row">
+        <div class="col-md-5">
+            <img src="~/images/@Model.AnhSanPham" class="img-fluid rounded shadow" alt="Ảnh sản phẩm" />
+        </div>
+        <div class="col-md-7">
+            <dl class="row">
+                <dt class="col-sm-4">Tên sản phẩm:</dt>
+                <dd class="col-sm-8">@Model.TenSP</dd>
 
-<div>
-    <h4>san_pham</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ten_san_pham)
-        </dt>
+                <dt class="col-sm-4">Mô tả:</dt>
+                <dd class="col-sm-8">@Model.MoTa</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ten_san_pham)
-        </dd>
+                <dt class="col-sm-4">Đơn giá:</dt>
+                <dd class="col-sm-8 price">@String.Format("{0:N0} ₫", Model.DonGia)</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.mo_ta)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.mo_ta)
-        </dd>
+                <dt class="col-sm-4">Số lượng:</dt>
+                <dd class="col-sm-8">@Model.SoLuong</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.gia)
-        </dt>
+                <dt class="col-sm-4">Loại bạc:</dt>
+                <dd class="col-sm-8">@Model.LoaiBac</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.gia)
-        </dd>
+                @*<dt class="col-sm-4">Ngày tạo:</dt>
+        @(Model.NgayTao.HasValue ? Model.NgayTao.Value.ToString("dd/MM/yyyy") : "")*@
 
-        <dt>
-            @Html.DisplayNameFor(model => model.so_luong)
-        </dt>
+                <dt class="col-sm-4">Loại sản phẩm:</dt>
+                <dd class="col-sm-8">@Model.LoaiSanPham.TenLoaiSP</dd>
+            </dl>
 
-        <dd>
-            @Html.DisplayFor(model => model.so_luong)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.anh_san_pham)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.anh_san_pham)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.loai_bac)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.loai_bac)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ngay_tao)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ngay_tao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.danh_muc.ten_danh_muc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.danh_muc.ten_danh_muc)
-        </dd>
-
-    </dl>
+            
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

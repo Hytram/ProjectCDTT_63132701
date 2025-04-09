@@ -1,0 +1,27 @@
+﻿h2 {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #888;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+    .back-button:hover {
+        color: #000;
+    }
+
+
+
+.form-wrapper {
+    max-width: 900px;
+    margin: 0px auto;
+    padding: 0 40px 50px 40px;
+}
