@@ -6,12 +6,15 @@
 
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="~/Content/qlsp.css" />
 </head>
 
-<h2>Danh sách sản phẩm hàng</h2>
-<p>
-    @Html.ActionLink("Thêm Sản Phẩm", "Create", null, new { @class = "btn btn-success" })
-</p>
+
+<h2>Danh sách sản phẩm</h2>
+<div class="center-button">
+    @Html.ActionLink("Thêm Sản Phẩm", "Create", null, new { @class = "btn-submit" })
+</div>
+
 
 <table class="table table-bordered">
     <thead>
@@ -21,8 +24,8 @@
             <th>Mô tả</th>
             <th>Đơn giá</th>
             <th>Loại sản phẩm</th>
-@*            <th>Trạng thái </th>
-            <th></th>*@
+            @*            <th>Trạng thái </th>
+                <th></th>*@
 
         </tr>
     </thead>
@@ -35,10 +38,10 @@
                 <td>@Html.DisplayFor(modelItem => item.MoTa)</td>
                 <td>@Html.DisplayFor(modelItem => item.DonGia)</td>
                 <td>@Html.DisplayFor(modelItem => item.LoaiBac)</td>
-@*                <td>@Html.DisplayFor(modelItem => item.trang_thai)</td>*@
-@*                <td>
-                    <a href="@Url.Action("ChiTietHoaDon", "SanPhams_64130053", new { id = hoaDon.SoHD })"><i class="fa-solid fa-circle-info"></i></a>
-                </td>*@
+                @*                <td>@Html.DisplayFor(modelItem => item.trang_thai)</td>*@
+                @*                <td>
+                        <a href="@Url.Action("ChiTietHoaDon", "SanPhams_64130053", new { id = hoaDon.SoHD })"><i class="fa-solid fa-circle-info"></i></a>
+                    </td>*@
                 <td>
                     <a href="@Url.Action("Details", new { id = item.MaSP })" class="btn btn-info btn-sm">
                         <i class="fas fa-eye"></i>

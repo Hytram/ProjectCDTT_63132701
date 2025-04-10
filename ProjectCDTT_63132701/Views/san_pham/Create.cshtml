@@ -31,12 +31,18 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group">
-                @Html.LabelFor(m => m.MoTa, "Mô tả :")
-                @Html.TextAreaFor(m => m.MoTa, new { rows = 2 })
+            <div class="form-group radio-group">
+                @Html.Label("Loại bạc :")
+                <label>
+                    @Html.RadioButtonFor(m => m.LoaiBac, "Italy") Italy
+                </label>
+                <label>
+                    @Html.RadioButtonFor(m => m.LoaiBac, "Thailand") Thailand
+                </label>
             </div>
+
             <div class="form-group">
-                @Html.LabelFor(m => m.AnhSanPham, "Ảnh:")
+                @Html.Label("Ảnh sản phẩm", new { @class = "form-label" })
                 <input type="file" name="AnhSanPhamUpload" class="form-control" />
 
 
@@ -50,7 +56,7 @@
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => m.SoLuong, "Số lượng :")
-                @Html.TextBoxFor(m => m.SoLuong, new { type = "number", min = "1" })
+                @Html.TextBoxFor(m => m.SoLuong, new { @class = "form-control", @type = "number", @min = "1", @id = "SoLuong" })
 
             </div>
         </div>
@@ -65,12 +71,35 @@
                     @Html.RadioButtonFor(m => m.LoaiBac, "Thailand") Thailand
                 </label>
             </div>
-            @*<div class="form-group">
-                @Html.LabelFor(m => m.NgayTao, "Ngày tạo :")
-                @Html.TextBoxFor(m => m.NgayTao, "{0:yyyy-MM-dd}", new { type = "date" })
-            </div>*@
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.DonGia, "Đơn giá :")
+                @Html.TextBoxFor(m => m.DonGia, new { @class = "form-control", type = "number", min = "50000", step = "10000" })
+
+            </div>
+
+
         </div>
 
         <button type="submit" class="btn-submit">Thêm sản phẩm</button>
     </div>
 }
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const donGiaInput = document.getElementById("DonGia");
+        const soLuongInput = document.getElementById("SoLuong");
+
+        if (donGiaInput) {
+            donGiaInput.addEventListener("input", function () {
+                this.value = this.value.replace(/[^0-9]/g, "");
+            });
+        }
+
+        if (soLuongInput) {
+            soLuongInput.addEventListener("input", function () {
+                this.value = this.value.replace(/[^0-9]/g, "");
+            });
+        }
+    });
+</script>
+

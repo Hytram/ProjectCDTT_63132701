@@ -140,8 +140,8 @@ body {
 .category-btn {
     display: inline-block;
     text-align: center;
-    border: 2px solid #ED8383;
-    color: #ED8383;
+    border: 2px solid #F7858F;
+    color: #F7858F;
     background-color: #fff;
     transition: all 0.3s ease;
     font-weight: 600;
@@ -149,7 +149,7 @@ body {
 }
 
 a.category-btn:hover {
-    background-color: #ED8383;
+    background-color: #F7858F;
     color: #fff;
 }
 

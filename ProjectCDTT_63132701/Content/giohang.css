@@ -152,9 +152,9 @@ h2 {
 
 /* Nút thêm vào giỏ (nếu dùng chung) */
 .btn-add-to-cart {
-    color: #ED8383;
+    color: #F7858F;
     background-color: transparent;
-    border: 1px solid #ED8383;
+    border: 1px solid #F7858F;
     border-radius: 4px;
     padding: 8px 16px;
     font-size: 14px;

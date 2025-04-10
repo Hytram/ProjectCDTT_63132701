@@ -25,3 +25,31 @@
     margin: 0px auto;
     padding: 0 40px 50px 40px;
 }
+
+.btn-submit {
+    background-color: #F7858F;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-submit:hover {
+        background-color: #e06c78;
+    }
+
+.btn-cancel {
+    background-color: #B0BEC5;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-cancel:hover {
+        background-color: #90A4AE;
+        color: white;
+    }

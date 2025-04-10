@@ -549,7 +549,7 @@ namespace ProjectCDTN_63132701.Controllers
 
                 db.SanPhams.Add(san_pham);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("QLSP", "san_pham");
             }
 
             ViewBag.MaLoaiSP = new SelectList(db.LoaiSanPhams, "MaLoaiSP", "TenLoaiSP", san_pham.MaLoaiSP);
@@ -559,38 +559,60 @@ namespace ProjectCDTN_63132701.Controllers
 
 
         // GET: san_pham/Edit/5
-        // GET: SanPham/Edit/5
+        // GET: san_pham/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SanPham san_pham = db.SanPhams.Find(id);
-            if (san_pham == null)
+            SanPham sanPham = db.SanPhams.Find(id);
+            if (sanPham == null)
             {
                 return HttpNotFound();
             }
-
-            ViewBag.MaLoaiSP = new SelectList(db.LoaiSanPhams, "MaLoaiSP", "TenLoaiSP", san_pham.MaLoaiSP);
-            return View(san_pham);
+            ViewBag.MaLoaiSP = new SelectList(db.LoaiSanPhams, "MaLoaiSP", "TenLoaiSP", sanPham.MaLoaiSP);
+            return View(sanPham);
         }
 
-        // POST: SanPham/Edit/5
+        // POST: san_pham/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaSP,TenSP,MoTa,DonGia,SoLuong,MaLoaiSP,AnhSanPham,LoaiBac,NgayTao")] SanPham san_pham)
+        public ActionResult Edit([Bind(Include = "MaSP,TenSP,MoTa,LoaiBac,DonGia,SoLuong,MaLoaiSP")] SanPham sanPham, HttpPostedFileBase AnhSanPhamUpload)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(san_pham).State = EntityState.Modified;
+                // Xử lý ảnh sản phẩm
+                if (AnhSanPhamUpload != null && AnhSanPhamUpload.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(AnhSanPhamUpload.FileName);
+                    string path = Path.Combine(Server.MapPath("~/images"), fileName);
+                    AnhSanPhamUpload.SaveAs(path);
+                    sanPham.AnhSanPham = fileName;
+                }
+                else
+                {
+                    // Giữ nguyên ảnh cũ nếu không chọn ảnh mới
+                    var oldData = db.SanPhams.AsNoTracking().FirstOrDefault(sp => sp.MaSP == sanPham.MaSP);
+                    if (oldData != null)
+                    {
+                        sanPham.AnhSanPham = oldData.AnhSanPham;
+                    }
+                }
+
+                db.Entry(sanPham).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("QLSP");
             }
 
-            ViewBag.MaLoaiSP = new SelectList(db.LoaiSanPhams, "MaLoaiSP", "TenLoaiSP", san_pham.MaLoaiSP);
-            return View(san_pham);
+            // Nếu ModelState không hợp lệ, load lại danh sách dropdown
+            ViewBag.MaLoaiSP = new SelectList(db.LoaiSanPhams, "MaLoaiSP", "TenLoaiSP", sanPham.MaLoaiSP);
+            return View(sanPham);
         }
+
+
+
+
 
 
         // GET: san_pham/Delete/5
@@ -616,7 +638,7 @@ namespace ProjectCDTN_63132701.Controllers
             SanPham san_pham = db.SanPhams.Find(id);
             db.SanPhams.Remove(san_pham);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("QLSP", "san_pham");
         }
 
         protected override void Dispose(bool disposing)
