@@ -14,6 +14,8 @@ namespace ProjectCDTT_63132701.Controllers
     {
         private Project_63132701Entities2 db = new Project_63132701Entities2();
 
+
+
         public ActionResult QLVC()
         {
             var donHangVanChuyens = db.VanChuyens.Include(d => d.DonHang).ToList();
@@ -45,7 +47,11 @@ namespace ProjectCDTT_63132701.Controllers
         // GET: Van_chuyen/Create
         public ActionResult Create()
         {
-            ViewBag.MaDH = new SelectList(db.DonHangs, "MaDH", "TrangThai");
+            ViewBag.DonViVanChuyenList = new SelectList(new[]
+            {
+                new { Value = "J&TExpress", Text = "J&T Express" },
+                new { Value = "GiaoHangNhanh", Text = "Giao Hàng Nhanh" },
+            }, "Value", "Text");
             return View();
         }
 
@@ -54,17 +60,21 @@ namespace ProjectCDTT_63132701.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaVanChuyen,MaDH,DonViVanChuyen,TrangThai,NgayTao,ThoiGianGiao,ThoiGianNhan")] VanChuyen vanChuyen)
+        public ActionResult Create(VanChuyen vc)
         {
             if (ModelState.IsValid)
             {
-                db.VanChuyens.Add(vanChuyen);
+                db.VanChuyens.Add(vc);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("QLVC", "Van_chuyen");
             }
 
-            ViewBag.MaDH = new SelectList(db.DonHangs, "MaDH", "TrangThai", vanChuyen.MaDH);
-            return View(vanChuyen);
+            ViewBag.DonViVanChuyenList = new SelectList(new[]
+            {
+                new { Value = "J&TExpress", Text = "J&T Express" },
+                new { Value = "GiaoHangNhanh", Text = "Giao Hàng Nhanh" },
+            }, "Value", "Text");
+            return View(vc);
         }
 
         // GET: Van_chuyen/Edit/5

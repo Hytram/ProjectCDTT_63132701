@@ -46,7 +46,7 @@
                                 <input type="hidden" name="MaSP" value="@item.MaSP" />
                                 <button type="submit" class="btn-remove"><i class="fa-solid fa-xmark"></i></button>
                             </form>
-                            <div class="item-price">@(((item.SoLuong ?? 0) * item.DonGia).ToString("N0")) đ</div>
+                            <div class="item-price">@(((item.SoLuong) * item.DonGia).ToString("N0")) đ</div>
                         </div>
 
                     </div>
@@ -59,18 +59,18 @@
 
             <div class="summary-row">
                 <span class="label">Tổng tiền hàng:</span>
-                <span class="value">@((cart?.Sum(x => (x.SoLuong ?? 0) * x.DonGia) ?? 0).ToString("N0")) đ</span>
+                <span class="value">@((cart?.Sum(x => (x.SoLuong) * x.DonGia) ?? 0).ToString("N0")) đ</span>
             </div>
             <div class="summary-row">
                 <span class="label">Tạm tính:</span>
-                <span class="value">@((cart?.Sum(x => (x.SoLuong ?? 0) * x.DonGia) ?? 0).ToString("N0")) đ</span>
+                <span class="value">@((cart?.Sum(x => (x.SoLuong) * x.DonGia) ?? 0).ToString("N0")) đ</span>
             </div>
             <hr />
 
             
             <div class="summary-row">
                 <span class="label">Tổng tiền:</span>
-                <span class="value">@((cart?.Sum(x => (x.SoLuong ?? 0) * x.DonGia) ?? 0).ToString("N0")) đ</span>
+                <span class="value">@((cart?.Sum(x => (x.SoLuong) * x.DonGia) ?? 0).ToString("N0")) đ</span>
             </div>
 
             <form action="@Url.Action("DatHang", "San_pham")" method="post">

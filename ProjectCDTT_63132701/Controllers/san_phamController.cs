@@ -287,11 +287,11 @@ namespace ProjectCDTN_63132701.Controllers
                     var sanPham = db.SanPhams.FirstOrDefault(p => p.MaSP == MaSP);
                     if (sanPham != null)
                     {
-                        sanPham.SoLuong += chiTiet.SoLuong ?? 0;
+                        sanPham.SoLuong += chiTiet.SoLuong;
                     }
                     db.ChiTietGioHangs.Remove(chiTiet);
                     db.SaveChanges();
-                    Session["CartCount"] = db.ChiTietGioHangs.Where(c => c.MaGH == gioHang.MaGH).Sum(c => c.SoLuong) ?? 0;
+                    Session["CartCount"] = db.ChiTietGioHangs.Where(c => c.MaGH == gioHang.MaGH).Sum(c => c.SoLuong);
                 }
             }
 
@@ -318,7 +318,7 @@ namespace ProjectCDTN_63132701.Controllers
             DonHang donHang = new DonHang
             {
                 MaKH = maKhachHang,
-                TongTien = gioHang.ChiTietGioHangs.Sum(ct => (ct.SoLuong ?? 0) * (ct.SanPham.DonGia)),
+                TongTien = gioHang.ChiTietGioHangs.Sum(ct => (ct.SoLuong) * (ct.SanPham.DonGia)),
                 NgayTao = DateTime.Now,
                 TrangThai = "Pending",
                 MaVanDon = GenerateTrackingNumber()
@@ -344,7 +344,7 @@ namespace ProjectCDTN_63132701.Controllers
                 {
                     MaDH = hoaDon.MaDH,
                     MaSP = item.MaSP,
-                    SoLuong = item.SoLuong ?? 0,
+                    SoLuong = item.SoLuong,
                     Gia = item.SanPham.DonGia
                 };
                 db.ChiTietHoaDons.Add(chiTiet);

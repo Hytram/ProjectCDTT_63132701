@@ -50,26 +50,16 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group">
+            <div class=" form-group">
                 @Html.LabelFor(m => m.MaLoaiSP, "Loại sản phẩm :")
                 @Html.DropDownListFor(m => m.MaLoaiSP, (SelectList)ViewBag.MaLoaiSP, "-- Chọn danh mục --")
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(m => m.SoLuong, "Số lượng :")
-                @Html.TextBoxFor(m => m.SoLuong, new { @class = "form-control", @type = "number", @min = "1", @id = "SoLuong" })
-
             </div>
         </div>
 
         <div class="form-row">
-            <div class="form-group radio-group">
-                @Html.Label("Loại bạc :")
-                <label>
-                    @Html.RadioButtonFor(m => m.LoaiBac, "Italy") Italy
-                </label>
-                <label>
-                    @Html.RadioButtonFor(m => m.LoaiBac, "Thailand") Thailand
-                </label>
+            <div class="form-group">
+                @Html.LabelFor(m => m.SoLuong, "Số lượng :")
+                @Html.TextBoxFor(m => m.SoLuong, new { @class = "form-control", @type = "number", @min = "1", @id = "SoLuong" })
             </div>
 
             <div class="form-group">

@@ -21,6 +21,11 @@ namespace ProjectCDTT_63132701.Models
         public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> ThoiGianGiao { get; set; }
         public Nullable<System.DateTime> ThoiGianNhan { get; set; }
+        public string DiaChiChiTiet { get; set; }
+        public string PhuongXa { get; set; }
+        public string QuanHuyen { get; set; }
+        public string TinhThanh { get; set; }
+        public decimal GiaVanChuyen { get; set; }
     
         public virtual DonHang DonHang { get; set; }
     }

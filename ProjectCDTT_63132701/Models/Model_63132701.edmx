@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Project_63132701Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Project_63132701Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ChiTietDonHang">
           <Key>
             <PropertyRef Name="MaDH" />
@@ -22,7 +22,7 @@
           </Key>
           <Property Name="MaGH" Type="int" Nullable="false" />
           <Property Name="MaSP" Type="int" Nullable="false" />
-          <Property Name="SoLuong" Type="int" />
+          <Property Name="SoLuong" Type="int" Nullable="false" />
           <Property Name="DonGia" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="ChiTietHoaDon">
@@ -129,6 +129,11 @@
           <Property Name="NgayTao" Type="datetime" />
           <Property Name="ThoiGianGiao" Type="datetime" />
           <Property Name="ThoiGianNhan" Type="datetime" />
+          <Property Name="GiaVanChuyen" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DiaChiChiTiet" Type="nvarchar" MaxLength="100" />
+          <Property Name="PhuongXa" Type="nvarchar" MaxLength="50" />
+          <Property Name="QuanHuyen" Type="nvarchar" MaxLength="50" />
+          <Property Name="TinhThanh" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="YeuThich">
           <Key>
@@ -329,7 +334,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VanChuyen__MaDH__4F7CD00D">
+        <Association Name="FK__VanChuyen__MaDH__571DF1D5">
           <End Role="DonHang" Type="Self.DonHang" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -441,7 +446,7 @@
             <End Role="DonHang" EntitySet="DonHang" />
             <End Role="ThanhToan" EntitySet="ThanhToan" />
           </AssociationSet>
-          <AssociationSet Name="FK__VanChuyen__MaDH__4F7CD00D" Association="Self.FK__VanChuyen__MaDH__4F7CD00D">
+          <AssociationSet Name="FK__VanChuyen__MaDH__571DF1D5" Association="Self.FK__VanChuyen__MaDH__571DF1D5">
             <End Role="DonHang" EntitySet="DonHang" />
             <End Role="VanChuyen" EntitySet="VanChuyen" />
           </AssociationSet>
@@ -454,8 +459,7 @@
             <End Role="YeuThich" EntitySet="YeuThich" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Project_63132701Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -478,7 +482,7 @@
           </Key>
           <Property Name="MaGH" Type="Int32" Nullable="false" />
           <Property Name="MaSP" Type="Int32" Nullable="false" />
-          <Property Name="SoLuong" Type="Int32" />
+          <Property Name="SoLuong" Type="Int32" Nullable="false" />
           <Property Name="DonGia" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <NavigationProperty Name="GioHang" Relationship="Self.FK__ChiTietGio__MaGH__21B6055D" FromRole="ChiTietGioHang" ToRole="GioHang" />
           <NavigationProperty Name="SanPham" Relationship="Self.FK__ChiTietGio__MaSP__22AA2996" FromRole="ChiTietGioHang" ToRole="SanPham" />
@@ -615,6 +619,11 @@
           <Property Name="ThoiGianGiao" Type="DateTime" Precision="3" />
           <Property Name="ThoiGianNhan" Type="DateTime" Precision="3" />
           <NavigationProperty Name="DonHang" Relationship="Self.FK__VanChuyen__MaDH__4F7CD00D" FromRole="VanChuyen" ToRole="DonHang" />
+          <Property Name="DiaChiChiTiet" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhuongXa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QuanHuyen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TinhThanh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GiaVanChuyen" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="YeuThich">
           <Key>
@@ -1073,6 +1082,11 @@
           <EntitySetMapping Name="VanChuyens">
             <EntityTypeMapping TypeName="Project_63132701Model.VanChuyen">
               <MappingFragment StoreEntitySet="VanChuyen">
+                <ScalarProperty Name="GiaVanChuyen" ColumnName="GiaVanChuyen" />
+                <ScalarProperty Name="TinhThanh" ColumnName="TinhThanh" />
+                <ScalarProperty Name="QuanHuyen" ColumnName="QuanHuyen" />
+                <ScalarProperty Name="PhuongXa" ColumnName="PhuongXa" />
+                <ScalarProperty Name="DiaChiChiTiet" ColumnName="DiaChiChiTiet" />
                 <ScalarProperty Name="MaVanChuyen" ColumnName="MaVanChuyen" />
                 <ScalarProperty Name="MaDH" ColumnName="MaDH" />
                 <ScalarProperty Name="DonViVanChuyen" ColumnName="DonViVanChuyen" />

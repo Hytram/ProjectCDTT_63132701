@@ -16,7 +16,7 @@ namespace ProjectCDTT_63132701.Models
     {
         public int MaGH { get; set; }
         public int MaSP { get; set; }
-        public Nullable<int> SoLuong { get; set; }
+        public int SoLuong { get; set; }
         public decimal DonGia { get; set; }
     
         public virtual GioHang GioHang { get; set; }
