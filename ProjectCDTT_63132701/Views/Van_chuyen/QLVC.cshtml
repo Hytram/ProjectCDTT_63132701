@@ -16,6 +16,7 @@
 <table class="table table-bordered">
     <thead>
         <tr>
+            <th>Khách hàng</th>
             <th>Tỉnh thành</th>
             <th>Quận huyện</th>
             <th>Phường xã</th>
@@ -27,6 +28,7 @@
         @foreach (var item in Model)
         {
             <tr>
+                <td>@Html.DisplayFor(modelItem => item.DonHang.KhachHang.HoTen)</td>
                 <td>@Html.DisplayFor(modelItem => item.TinhThanh)</td>
                 <td>@Html.DisplayFor(modelItem => item.QuanHuyen)</td>
                 <td>@Html.DisplayFor(modelItem => item.PhuongXa)</td>

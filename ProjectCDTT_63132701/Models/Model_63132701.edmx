@@ -46,6 +46,18 @@
           <Property Name="NgayTao" Type="datetime" />
           <Property Name="MaVanDon" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="GiaVanChuyen">
+          <Key>
+            <PropertyRef Name="MaGiaVanChuyen" />
+          </Key>
+          <Property Name="MaGiaVanChuyen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DonViVanChuyen" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="GiaVanChuyen" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DiaChiChiTiet" Type="nvarchar" MaxLength="100" />
+          <Property Name="PhuongXa" Type="nvarchar" MaxLength="50" />
+          <Property Name="QuanHuyen" Type="nvarchar" MaxLength="50" />
+          <Property Name="TinhThanh" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="GioHang">
           <Key>
             <PropertyRef Name="MaGH" />
@@ -124,6 +136,7 @@
           </Key>
           <Property Name="MaVanChuyen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MaDH" Type="int" />
+          <Property Name="MaGiaVanChuyen" Type="int" />
           <Property Name="DonViVanChuyen" Type="nvarchar" MaxLength="100" />
           <Property Name="TrangThai" Type="nvarchar" MaxLength="20" />
           <Property Name="NgayTao" Type="datetime" />
@@ -334,7 +347,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VanChuyen__MaDH__571DF1D5">
+        <Association Name="FK__VanChuyen__MaDH__6E01572D">
           <End Role="DonHang" Type="Self.DonHang" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
           </End>
@@ -345,6 +358,20 @@
             </Principal>
             <Dependent Role="VanChuyen">
               <PropertyRef Name="MaDH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VanChuyen__MaGia__6EF57B66">
+          <End Role="GiaVanChuyen" Type="Self.GiaVanChuyen" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="VanChuyen" Type="Self.VanChuyen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GiaVanChuyen">
+              <PropertyRef Name="MaGiaVanChuyen" />
+            </Principal>
+            <Dependent Role="VanChuyen">
+              <PropertyRef Name="MaGiaVanChuyen" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -381,6 +408,7 @@
           <EntitySet Name="ChiTietGioHang" EntityType="Self.ChiTietGioHang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChiTietHoaDon" EntityType="Self.ChiTietHoaDon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DonHang" EntityType="Self.DonHang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GiaVanChuyen" EntityType="Self.GiaVanChuyen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GioHang" EntityType="Self.GioHang" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HoaDon" EntityType="Self.HoaDon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KhachHang" EntityType="Self.KhachHang" Schema="dbo" store:Type="Tables" />
@@ -446,8 +474,12 @@
             <End Role="DonHang" EntitySet="DonHang" />
             <End Role="ThanhToan" EntitySet="ThanhToan" />
           </AssociationSet>
-          <AssociationSet Name="FK__VanChuyen__MaDH__571DF1D5" Association="Self.FK__VanChuyen__MaDH__571DF1D5">
+          <AssociationSet Name="FK__VanChuyen__MaDH__6E01572D" Association="Self.FK__VanChuyen__MaDH__6E01572D">
             <End Role="DonHang" EntitySet="DonHang" />
+            <End Role="VanChuyen" EntitySet="VanChuyen" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VanChuyen__MaGia__6EF57B66" Association="Self.FK__VanChuyen__MaGia__6EF57B66">
+            <End Role="GiaVanChuyen" EntitySet="GiaVanChuyen" />
             <End Role="VanChuyen" EntitySet="VanChuyen" />
           </AssociationSet>
           <AssociationSet Name="FK__YeuThich__MaKH__48CFD27E" Association="Self.FK__YeuThich__MaKH__48CFD27E">
@@ -624,6 +656,8 @@
           <Property Name="QuanHuyen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TinhThanh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="GiaVanChuyen" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MaGiaVanChuyen" Type="Int32" />
+          <NavigationProperty Name="GiaVanChuyen1" Relationship="Project_63132701Model.FK__VanChuyen__MaGia__6EF57B66" FromRole="VanChuyen" ToRole="GiaVanChuyen" />
         </EntityType>
         <EntityType Name="YeuThich">
           <Key>
@@ -950,7 +984,39 @@
             <End Role="SanPham" EntitySet="SanPhams" />
             <End Role="YeuThich" EntitySet="YeuThiches" />
           </AssociationSet>
+          <EntitySet Name="GiaVanChuyens" EntityType="Project_63132701Model.GiaVanChuyen" />
+          <AssociationSet Name="FK__VanChuyen__MaGia__6EF57B66" Association="Project_63132701Model.FK__VanChuyen__MaGia__6EF57B66">
+            <End Role="GiaVanChuyen" EntitySet="GiaVanChuyens" />
+            <End Role="VanChuyen" EntitySet="VanChuyens" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="GiaVanChuyen">
+          <Key>
+            <PropertyRef Name="MaGiaVanChuyen" />
+          </Key>
+          <Property Name="MaGiaVanChuyen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonViVanChuyen" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="GiaVanChuyen1" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="DiaChiChiTiet" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhuongXa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QuanHuyen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TinhThanh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="VanChuyens" Relationship="Project_63132701Model.FK__VanChuyen__MaGia__6EF57B66" FromRole="GiaVanChuyen" ToRole="VanChuyen" />
+        </EntityType>
+        <Association Name="FK__VanChuyen__MaGia__6EF57B66">
+          <End Type="Project_63132701Model.GiaVanChuyen" Role="GiaVanChuyen" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Project_63132701Model.VanChuyen" Role="VanChuyen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GiaVanChuyen">
+              <PropertyRef Name="MaGiaVanChuyen" />
+            </Principal>
+            <Dependent Role="VanChuyen">
+              <PropertyRef Name="MaGiaVanChuyen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1082,6 +1148,7 @@
           <EntitySetMapping Name="VanChuyens">
             <EntityTypeMapping TypeName="Project_63132701Model.VanChuyen">
               <MappingFragment StoreEntitySet="VanChuyen">
+                <ScalarProperty Name="MaGiaVanChuyen" ColumnName="MaGiaVanChuyen" />
                 <ScalarProperty Name="GiaVanChuyen" ColumnName="GiaVanChuyen" />
                 <ScalarProperty Name="TinhThanh" ColumnName="TinhThanh" />
                 <ScalarProperty Name="QuanHuyen" ColumnName="QuanHuyen" />
@@ -1104,6 +1171,19 @@
                 <ScalarProperty Name="MaKH" ColumnName="MaKH" />
                 <ScalarProperty Name="MaSP" ColumnName="MaSP" />
                 <ScalarProperty Name="NgayThem" ColumnName="NgayThem" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GiaVanChuyens">
+            <EntityTypeMapping TypeName="Project_63132701Model.GiaVanChuyen">
+              <MappingFragment StoreEntitySet="GiaVanChuyen">
+                <ScalarProperty Name="TinhThanh" ColumnName="TinhThanh" />
+                <ScalarProperty Name="QuanHuyen" ColumnName="QuanHuyen" />
+                <ScalarProperty Name="PhuongXa" ColumnName="PhuongXa" />
+                <ScalarProperty Name="DiaChiChiTiet" ColumnName="DiaChiChiTiet" />
+                <ScalarProperty Name="GiaVanChuyen1" ColumnName="GiaVanChuyen" />
+                <ScalarProperty Name="DonViVanChuyen" ColumnName="DonViVanChuyen" />
+                <ScalarProperty Name="MaGiaVanChuyen" ColumnName="MaGiaVanChuyen" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

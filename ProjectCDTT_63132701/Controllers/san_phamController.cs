@@ -291,7 +291,8 @@ namespace ProjectCDTN_63132701.Controllers
                     }
                     db.ChiTietGioHangs.Remove(chiTiet);
                     db.SaveChanges();
-                    Session["CartCount"] = db.ChiTietGioHangs.Where(c => c.MaGH == gioHang.MaGH).Sum(c => c.SoLuong);
+                    int cartCount = db.ChiTietGioHangs.Where(c => c.MaGH == gioHang.MaGH).Sum(c => (int?)c.SoLuong) ?? 0;
+                    Session["CartCount"] = cartCount;
                 }
             }
 
@@ -299,7 +300,7 @@ namespace ProjectCDTN_63132701.Controllers
         }
 
         [HttpPost]
-        public ActionResult DatHang()
+        public ActionResult DatHang(string tinhThanh, string quanHuyen, string phuongXa, string diaChiChiTiet, string donViVanChuyen, int maGiaVanChuyen, decimal giaVanChuyen)
         {
             int maKhachHang = (int)Session["UserId"];
             var gioHang = db.GioHangs.Include("ChiTietGioHangs.SanPham")
@@ -318,13 +319,29 @@ namespace ProjectCDTN_63132701.Controllers
             DonHang donHang = new DonHang
             {
                 MaKH = maKhachHang,
-                TongTien = gioHang.ChiTietGioHangs.Sum(ct => (ct.SoLuong) * (ct.SanPham.DonGia)),
+                TongTien = giaVanChuyen,
                 NgayTao = DateTime.Now,
                 TrangThai = "Pending",
                 MaVanDon = GenerateTrackingNumber()
             };
 
             db.DonHangs.Add(donHang);
+            db.SaveChanges();
+
+            VanChuyen vanChuyen = new VanChuyen
+            {
+                MaDH = donHang.MaDH,
+                MaGiaVanChuyen = maGiaVanChuyen,
+                TinhThanh = tinhThanh,
+                QuanHuyen = quanHuyen,
+                PhuongXa = phuongXa,
+                GiaVanChuyen = giaVanChuyen,
+                DiaChiChiTiet = diaChiChiTiet,
+                DonViVanChuyen = donViVanChuyen.Trim(),
+                NgayTao = DateTime.Now,
+                TrangThai = "Pending"
+            };
+            db.VanChuyens.Add(vanChuyen);
             db.SaveChanges();
 
             HoaDon hoaDon = new HoaDon
@@ -355,8 +372,7 @@ namespace ProjectCDTN_63132701.Controllers
             db.ChiTietGioHangs.RemoveRange(gioHang.ChiTietGioHangs);
             db.GioHangs.Remove(gioHang);
             db.SaveChanges();
-            int remainingCartCount = db.GioHangs.Count(c => c.MaKH == maKhachHang);
-            Session["CartCount"] = remainingCartCount;
+            Session["CartCount"] = 0;
             TempData["Message"] = "Đặt hàng thành công!";
             return RedirectToAction("GioHang", "San_pham");
         }
@@ -493,8 +509,22 @@ namespace ProjectCDTN_63132701.Controllers
             return View();
         }
 
+        [HttpPost]
+        public JsonResult GetShippingCost(string tinhThanh, string donViVanChuyen)
+        {
+            var shippingCost = db.GiaVanChuyens
+                .FirstOrDefault(v => v.TinhThanh.Trim() == tinhThanh.Trim() &&
+                                     v.DonViVanChuyen.Trim() == donViVanChuyen.Trim());
 
-
+            if (shippingCost != null)
+            {
+                return Json(new { success = true, cost = shippingCost.GiaVanChuyen1, maGiaVanChuyen = shippingCost.MaGiaVanChuyen}, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, message = "Không tìm thấy giá vận chuyển cho khu vực này!" }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
 
         // GET: san_pham

@@ -38,5 +38,6 @@ namespace ProjectCDTT_63132701.Models
         public virtual DbSet<ThanhToan> ThanhToans { get; set; }
         public virtual DbSet<VanChuyen> VanChuyens { get; set; }
         public virtual DbSet<YeuThich> YeuThiches { get; set; }
+        public virtual DbSet<GiaVanChuyen> GiaVanChuyens { get; set; }
     }
 }

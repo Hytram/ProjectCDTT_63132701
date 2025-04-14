@@ -18,7 +18,7 @@ namespace ProjectCDTT_63132701.Controllers
 
         public ActionResult QLVC()
         {
-            var donHangVanChuyens = db.VanChuyens.Include(d => d.DonHang).ToList();
+            var donHangVanChuyens = db.VanChuyens.Include(d => d.DonHang.KhachHang).ToList();
             return View(donHangVanChuyens);
         }
 

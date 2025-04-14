@@ -35,6 +35,8 @@
         <AssociationConnector Association="Project_63132701Model.FK__LichSuTruy__MaSP__44FF419A" ManuallyRouted="false" />
         <AssociationConnector Association="Project_63132701Model.FK__SanPham__MaLoaiS__1920BF5C" ManuallyRouted="false" />
         <AssociationConnector Association="Project_63132701Model.FK__YeuThich__MaSP__49C3F6B7" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Project_63132701Model.GiaVanChuyen" Width="1.5" PointX="5.375" PointY="1" />
+        <AssociationConnector Association="Project_63132701Model.FK__VanChuyen__MaGia__6EF57B66" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

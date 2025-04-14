@@ -30,7 +30,7 @@ namespace ProjectCDTT_63132701.Controllers
                 Session["UserEmail"] = user.Email;
                 Session["UserId"] = user.MaKH;
                 var gioHang = db.GioHangs.FirstOrDefault(g => g.MaKH == user.MaKH && g.TrangThai == "Pending");
-                Session["CartCount"] = gioHang != null ? db.ChiTietGioHangs.Where(c => c.MaGH == gioHang.MaGH).Sum(c => c.SoLuong) : 0;
+                Session["CartCount"] = gioHang != null ? db.ChiTietGioHangs.Where(c => c.MaGH == gioHang.MaGH).Sum(c => (int?)c.SoLuong) ?? 0 : 0;
                 int wishlistCount = db.YeuThiches.Count(y => y.MaKH == user.MaKH);
                 Session["FavoriteCount"] = wishlistCount;
 
