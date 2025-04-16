@@ -12,7 +12,6 @@
 </head>
 
 @using (Html.BeginForm("Create", "san_pham", FormMethod.Post, new { enctype = "multipart/form-data" }))
-
 {
     @Html.AntiForgeryToken()
 
@@ -26,7 +25,6 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.TenSP, "Tên sản phẩm :")
                 @Html.TextBoxFor(m => m.TenSP, new { @class = "long-input" })
-
             </div>
         </div>
 
@@ -44,13 +42,11 @@
             <div class="form-group">
                 @Html.Label("Ảnh sản phẩm", new { @class = "form-label" })
                 <input type="file" name="AnhSanPhamUpload" class="form-control" />
-
-
             </div>
         </div>
 
         <div class="form-row">
-            <div class=" form-group">
+            <div class="form-group">
                 @Html.LabelFor(m => m.MaLoaiSP, "Loại sản phẩm :")
                 @Html.DropDownListFor(m => m.MaLoaiSP, (SelectList)ViewBag.MaLoaiSP, "-- Chọn danh mục --")
             </div>
@@ -65,13 +61,15 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.DonGia, "Đơn giá :")
                 @Html.TextBoxFor(m => m.DonGia, new { @class = "form-control", type = "number", min = "50000", step = "10000" })
-
             </div>
-
-
         </div>
 
-        <button type="submit" class="btn-submit">Thêm sản phẩm</button>
+        <!-- Thêm div wrapper cho nút "Thêm sản phẩm" để tách nó khỏi các cột -->
+        <div class="form-row">
+            <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-new ">Thêm sản phẩm</button>
+            </div>
+        </div>
     </div>
 }
 <script>
@@ -92,4 +90,3 @@
         }
     });
 </script>
-

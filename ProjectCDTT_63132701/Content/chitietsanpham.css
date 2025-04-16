@@ -69,7 +69,7 @@ body {
 
     .product-info .stock {
         font-size: 14px;
-        color: #ed8383;
+        color: #f5a8a8;
         font-weight: bold;
         margin-bottom: 10px;
     }
@@ -108,7 +108,7 @@ body {
 }
 
 .btn-buy-now {
-    background-color: #ED8383;
+    background-color: #f5a8a8;
     color: white;
     font-size: 20px;
     font-weight: bold;
@@ -129,8 +129,8 @@ body {
 
 .btn-add-to-cart {
     background-color: white;
-    border: 3px solid #ED8383 !important; 
-    color: #ED8383; 
+    border: 3px solid #f5a8a8 !important; 
+    color: #f5a8a8; 
     font-size: 10px;
    
     padding: 16px;
@@ -147,12 +147,12 @@ body {
 
     .btn-add-to-cart i {
         font-size: 15px; 
-        color: #ED8383; 
+        color: #f5a8a8; 
     }
 
     .btn-add-to-cart span {
         font-size: 14px;
-        color: #ED8383;
+        color: #f5a8a8;
     }
 
 
@@ -162,7 +162,7 @@ body {
 
         .btn-add-to-cart:hover i,
         .btn-add-to-cart:hover span {
-            color: #ED8383;
+            color: #f5a8a8;
         }
 
 

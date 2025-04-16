@@ -43,16 +43,15 @@ h2 {
     .wishlist-toggle.active {
         color: red;
     }
-
 .wishlist-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 24px;
     align-items: stretch;
     padding: 0;
-
-
+    margin-bottom: 30px;
 }
+
 
 
 .wishlist-card {
@@ -113,7 +112,7 @@ h2 {
     gap: 6px;
 }
 
-    /* Không đổi màu khi hover */
+
     .btn-add-to-cart:hover {
         background-color: transparent;
         color: #F7858F;

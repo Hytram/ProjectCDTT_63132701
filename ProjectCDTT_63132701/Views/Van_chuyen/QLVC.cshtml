@@ -6,12 +6,13 @@
 
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="~/Content/qlsp.css" />
 </head>
 
 <h2>Danh sách vận chuyển</h2>
-    <p>
-        @Html.ActionLink("Thêm đơn vận chuyển", "Create", null, new { @class = "btn btn-success" })
-    </p>
+<p>
+    @* @Html.ActionLink("Thêm đơn vận chuyển", "Create", null, new { @class = "btn-submit" })*@
+</p>
 
 <table class="table table-bordered">
     <thead>
@@ -20,8 +21,11 @@
             <th>Tỉnh thành</th>
             <th>Quận huyện</th>
             <th>Phường xã</th>
+            <th>Địa chỉ cụ thể</th>
+            <th>Trạng thái</th>
             <th>Đơn vị vận chuyển</th>
-            <th>Tổng tiền</th>
+            <th>Giá vận chuyển</th>
+            <th>Hành động</th>
         </tr>
     </thead>
     <tbody>
@@ -32,6 +36,8 @@
                 <td>@Html.DisplayFor(modelItem => item.TinhThanh)</td>
                 <td>@Html.DisplayFor(modelItem => item.QuanHuyen)</td>
                 <td>@Html.DisplayFor(modelItem => item.PhuongXa)</td>
+                <td>@Html.DisplayFor(modelItem => item.DiaChiChiTiet)</td>
+                <td>@Html.DisplayFor(modelItem => item.TrangThai)</td>
                 <td>@Html.DisplayFor(modelItem => item.DonViVanChuyen)</td>
                 <td>@Html.DisplayFor(modelItem => item.GiaVanChuyen)</td>
                 <td>

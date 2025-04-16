@@ -53,6 +53,7 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
+    
 }
 
     .form-group label {
@@ -90,40 +91,55 @@ body {
     }
 
 .btn-submit {
-    display: block;
-    margin: 30px auto 0;
-    padding: 12px 40px;
+    margin-left: 210px;
     background-color: #F7858F;
-    border: none;
-    border-radius: 15px;
     color: white;
-    font-size: 17px;
-    font-weight: bold;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 50px;
 }
 
     .btn-submit:hover {
-        background-color: #F7858F;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        background-color: #e06c78;
+        color: white;
     }
 .btn-cancel {
-    display: block;
-    margin: 30px auto 0;
-    padding: 12px 40px;
-    background-color: #b0bec5; 
-    border: none;
-    border-radius: 15px;
+    margin-right: 290px;
+    background-color: #b0bec5;
     color: white;
-    font-size: 17px;
-    font-weight: bold;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    border: none;
+    padding: 8px 20px;
+    white-space: nowrap;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 50px;
 }
 
     .btn-cancel:hover {
         background-color: #90a4ae;
         color: white;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
+
+.btn-new {
+    background-color: #F7858F;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 50px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+    .btn-new:hover {
+        background-color: #e06c78;
+        color: white;
+    } 
 
 .form-wrapper .form-control,
 .form-wrapper .form-select,
@@ -134,4 +150,21 @@ body {
     font-size: 15px;
     padding: 10px 12px;
     border: 1px solid #ccc;
+}
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .action-buttons .btn {
+        flex: 1;
+        min-width: 150px;
+        padding: 10px 20px;
+        font-weight: 500;
+        border-radius: 8px;
+    }
+.row p {
+    margin-bottom: 10px;
+    font-size: 16px;
 }

@@ -64,40 +64,43 @@
                     <span class="value">@totalPrice.ToString("N0") đ</span>
                 </div>
                 <hr />
+                <div class="form-container">
+                    <div class="form-group">
+                        <label>Tỉnh thành phố</label>
+                        <select id="tinhThanh" class="form-control">
+                            <option value="">-- Chọn Tỉnh/Thành --</option>
+                        </select>
+                    </div>
 
-                <div class="form-group">
-                    <label>Tỉnh thành phố</label>
-                    <select id="tinhThanh" class="form-control">
-                        <option value="">-- Chọn Tỉnh/Thành --</option>
-                    </select>
-                </div>
+                    <div class="form-group">
+                        <label>Quận huyện</label>
+                        <select id="quanHuyen" class="form-control">
+                            <option value="">-- Chọn Quận/Huyện --</option>
+                        </select>
+                    </div>
 
-                <div class="form-group">
-                    <label>Quận huyện</label>
-                    <select id="quanHuyen" class="form-control">
-                        <option value="">-- Chọn Quận/Huyện --</option>
-                    </select>
-                </div>
+                    <div class="form-group">
+                        <label>Phường xã</label>
+                        <select id="phuongXa" class="form-control">
+                            <option value="">-- Chọn Phường/Xã --</option>
+                        </select>
+                    </div>
 
-                <div class="form-group">
-                    <label>Phường xã</label>
-                    <select id="phuongXa" class="form-control">
-                        <option value="">-- Chọn Phường/Xã --</option>
-                    </select>
+                    <div class="form-group">
+                        <label>Đơn vị vận chuyển</label>
+                        <select id="DonViVanChuyen" class="form-control">
+                            <option value="">-- Chọn Đơn vị vận chuyển --</option>
+                            <option value="J&TExpress">J&T Express</option>
+                            <option value="GiaoHangNhanh">Giao Hàng Nhanh</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Địa chỉ cụ thể</label>
+                        <input type="text" id="diaChiCuThe" name="DiaChiCuThe" class="form-control" placeholder="Số nhà, tên đường..." required />
+                    </div>
+                    <button id="btnTinhGia" class="btn-add-to-cart">Tính Giá Vận Chuyển</button>
                 </div>
-
-                <div class="form-group">
-                    <label>Đơn vị vận chuyển</label>
-                    <select id="DonViVanChuyen" class="form-control">
-                        <option value="">-- Chọn Đơn vị vận chuyển --</option>
-                        <option value="J&TExpress">J&T Express</option>
-                        <option value="GiaoHangNhanh">Giao Hàng Nhanh</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Địa chỉ cụ thể</label>
-                    <input type="text" id="diaChiCuThe" name="DiaChiCuThe" class="form-control" placeholder="Số nhà, tên đường..." required />
-                </div>
+               
 
                 <div class="summary-row">
                     <span class="label">Giá vận chuyển:</span>
@@ -109,7 +112,6 @@
                     <span id="finalTotal" class="value">@totalPrice.ToString("N0") đ</span>
                 </div>
 
-                <button id="btnTinhGia" class="btn btn-primary">Tính Giá Vận Chuyển</button>
 
                 <form action="@Url.Action("DatHang", "San_pham")" method="post">
                     <input type="hidden" id="inputTinhThanh" name="TinhThanh" />
@@ -122,8 +124,8 @@
                     <button type="submit" class="btn-pink">MUA HÀNG</button>
                 </form>
             </div>
-        }
-    </div>
+                }
+            </div>
 </div>
 
 <script>

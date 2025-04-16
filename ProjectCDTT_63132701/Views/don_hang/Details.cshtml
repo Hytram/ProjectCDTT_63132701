@@ -1,45 +1,82 @@
-﻿@model ProjectCDTT_63132701.Models.DonHang
+﻿@model ProjectCDTT_63132701.Models.HoaDon
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Chi Tiết Đơn Hàng";
     Layout = "~/Views/shared/_LayoutAdmin.cshtml";
+    <link rel="stylesheet" href="~/Content/details.css" />
 }
 
-<h2>Details</h2>
+<div class="container">
+    <a href="javascript:history.back()" class="back-button">
+        <i class="fa-solid fa-chevron-left"></i> Quay lại
+    </a>
+    <h2>Thông tin đơn hàng của khách hàng</h2>
 
-<div>
-    <h4>DonHang</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.TongTien)</dt>
-        <dd>@Html.DisplayFor(model => model.TongTien)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.TrangThai)</dt>
-        <dd>@Html.DisplayFor(model => model.TrangThai)</dd>
 
-        <dt>@Html.DisplayNameFor(model => model.NgayTao)</dt>
-        <dd>@Html.DisplayFor(model => model.NgayTao)</dd>
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <p><strong>Họ Tên Khách Hàng:</strong> @Model.KhachHang.HoTen</p>
+            <p><strong>Email:</strong> @Model.KhachHang.Email</p>
+            <p><strong>Số điện thoại:</strong> @Model.KhachHang.SoDienThoai</p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Mã Đơn Hàng:</strong> @Model.MaDH</p>
+            <p><strong>Ngày Tạo Đơn:</strong> @Model.NgayTao</p>
+            <p>
+                <strong>Trạng Thái Đơn Hàng:</strong>
+                @if (Model.TrangThai == "Pending")
+                {
+                    <span>Chưa duyệt</span>
+                }
+                else
+                {
+                    <span>@Model.TrangThai</span>
+                }
+            </p>
+        </div>
+    </div>
 
-        <dt>@Html.DisplayNameFor(model => model.MaVanDon)</dt>
-        <dd>@Html.DisplayFor(model => model.MaVanDon)</dd>
+    <h3>Chi tiết đơn hàng</h3>
+    <table class="table table-bordered mt-4">
+        <thead>
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Tổng tiền của sản phẩm</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var chiTiet in Model.ChiTietHoaDons)
+            {
+                <tr>
+                    <td>@chiTiet.SanPham.TenSP</td>
+                    <td>@chiTiet.Gia.ToString("N0") đ</td>
+                    <td>@chiTiet.SoLuong</td>
+                    <td>@(chiTiet.SoLuong * chiTiet.Gia)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-        <dt>@Html.DisplayNameFor(model => model.KhachHang.HoTen)</dt>
-        <dd>@Html.DisplayFor(model => model.KhachHang.HoTen)</dd>
+    <div class="d-flex justify-content-end">
+        <h4>Tổng Tiền: @String.Format("{0:N0} ₫", Model.TongTien) </h4>
+    </div>
 
-        <dt>@Html.DisplayNameFor(model => model.HoaDon.TrangThai)</dt>
-        <dd>@Html.DisplayFor(model => model.HoaDon.TrangThai)</dd>
-    </dl>
+    <div class="d-flex justify-content-center align-items-center">
+        @if (Model.TrangThai == "Pending")
+        {
+            <form action="@Url.Action("DuyetDonHang", "Don_hang")" method="post" style="display:inline;">
+                <input type="hidden" name="id" value="@Model.MaDH" />
+                <button type="submit" class="btn btn-submit">
+                    <i class="fa-solid fa-check"></i> Duyệt đơn hàng
+                </button>
+            </form>
+        }
+
+        <a href="@Url.Action("Edit", "Don_hang")" class="btn btn-cancel ms-lg-3">
+            Chỉnh sửa
+        </a>
+    </div>
 </div>
-
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MaDH }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
-
-<!-- Button to approve order and move to shipping -->
-@using (Html.BeginForm("DuyetDonHang", "DonHang", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-    <input type="hidden" name="id" value="@Model.MaDH" />
-    <button type="submit" class="btn btn-success">Duyệt Đơn Hàng</button>
-}

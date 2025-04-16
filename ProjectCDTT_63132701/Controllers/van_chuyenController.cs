@@ -47,13 +47,25 @@ namespace ProjectCDTT_63132701.Controllers
         // GET: Van_chuyen/Create
         public ActionResult Create()
         {
+            ViewBag.MaDHList = new SelectList(
+                db.DonHangs.Where(dh => !db.VanChuyens.Any(vc => vc.MaDH == dh.MaDH)),
+                "MaDH", "MaDH"
+            );
+
             ViewBag.DonViVanChuyenList = new SelectList(new[]
             {
                 new { Value = "J&TExpress", Text = "J&T Express" },
-                new { Value = "GiaoHangNhanh", Text = "Giao Hàng Nhanh" },
+                new { Value = "GiaoHangNhanh", Text = "Giao Hàng Nhanh" }
             }, "Value", "Text");
+
+            ViewBag.TinhThanhList = new SelectList(
+                db.GiaVanChuyens.Select(g => g.TinhThanh).Distinct(),
+                "TinhThanh"
+            );
+
             return View();
         }
+
 
         // POST: Van_chuyen/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 

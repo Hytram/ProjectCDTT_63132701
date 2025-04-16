@@ -28,6 +28,9 @@ namespace ProjectCDTT_63132701.Controllers
             return View(donHangs.ToList());
         }
 
+
+
+
         // GET: Don_hang/Details/5
         public ActionResult Details(int? id)
         {
@@ -35,13 +38,56 @@ namespace ProjectCDTT_63132701.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DonHang donHang = db.DonHangs.Find(id);
-            if (donHang == null)
+
+            var hoaDon = db.HoaDons
+                .Include("KhachHang")
+                .Include("ChiTietHoaDons.SanPham")
+                .FirstOrDefault(h => h.MaDH == id);
+
+            if (hoaDon == null)
             {
                 return HttpNotFound();
             }
-            return View(donHang);
+
+            return View(hoaDon);
         }
+
+
+
+
+        [HttpPost]
+        public ActionResult DuyetDonHang(int id)
+        {
+            
+            var donHang = db.DonHangs.FirstOrDefault(dh => dh.MaDH == id);
+
+            if (donHang != null)
+            {
+              
+                donHang.TrangThai = "Confirmed"; 
+                db.SaveChanges();
+
+           
+                TempData["SuccessMessage"] = "Đơn hàng đã được duyệt thành công.";
+
+               
+                return RedirectToAction("QLDH");
+            }
+
+           
+            TempData["ErrorMessage"] = "Không tìm thấy đơn hàng.";
+            return RedirectToAction("QLDH");
+        }
+
+
+
+
+
+
+
+
+
+
 
         // GET: Don_hang/Create
         public ActionResult Create()
