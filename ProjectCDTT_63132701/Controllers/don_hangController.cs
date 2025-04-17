@@ -65,6 +65,11 @@ namespace ProjectCDTT_63132701.Controllers
             {
               
                 donHang.TrangThai = "Confirmed"; 
+                var vanChuyen =  db.VanChuyens.FirstOrDefault(ch => ch.MaDH == id);
+                if (vanChuyen != null)
+                {
+                    vanChuyen.TrangThai = "Shipping";
+                }
                 db.SaveChanges();
 
            
@@ -78,7 +83,6 @@ namespace ProjectCDTT_63132701.Controllers
             TempData["ErrorMessage"] = "Không tìm thấy đơn hàng.";
             return RedirectToAction("QLDH");
         }
-
 
 
 
@@ -174,7 +178,7 @@ namespace ProjectCDTT_63132701.Controllers
             DonHang donHang = db.DonHangs.Find(id);
             db.DonHangs.Remove(donHang);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("QLDH");
         }
 
         protected override void Dispose(bool disposing)

@@ -54,24 +54,36 @@
                     }
                 </td>
                 <td>
-             
+
                     <a href="@Url.Action("Details", new { id = item.MaDH })" class="btn btn-info btn-sm">
                         <i class="fas fa-eye"></i>
                     </a>
 
-                 
+
                     <a href="@Url.Action("Edit", new { id = item.MaDH })" class="btn btn-warning btn-sm">
                         <i class="fas fa-edit"></i>
                     </a>
 
-                  
+
                     <a href="@Url.Action("Delete", new { id = item.MaDH })" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa đơn hàng này?');">
                         <i class="fas fa-trash"></i>
                     </a>
 
-                   
+
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<script>
+    setTimeout(function () {
+        var message = document.getElementById("successMessage");
+        if (message) {
+            message.style.transition = "opacity 0.5s ease";
+            message.style.opacity = 0;
+            setTimeout(function () {
+                message.remove();
+            }, 500);
+        }
+    }, 3000);
+</script>

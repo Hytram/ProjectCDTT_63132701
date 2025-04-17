@@ -116,7 +116,7 @@ namespace ProjectCDTT_63132701.Controllers
             {
                 db.Entry(vanChuyen).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("QLVC");
             }
             ViewBag.MaDH = new SelectList(db.DonHangs, "MaDH", "TrangThai", vanChuyen.MaDH);
             return View(vanChuyen);
@@ -145,7 +145,7 @@ namespace ProjectCDTT_63132701.Controllers
             VanChuyen vanChuyen = db.VanChuyens.Find(id);
             db.VanChuyens.Remove(vanChuyen);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("QLVC");
         }
 
         protected override void Dispose(bool disposing)

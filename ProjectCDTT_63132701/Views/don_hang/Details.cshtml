@@ -25,13 +25,13 @@
             <p><strong>Ngày Tạo Đơn:</strong> @Model.NgayTao</p>
             <p>
                 <strong>Trạng Thái Đơn Hàng:</strong>
-                @if (Model.TrangThai == "Pending")
+                @if (Model.DonHang.TrangThai == "Pending")
                 {
                     <span>Chưa duyệt</span>
                 }
                 else
                 {
-                    <span>@Model.TrangThai</span>
+                    <span>Đã duyệt</span>
                 }
             </p>
         </div>
@@ -65,18 +65,23 @@
     </div>
 
     <div class="d-flex justify-content-center align-items-center">
-        @if (Model.TrangThai == "Pending")
-        {
-            <form action="@Url.Action("DuyetDonHang", "Don_hang")" method="post" style="display:inline;">
-                <input type="hidden" name="id" value="@Model.MaDH" />
-                <button type="submit" class="btn btn-submit">
-                    <i class="fa-solid fa-check"></i> Duyệt đơn hàng
+        <div class="d-flex justify-content-center align-items-center">
+            @if (Model.DonHang.TrangThai == "Pending")
+            {
+                <form action="@Url.Action("DuyetDonHang", "Don_hang")" method="post" style="display:inline;">
+                    <input type="hidden" name="id" value="@Model.MaDH" />
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fa-solid fa-check"></i> Duyệt đơn hàng
+                    </button>
+                </form>
+            }
+            else
+            {
+                <button class="btn btn-submit btn-disabled" disabled style="cursor: not-allowed;">
+                    <i class="fa-solid fa-check"></i> Đã duyệt đơn hàng
                 </button>
-            </form>
-        }
+            }
+        </div>
 
-        <a href="@Url.Action("Edit", "Don_hang")" class="btn btn-cancel ms-lg-3">
-            Chỉnh sửa
-        </a>
     </div>
 </div>

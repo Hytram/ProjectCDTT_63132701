@@ -14,9 +14,9 @@
     transition: color 0.3s;
 }
 
-    .back-button:hover {
-        color: #000;
-    }
+.back-button:hover {
+    color: #000;
+}
 
 
 
@@ -27,7 +27,7 @@
 }
 
 .btn-submit {
-    margin-left: 210px;
+/*    margin-left: 210px;*/
     background-color: #F7858F;
     color: white;
     border: none;
@@ -37,10 +37,19 @@
     margin-bottom: 70px;
 }
 
-    .btn-submit:hover {
-        background-color: #e06c78;
-        color: white;
-    }
+.btn-submit:hover {
+    background-color: #e06c78;
+    color: white;
+}
+
+.btn-disabled {
+    background-color: #ccc !important;
+    color: #666 !important;
+    border: none;
+    cursor: not-allowed;
+    opacity: 0.7;
+    pointer-events: none;
+}
 
 .btn-cancel {
     margin-right: 290px;
