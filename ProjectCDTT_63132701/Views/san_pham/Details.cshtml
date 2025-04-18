@@ -41,7 +41,17 @@
         @(Model.NgayTao.HasValue ? Model.NgayTao.Value.ToString("dd/MM/yyyy") : "")*@
 
                 <dt class="col-sm-4">Loại sản phẩm:</dt>
-                <dd class="col-sm-8">@Model.LoaiSanPham.TenLoaiSP</dd>
+                <dd class="col-sm-8">
+                    @if (Model.LoaiSanPham != null)
+                    {
+                        @Model.LoaiSanPham.TenLoaiSP
+                    }
+                    else
+                    {
+                        <span class="text-muted">Không có thông tin</span>
+                    }
+                </dd>
+
             </dl>
 
             

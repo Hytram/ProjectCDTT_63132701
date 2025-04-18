@@ -1,67 +1,53 @@
 ﻿@model ProjectCDTT_63132701.Models.KhachHang
 
 @{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Chi tiết khách hàng";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Details</h2>
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/create.css" />
+</head>
 
-<div>
-    <h4>KhachHang</h4>
-    <hr />
+<div class="form-wrapper">
+    <a href="javascript:history.back()" class="back-button">
+        <i class="fa-solid fa-chevron-left"></i> Quay lại
+    </a>
+    <h2 >Chi tiết khách hàng</h2>
+
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.HoTen)
-        </dt>
+        <div class="row mb-2">
+            <dt class="col-sm-3">Họ tên:</dt>
+            <dd class="col-sm-9">@Model.HoTen</dd>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.HoTen)
-        </dd>
+        <div class="row mb-2">
+            <dt class="col-sm-3">Email:</dt>
+            <dd class="col-sm-9">@Model.Email</dd>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+        <div class="row mb-2">
+            <dt class="col-sm-3">Mật khẩu:</dt>
+            <dd class="col-sm-9">@Model.MatKhau</dd>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+        <div class="row mb-2">
+            <dt class="col-sm-3">Số điện thoại:</dt>
+            <dd class="col-sm-9">@Model.SoDienThoai</dd>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MatKhau)
-        </dt>
+        <div class="row mb-2">
+            <dt class="col-sm-3">Địa chỉ:</dt>
+            <dd class="col-sm-9">@Model.DiaChi</dd>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.MatKhau)
-        </dd>
+        <div class="row mb-2">
+            <dt class="col-sm-3">Vai trò:</dt>
+            <dd class="col-sm-9">
+                @(Model.VaiTro == "Admin" ? "Quản trị viên" : "Khách hàng")
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SoDienThoai)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SoDienThoai)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DiaChi)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DiaChi)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.VaiTro)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VaiTro)
-        </dd>
-
+        </div>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MaKH }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

@@ -22,11 +22,33 @@ namespace ProjectCDTT_63132701.Controllers
 
 
         // GET: Don_hang
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            var donHangs = db.DonHangs.Include(d => d.KhachHang).Include(d => d.HoaDon);
-            return View(donHangs.ToList());
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var hoaDon = db.HoaDons.Include("KhachHang")
+                                  .FirstOrDefault(h => h.MaDH == id);
+
+            if (hoaDon == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Nếu bạn có bảng ChiTietDonHang thì load luôn
+            var chiTietHoaDon = db.ChiTietHoaDons
+                                   .Where(ct => ct.MaDH == id)
+                                   .Include("SanPham")
+                                   .ToList();
+
+            ViewBag.ChiTietSanPham = chiTietHoaDon;
+
+            return View(hoaDon);
         }
+
+
 
 
 
@@ -127,33 +149,42 @@ namespace ProjectCDTT_63132701.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            DonHang donHang = db.DonHangs.Find(id);
-            if (donHang == null)
+
+            var hoaDon = db.HoaDons
+                .Include(h => h.KhachHang)
+                .Include(h => h.DonHang)
+                .Include(h => h.ChiTietHoaDons.Select(c => c.SanPham))
+                .FirstOrDefault(h => h.MaDH == id);
+
+            if (hoaDon == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.MaKH = new SelectList(db.KhachHangs, "MaKH", "HoTen", donHang.MaKH);
-            ViewBag.MaDH = new SelectList(db.HoaDons, "MaDH", "TrangThai", donHang.MaDH);
-            return View(donHang);
+
+            return View(hoaDon);
         }
 
-        // POST: Don_hang/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: HoaDon/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaDH,MaKH,TongTien,TrangThai,NgayTao,MaVanDon")] DonHang donHang)
+        public ActionResult Edit(HoaDon hoaDon)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(donHang).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var existingHoaDon = db.HoaDons.Include(h => h.DonHang).FirstOrDefault(h => h.MaDH == hoaDon.MaDH);
+                if (existingHoaDon != null)
+                {
+                    existingHoaDon.DonHang.TrangThai = hoaDon.DonHang.TrangThai;
+                    // Bạn có thể cập nhật thêm các thông tin khác nếu cần.
+
+                    db.SaveChanges();
+                    return RedirectToAction("QLDH", new { id = hoaDon.MaDH });
+                }
+                return HttpNotFound();
             }
-            ViewBag.MaKH = new SelectList(db.KhachHangs, "MaKH", "HoTen", donHang.MaKH);
-            ViewBag.MaDH = new SelectList(db.HoaDons, "MaDH", "TrangThai", donHang.MaDH);
-            return View(donHang);
+            return View(hoaDon);
         }
+
 
         // GET: Don_hang/Delete/5
         public ActionResult Delete(int? id)

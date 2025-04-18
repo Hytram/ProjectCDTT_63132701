@@ -1,4 +1,4 @@
-﻿@model ProjectCDTT_63132701.Models.DonHang
+﻿@model ProjectCDTT_63132701.Models.HoaDon
 
 @{
     ViewBag.Title = "Edit";
@@ -9,61 +9,70 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="~/Content/details.css" />
+    <link rel="stylesheet" href="~/Content/create.css" />
 </head>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<div class="container">
+    <a href="javascript:history.back()" class="back-button">
+        <i class="fa-solid fa-chevron-left"></i> Quay lại
+    </a>
+    <h2>Chỉnh sửa đơn hàng </h2>
 
-    <div class="form-wrapper">
-        <a href="javascript:history.back()" class="back-button">
-            <i class="fa-solid fa-chevron-left"></i> Quay lại
-        </a>
-        <h2 class="form-title">Chỉnh sửa thông tin đơn hàng</h2>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.MaDH)
-
-        <div class="form-row">
-            <div class="form-group">
-                @Html.LabelFor(model => model.MaKH, "Mã khách hàng :", new { @class = "form-label" })
-              
-                <p>@Model.MaKH</p>
-                @Html.HiddenFor(model => model.MaKH) 
-                @Html.ValidationMessageFor(model => model.MaKH, "", new { @class = "text-danger" })
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.TongTien, "Tổng tiền :", new { @class = "form-label" })
-                @Html.EditorFor(model => model.TongTien, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TongTien, "", new { @class = "text-danger" })
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.TrangThai, "Trạng thái :", new { @class = "form-label" })
-                <!-- Trạng thái sử dụng dropdown -->
-                @Html.DropDownListFor(model => model.TrangThai, new SelectList(new[] { "Pending", "Paid", "Failed" }), new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.NgayTao, "Ngày tạo :", new { @class = "form-label" })
-                @Html.EditorFor(model => model.NgayTao, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NgayTao, "", new { @class = "text-danger" })
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.MaVanDon, "Mã vận đơn :", new { @class = "form-label" })
-                @Html.EditorFor(model => model.MaVanDon, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MaVanDon, "", new { @class = "text-danger" })
-            </div>
+    <div class="row mt-4">
+        <!-- Thông tin Khách hàng -->
+        <div class="col-md-6">
+            <p><strong>Họ Tên Khách Hàng:</strong> @Model.KhachHang.HoTen</p>
+            <p><strong>Email:</strong> @Model.KhachHang.Email</p>
+            <p><strong>Số điện thoại:</strong> @Model.KhachHang.SoDienThoai</p>
         </div>
 
-        <div class="form-row">
-            <div class="col-md-10 offset-md-2">
-                <input type="submit" value="Lưu" class="btn btn-submit" />
-            </div>
+        <!-- Thông tin Đơn hàng -->
+        <div class="col-md-6">
+            <p><strong>Mã Đơn Hàng:</strong> @Model.MaDH</p>
+            <p><strong>Ngày Tạo Đơn:</strong> @(Model.NgayTao.HasValue ? Model.NgayTao.Value.ToString("dd/MM/yyyy") : "Không có thông tin")</p>
+            <p>
+                <strong>Trạng Thái Đơn Hàng:</strong>
+                @Html.DropDownListFor(model => model.DonHang.TrangThai, new SelectList(
+                    new List<string> { "Pending", "Confirmed", "Processing", "Shipping", "Completed", "Cancelled" },
+                    Model.DonHang.TrangThai), new { @class = "form-control" })
+            </p>
         </div>
     </div>
-}
+
+    <h3>Chi Tiết Đơn Hàng</h3>
+    <table class="table table-bordered mt-4">
+        <thead>
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Tổng tiền của sản phẩm</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var chiTiet in Model.ChiTietHoaDons)
+            {
+                <tr>
+                    <td>@chiTiet.SanPham.TenSP</td>
+                    <td>@chiTiet.Gia.ToString("N0") đ</td>
+                    <td>@chiTiet.SoLuong</td>
+                    <td>@(chiTiet.SoLuong * chiTiet.Gia)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-end">
+        <h4>Tổng Tiền: @String.Format("{0:N0} ₫", Model.TongTien) </h4>
+    </div>
+
+    <!-- Form để chỉnh sửa thông tin đơn hàng -->
+    <div class="text-center mt-4">
+        <div class="d-inline-flex gap-2">
+            <button type="submit" class="btn-submit">
+                <i class="fa-solid fa-check"></i> Lưu thông tin
+            </button>
+
+            @Html.ActionLink("Hủy", "QLDH", null, new { @class = " btn-cancel text-decoration-none" })
+        </div>
+    </div>
+</div>

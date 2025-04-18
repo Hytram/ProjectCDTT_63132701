@@ -27,20 +27,15 @@
 
             <!-- Logo -->
             <div class="header-center">
-                <a href="@Url.Action("Index", "san_pham")">
-                    <img src="~/Images/logo.png" alt="Logo" style="cursor: pointer;">
+                @*<a href="@Url.Action("Index", "san_pham")">*@
+                <img src="~/Images/logo.png" alt="Logo" style="cursor: pointer;">
                 </a>
 
             </div>
 
             <!-- Biểu tượng yêu thích và giỏ hàng -->
             <div class="header-right">
-                <div>
-                    <i class="far fa-heart"></i> <span>0</span>
-                </div>
-                <div>
-                    <i class="fas fa-shopping-bag"></i> <span>0</span>
-                </div>
+                
                 <div>
                     @if (Session["UserId"] == null)
                     {

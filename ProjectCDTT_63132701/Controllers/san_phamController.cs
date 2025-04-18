@@ -540,13 +540,16 @@ namespace ProjectCDTN_63132701.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SanPham san_pham = db.SanPhams.Find(id);
+            SanPham san_pham = db.SanPhams.Include(s => s.LoaiSanPham).FirstOrDefault(s => s.MaSP == id);
+
             if (san_pham == null)
             {
                 return HttpNotFound();
             }
+
             return View(san_pham);
         }
+
 
         // GET: san_pham/Create
         public ActionResult Create()
@@ -652,7 +655,8 @@ namespace ProjectCDTN_63132701.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SanPham san_pham = db.SanPhams.Find(id);
+            SanPham san_pham = db.SanPhams.Include(s => s.LoaiSanPham).FirstOrDefault(s => s.MaSP == id);
+
             if (san_pham == null)
             {
                 return HttpNotFound();
@@ -660,16 +664,24 @@ namespace ProjectCDTN_63132701.Controllers
             return View(san_pham);
         }
 
+
         // POST: san_pham/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             SanPham san_pham = db.SanPhams.Find(id);
+
+            if (san_pham == null)
+            {
+                return HttpNotFound();
+            }
+
             db.SanPhams.Remove(san_pham);
             db.SaveChanges();
             return RedirectToAction("QLSP", "san_pham");
         }
+
 
         protected override void Dispose(bool disposing)
         {

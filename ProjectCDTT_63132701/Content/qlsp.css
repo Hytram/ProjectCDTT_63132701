@@ -4,7 +4,16 @@
     margin-top: 30px;
     margin-bottom: 20px;
 }
-.table.table-bordered {
+th {
+    text-align: left;
+    vertical-align: middle; 
+}
+td {
+    text-align: left;
+    vertical-align: middle;
+}
+.table.table-bordered 
+    {
     margin-bottom: 50px;
 }
 .center-button {

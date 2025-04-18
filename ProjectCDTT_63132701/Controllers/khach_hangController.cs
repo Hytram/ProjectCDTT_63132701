@@ -90,7 +90,7 @@ namespace ProjectCDTT_63132701.Controllers
             {
                 db.Entry(khachHang).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("QLKH");
             }
             return View(khachHang);
         }

@@ -221,6 +221,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\chitietsanpham.css" />
     <Content Include="Content\create.css" />
+    <Content Include="Content\delete.css" />
     <Content Include="Content\details.css" />
     <Content Include="Content\dichvu.css" />
     <Content Include="Content\giohang.css" />

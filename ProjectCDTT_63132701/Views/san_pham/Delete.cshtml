@@ -18,7 +18,7 @@
     <div class="row">
         <!-- Ảnh sản phẩm -->
         <div class="col-md-5">
-            <img src="~/Content/images/@Model.AnhSanPham" alt="Ảnh sản phẩm" class="img-fluid rounded shadow" style="max-height: 300px;" />
+            <img src="~/images/@Model.AnhSanPham" class="img-fluid rounded shadow" alt="Ảnh sản phẩm" />
         </div>
 
         <!-- Thông tin sản phẩm -->
@@ -37,7 +37,17 @@
                 <dd class="col-sm-8">@Model.SoLuong</dd>
 
                 <dt class="col-sm-4">Loại sản phẩm:</dt>
-                <dd class="col-sm-8">@Model.LoaiSanPham.TenLoaiSP</dd>
+                <dd class="col-sm-8">
+                    @if (Model.LoaiSanPham != null)
+                    {
+                        @Model.LoaiSanPham.TenLoaiSP
+                    }
+                    else
+                    {
+                        <span class="text-muted">Không có thông tin</span>
+                    }
+                </dd>
+
             </dl>
             @using (Html.BeginForm("Delete", "san_pham", FormMethod.Post))
             {

@@ -1,71 +1,50 @@
 ﻿@model ProjectCDTT_63132701.Models.VanChuyen
 
 @{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "Chi tiết vận chuyển";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+
 <head>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="~/Content/create.css" />
 </head>
-<h2>Details</h2>
 
-<div>
-    <h4>VanChuyen</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DonViVanChuyen)
-        </dt>
+<div class="form-wrapper">
+    <a href="javascript:history.back()" class="back-button">
+        <i class="fa-solid fa-chevron-left"></i> Quay lại
+    </a>
+    <h2 class="mb-4">Chi tiết vận chuyển</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.DonViVanChuyen)
-        </dd>
+    <div class="row">
+        <div class="col-md-12">
+            <dl class="row">
+                <dt class="col-sm-4">Đơn vị vận chuyển:</dt>
+                <dd class="col-sm-8">@Model.DonViVanChuyen</dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TrangThai)
-        </dt>
+                <dt class="col-sm-4">Trạng thái:</dt>
+                <dd class="col-sm-8">@Model.TrangThai</dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.TrangThai)
-        </dd>
+                <dt class="col-sm-4">Ngày tạo:</dt>
+                <dd class="col-sm-8">
+                    @(Model.NgayTao.HasValue ? Model.NgayTao.Value.ToString("dd/MM/yyyy") : "")
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayTao)
-        </dt>
+                <dt class="col-sm-4">Thời gian giao:</dt>
+                <dd class="col-sm-8">
+                    @(Model.ThoiGianGiao.HasValue ? Model.ThoiGianGiao.Value.ToString("dd/MM/yyyy") : "")
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.NgayTao)
-        </dd>
+                <dt class="col-sm-4">Thời gian nhận:</dt>
+                <dd class="col-sm-8">
+                    @(Model.ThoiGianNhan.HasValue ? Model.ThoiGianNhan.Value.ToString("dd/MM/yyyy") : "")
+                </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ThoiGianGiao)
-        </dt>
+                <dt class="col-sm-4">Trạng thái đơn hàng:</dt>
+                <dd class="col-sm-8">@Model.DonHang?.TrangThai</dd>
+            </dl>
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.ThoiGianGiao)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ThoiGianNhan)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ThoiGianNhan)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DonHang.TrangThai)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DonHang.TrangThai)
-        </dd>
-
-    </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MaVanChuyen }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

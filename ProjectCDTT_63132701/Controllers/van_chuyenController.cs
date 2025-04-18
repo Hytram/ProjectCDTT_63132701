@@ -129,24 +129,32 @@ namespace ProjectCDTT_63132701.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             VanChuyen vanChuyen = db.VanChuyens.Find(id);
             if (vanChuyen == null)
             {
                 return HttpNotFound();
             }
+
             return View(vanChuyen);
         }
 
-        // POST: Van_chuyen/Delete/5
+        // POST: VanChuyen/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             VanChuyen vanChuyen = db.VanChuyens.Find(id);
-            db.VanChuyens.Remove(vanChuyen);
-            db.SaveChanges();
-            return RedirectToAction("QLVC");
+
+            if (vanChuyen != null)
+            {
+                db.VanChuyens.Remove(vanChuyen);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("QLVC", "vanChuyen"); 
         }
+
 
         protected override void Dispose(bool disposing)
         {

@@ -1,64 +1,76 @@
-﻿@model IEnumerable<ProjectCDTT_63132701.Models.DonHang>
+﻿@model ProjectCDTT_63132701.Models.HoaDon
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Chi Tiết Đơn Hàng";
     Layout = "~/Views/shared/_LayoutAdmin.cshtml";
+    <link rel="stylesheet" href="~/Content/details.css" />
 }
 
-<h2>Index</h2>
+<div class="container">
+    <a href="javascript:history.back()" class="back-button">
+        <i class="fa-solid fa-chevron-left"></i> Quay lại
+    </a>
+    <h2>Chi tiết đơn hàng </h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TongTien)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TrangThai)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayTao)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MaVanDon)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.KhachHang.HoTen)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HoaDon.TrangThai)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TongTien)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TrangThai)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayTao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaVanDon)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.KhachHang.HoTen)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HoaDon.TrangThai)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MaDH }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MaDH }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MaDH })
-        </td>
-    </tr>
-}
 
-</table>
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <p><strong>Họ Tên Khách Hàng:</strong> @Model.KhachHang.HoTen</p>
+            <p><strong>Email:</strong> @Model.KhachHang.Email</p>
+            <p><strong>Số điện thoại:</strong> @Model.KhachHang.SoDienThoai</p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Mã Đơn Hàng:</strong> @Model.MaDH</p>
+            <p><strong>Ngày Tạo Đơn:</strong> @Model.NgayTao</p>
+            <p>
+                <strong>Trạng Thái Đơn Hàng:</strong>
+                @if (Model.DonHang.TrangThai == "Pending")
+                {
+                    <span>Chưa duyệt</span>
+                }
+                else
+                {
+                    <span>Đã duyệt</span>
+                }
+            </p>
+        </div>
+    </div>
+
+    <h3>Chi tiết đơn hàng</h3>
+    <table class="table table-bordered mt-4">
+        <thead>
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Tổng tiền của sản phẩm</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var chiTiet in Model.ChiTietHoaDons)
+            {
+                <tr>
+                    <td>@chiTiet.SanPham.TenSP</td>
+                    <td>@chiTiet.Gia.ToString("N0") đ</td>
+                    <td>@chiTiet.SoLuong</td>
+                    <td>@(chiTiet.SoLuong * chiTiet.Gia)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-end">
+        <h4>Tổng Tiền: @String.Format("{0:N0} ₫", Model.TongTien) </h4>
+    </div>
+    @* <div class="text-center mt-4">
+            <form action="@Url.Action("Edit", "Don_hang", new { id = Model.MaDH })" method="get">
+                <button type="submit" class="btn btn-submit px-4">
+                    <i class="fas fa-edit"></i> Chỉnh sửa đơn hàng
+                </button>
+            </form>
+        </div>*@
+
+
+
+</div>
