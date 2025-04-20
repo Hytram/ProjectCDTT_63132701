@@ -49,6 +49,45 @@ namespace ProjectCDTT_63132701.Controllers
             return View();
         }
 
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(string hoTen, string email, string soDienThoai, string diaChi, string matKhau)
+        {
+            try
+            {
+                if (db.KhachHangs.Any(k => k.Email.ToLower() == email.ToLower()))
+                {
+                    ViewBag.Message = "Email đã được sử dụng.";
+                    return View();
+                }
+
+                var newKhachHang = new KhachHang
+                {
+                    HoTen = hoTen,
+                    Email = email,
+                    SoDienThoai = soDienThoai,
+                    DiaChi = diaChi,
+                    MatKhau = matKhau,
+                    VaiTro = "User"
+                };
+
+                db.KhachHangs.Add(newKhachHang);
+                db.SaveChanges();
+
+                ViewBag.Message = "Đăng ký thành công! Vui lòng đăng nhập.";
+                return RedirectToAction("Login");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Đã xảy ra lỗi: " + ex.Message;
+                return View();
+            }
+        }
         [HttpGet]
         public ActionResult Logout()
         {

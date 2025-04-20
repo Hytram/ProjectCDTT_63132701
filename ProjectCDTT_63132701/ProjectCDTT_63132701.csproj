@@ -448,6 +448,7 @@
     <Content Include="Views\San_pham\ChiTietSanPham.cshtml" />
     <Content Include="Views\tai_khoan\Login.cshtml" />
     <Content Include="Views\San_pham\KhuyenMai.cshtml" />
+    <Content Include="Views\tai_khoan\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

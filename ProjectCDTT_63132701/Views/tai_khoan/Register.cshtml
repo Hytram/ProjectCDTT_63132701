@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/shared/_LayoutUser.cshtml";
+}
+
+<div class="container">
+    <div class="form-box">
+        <h2>Đăng ký tài khoản</h2>
+        @using (Html.BeginForm("Register", "Tai_khoan", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <label for="hoTen">Họ và tên</label>
+                <input type="text" name="hoTen" class="form-control" id="hoTen" placeholder="Nhập họ tên" required />
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" class="form-control" id="email" placeholder="Nhập email" required />
+            </div>
+
+            <div class="form-group">
+                <label for="soDienThoai">Số điện thoại</label>
+                <input type="text" name="soDienThoai" class="form-control" id="soDienThoai" placeholder="Nhập số điện thoại" required />
+            </div>
+
+            <div class="form-group">
+                <label for="diaChi">Địa chỉ</label>
+                <textarea name="diaChi" class="form-control" id="diaChi" placeholder="Nhập địa chỉ"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="matKhau">Mật khẩu</label>
+                <input type="password" name="matKhau" class="form-control" id="matKhau" placeholder="Nhập mật khẩu" required />
+            </div>
+
+            if (ViewBag.Message != null)
+            {
+                <div class="alert">
+                    @ViewBag.Message
+                </div>
+            }
+            <div class="button-container">
+                <button type="submit" class="btn btn-primary">Đăng ký</button>
+
+            </div>
+        }
+        <p>Đã có tài khoản? <a href="/Tai_khoan/Login">Đăng nhập</a></p>
+
+    </div>
+</div>
+
