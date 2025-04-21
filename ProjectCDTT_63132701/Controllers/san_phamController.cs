@@ -365,6 +365,15 @@ namespace ProjectCDTN_63132701.Controllers
                     Gia = item.SanPham.DonGia
                 };
                 db.ChiTietHoaDons.Add(chiTiet);
+
+                ChiTietDonHang chiTietDonHang = new ChiTietDonHang
+                {
+                    MaDH = donHang.MaDH,
+                    MaSP = item.MaSP,
+                    SoLuong = item.SoLuong,
+                    DonGia = item.SanPham.DonGia
+                };
+                db.ChiTietDonHangs.Add(chiTietDonHang);
             }
 
             db.SaveChanges();

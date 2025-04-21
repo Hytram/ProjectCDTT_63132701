@@ -15,7 +15,6 @@ namespace ProjectCDTT_63132701.Controllers
         private Project_63132701Entities2 db = new Project_63132701Entities2();
 
 
-
         public ActionResult QLVC()
         {
             var donHangVanChuyens = db.VanChuyens.Include(d => d.DonHang.KhachHang).ToList();
@@ -36,11 +35,18 @@ namespace ProjectCDTT_63132701.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            VanChuyen vanChuyen = db.VanChuyens.Find(id);
+            VanChuyen vanChuyen = db.VanChuyens
+                    .Include(vc => vc.DonHang)
+                    .Include(vc => vc.DonHang.ChiTietDonHangs.Select(ct => ct.SanPham))
+                    .Include(vc => vc.DonHang.KhachHang)
+                    .FirstOrDefault(vc => vc.MaVanChuyen == id);
             if (vanChuyen == null)
             {
                 return HttpNotFound();
             }
+
+            var hoaDon = db.HoaDons.FirstOrDefault(hd => hd.MaDH == vanChuyen.MaDH);
+            ViewBag.TongTienHoaDon = hoaDon.TongTien;
             return View(vanChuyen);
         }
 

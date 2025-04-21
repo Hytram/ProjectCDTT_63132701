@@ -3,6 +3,11 @@
 @{
     ViewBag.Title = "Chi tiết vận chuyển";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var rand = new Random();
+    var daysToAdd = rand.Next(3, 5);
+    var ngayTao = Model.NgayTao ?? DateTime.Now;
+    var ngayGiao = ngayTao.AddDays(daysToAdd);
+    var ngayNhan = ngayGiao.AddDays(1);
 }
 
 <head>
@@ -20,6 +25,14 @@
     <div class="row">
         <div class="col-md-12">
             <dl class="row">
+                <dt class="col-sm-4">Khách hàng:</dt>
+                <dd class="col-sm-8">@Model.DonHang.KhachHang.HoTen</dd>
+
+                <dt class="col-sm-4">Địa chỉ:</dt>
+                <dd class="col-sm-8">
+                    @(Model.DiaChiChiTiet + ", " + @Model.PhuongXa + ", " + @Model.QuanHuyen + ", " + @Model.TinhThanh)
+                </dd>
+                
                 <dt class="col-sm-4">Đơn vị vận chuyển:</dt>
                 <dd class="col-sm-8">@Model.DonViVanChuyen</dd>
 
@@ -28,22 +41,46 @@
 
                 <dt class="col-sm-4">Ngày tạo:</dt>
                 <dd class="col-sm-8">
-                    @(Model.NgayTao.HasValue ? Model.NgayTao.Value.ToString("dd/MM/yyyy") : "")
+                    @(Model.NgayTao.Value.ToString("dd/MM/yyyy"))
                 </dd>
 
                 <dt class="col-sm-4">Thời gian giao:</dt>
                 <dd class="col-sm-8">
-                    @(Model.ThoiGianGiao.HasValue ? Model.ThoiGianGiao.Value.ToString("dd/MM/yyyy") : "")
+                    @ngayGiao.ToString("dd/MM/yyyy")
                 </dd>
 
                 <dt class="col-sm-4">Thời gian nhận:</dt>
                 <dd class="col-sm-8">
-                    @(Model.ThoiGianNhan.HasValue ? Model.ThoiGianNhan.Value.ToString("dd/MM/yyyy") : "")
+                    @ngayNhan.ToString("dd/MM/yyyy")
                 </dd>
 
-                <dt class="col-sm-4">Trạng thái đơn hàng:</dt>
-                <dd class="col-sm-8">@Model.DonHang?.TrangThai</dd>
+
             </dl>
+
+            <h3>Chi tiết đơn hàng</h3>
+            <table class="table table-bordered mt-4">
+                <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>Đơn giá</th>
+                        <th>Số lượng</th>
+                        <th>Tổng tiền của sản phẩm</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var chiTiet in Model.DonHang.ChiTietDonHangs)
+                    {
+                        <tr>
+                            <td>@chiTiet.SanPham.TenSP</td>
+                            <td>@chiTiet.DonGia.ToString("N0") đ</td>
+                            <td>@chiTiet.SoLuong</td>
+                            <td>@(chiTiet.SoLuong * chiTiet.DonGia)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <h4>Tổng tiền (đã bao gồm phí ship):</h4>
+            <p>@String.Format("{0:N0} VNĐ", ViewBag.TongTienHoaDon)</p>
         </div>
     </div>
 
