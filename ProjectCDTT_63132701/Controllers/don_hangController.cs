@@ -74,45 +74,41 @@ namespace ProjectCDTT_63132701.Controllers
             return View(hoaDon);
         }
 
-
-
-
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DuyetDonHang(int id)
         {
-            
             var donHang = db.DonHangs.FirstOrDefault(dh => dh.MaDH == id);
-
             if (donHang != null)
             {
-              
-                donHang.TrangThai = "Confirmed"; 
-                var vanChuyen =  db.VanChuyens.FirstOrDefault(ch => ch.MaDH == id);
-                if (vanChuyen != null)
+                var vanChuyen = db.VanChuyens.FirstOrDefault(vc => vc.MaDH == id);
+
+                if (donHang.TrangThai == "Confirmed")
                 {
-                    vanChuyen.TrangThai = "Shipping";
+                    donHang.TrangThai = "Pending";
+                    if (vanChuyen != null)
+                    {
+                        vanChuyen.TrangThai = "Pending";
+                    }
+                    TempData["SuccessMessage"] = "Đã hủy duyệt đơn hàng.";
                 }
+                else
+                {
+                    donHang.TrangThai = "Confirmed";
+                    if (vanChuyen != null)
+                    {
+                        vanChuyen.TrangThai = "Shipping";
+                    }
+                    TempData["SuccessMessage"] = "Đã duyệt đơn hàng thành công.";
+                }
+
                 db.SaveChanges();
-
-           
-                TempData["SuccessMessage"] = "Đơn hàng đã được duyệt thành công.";
-
-               
                 return RedirectToAction("QLDH");
             }
 
-           
             TempData["ErrorMessage"] = "Không tìm thấy đơn hàng.";
             return RedirectToAction("QLDH");
         }
-
-
-
-
-
-
-
-
 
 
         // GET: Don_hang/Create

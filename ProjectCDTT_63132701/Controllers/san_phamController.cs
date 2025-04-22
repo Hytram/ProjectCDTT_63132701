@@ -549,42 +549,26 @@ namespace ProjectCDTN_63132701.Controllers
             }
         }
 
-
-
-
-
-
-
-
         // GET: san_pham
         public ActionResult Index()
         {
-            // Lấy 4 sản phẩm đầu tiên cho mỗi loại
-            var firstProductOfEachType = db.SanPhams
-                                         .Where(sp => sp.MaLoaiSP == 1)
-                                         .FirstOrDefault();
+            var newestProducts = db.SanPhams
+                .OrderByDescending(sp => sp.NgayTao)
+                .Take(4)
+                .ToList();
 
-            var secondProductOfEachType = db.SanPhams
-                                                .Where(sp => sp.MaLoaiSP == 2)
-                                                .FirstOrDefault();
+            var oldestProducts = db.SanPhams
+                .OrderBy(sp => sp.NgayTao)
+                .Take(4)
+                .ToList();
 
-            var thirdProductOfEachType = db.SanPhams
-                                               .Where(sp => sp.MaLoaiSP == 3)
-                                               .FirstOrDefault();
+            var viewModel = new HomeIndexViewModel
+            {
+                NewestProducts = newestProducts,
+                OldestProducts = oldestProducts
+            };
 
-            var fourthProductOfEachType = db.SanPhams
-                                                .Where(sp => sp.MaLoaiSP == 4)
-                                                .FirstOrDefault();
-
-            
-            var products = new List<SanPham> {
-        firstProductOfEachType,
-        secondProductOfEachType,
-        thirdProductOfEachType,
-        fourthProductOfEachType
-    }.Where(sp => sp != null).ToList(); 
-
-            return View(products);
+            return View(viewModel);
         }
 
 

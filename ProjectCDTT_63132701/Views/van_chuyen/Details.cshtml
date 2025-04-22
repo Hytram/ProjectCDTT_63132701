@@ -76,7 +76,7 @@
                     <td>@chiTiet.SanPham.TenSP</td>
                     <td>@chiTiet.DonGia.ToString("N0") đ</td>
                     <td>@chiTiet.SoLuong</td>
-                    <td>@(chiTiet.SoLuong * chiTiet.DonGia)</td>
+                    <td>@String.Format("{0:N0} đ", chiTiet.SoLuong * chiTiet.DonGia)</td>
                 </tr>
             }
         </tbody>

@@ -10,13 +10,13 @@
     <a href="javascript:history.back()" class="back-button">
         <i class="fa-solid fa-chevron-left"></i> Quay lại
     </a>
-    <h2>Thông tin đơn hàng của khách hàng</h2>
+    <h2>Thông tin của đơn hàng</h2>
 
 
 
     <div class="row mt-4">
         <div class="col-md-6">
-            <p><strong>Họ Tên Khách Hàng:</strong> @Model.KhachHang.HoTen</p>
+            <p><strong>Khách Hàng:</strong> @Model.KhachHang.HoTen</p>
             <p><strong>Email:</strong> @Model.KhachHang.Email</p>
             <p><strong>Số điện thoại:</strong> @Model.KhachHang.SoDienThoai</p>
         </div>
@@ -52,16 +52,16 @@
             {
                 <tr>
                     <td>@chiTiet.SanPham.TenSP</td>
-                    <td>@chiTiet.Gia.ToString("N0") đ</td>
+                    <td>@chiTiet.Gia.ToString("N0")đ</td>
                     <td>@chiTiet.SoLuong</td>
-                    <td>@(chiTiet.SoLuong * chiTiet.Gia)</td>
+                    <td>@((chiTiet.SoLuong * chiTiet.Gia))</td>
                 </tr>
             }
         </tbody>
     </table>
 
     <div class="d-flex justify-content-end">
-        <h4>Tổng Tiền: @String.Format("{0:N0} ₫", Model.TongTien) </h4>
+        <h4>Tổng Tiền: @String.Format("{0:N0}đ", Model.TongTien) </h4>
     </div>
 
     <div class="d-flex justify-content-center align-items-center">
@@ -78,7 +78,7 @@
             else
             {
                 <button class="btn btn-submit btn-disabled" disabled style="cursor: not-allowed;">
-                    <i class="fa-solid fa-check"></i> Đã duyệt đơn hàng
+                    <i class="fa-solid fa-check"></i> Đơn hàng đã được duyệt
                 </button>
             }
         </div>

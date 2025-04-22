@@ -164,6 +164,7 @@
     <Compile Include="Models\HoaDon.cs">
       <DependentUpon>Model_63132701.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HomeIndexViewModel.cs" />
     <Compile Include="Models\KhachHang.cs">
       <DependentUpon>Model_63132701.tt</DependentUpon>
     </Compile>
