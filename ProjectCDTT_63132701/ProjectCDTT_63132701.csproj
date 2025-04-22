@@ -227,6 +227,7 @@
     <Content Include="Content\giohang.css" />
     <Content Include="Content\Home.css" />
     <Content Include="Content\khuyenmai.css" />
+    <Content Include="Content\loaibac.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\qlsp.css" />
     <Content Include="Content\rootcss.css" />
@@ -308,6 +309,15 @@
     <Content Include="Images\mau18.jpg" />
     <Content Include="Images\mau19.jpg" />
     <Content Include="Images\mau2.jpg" />
+    <Content Include="Images\mau20.jpg" />
+    <Content Include="Images\mau21.jpg" />
+    <Content Include="Images\mau22.jpg" />
+    <Content Include="Images\mau23.jpg" />
+    <Content Include="Images\mau24.jpg" />
+    <Content Include="Images\mau25.jpg" />
+    <Content Include="Images\mau26.jpg" />
+    <Content Include="Images\mau27.jpg" />
+    <Content Include="Images\mau28.jpg" />
     <Content Include="Images\mau3.jpg" />
     <Content Include="Images\mau4.jpg" />
     <Content Include="Images\mau5.jpg" />
@@ -344,6 +354,7 @@
     <Content Include="Images\shop2.jpg" />
     <Content Include="Images\shop3.jpg" />
     <Content Include="Images\shop4.jpg" />
+    <Content Include="Images\shop5.jpg" />
     <Content Include="Images\vongtai12.jpg" />
     <Content Include="Images\vongtay1.jpg" />
     <Content Include="Images\vongtay10.jpg" />
@@ -412,7 +423,6 @@
     <Content Include="Views\San_pham\Create.cshtml" />
     <Content Include="Views\San_pham\Delete.cshtml" />
     <Content Include="Views\San_pham\Details.cshtml" />
-    <Content Include="Views\San_pham\DichVu.cshtml" />
     <Content Include="Views\San_pham\Edit.cshtml" />
     <Content Include="Views\San_pham\GioHang.cshtml" />
     <Content Include="Views\San_pham\Index.cshtml" />
@@ -449,6 +459,9 @@
     <Content Include="Views\tai_khoan\Login.cshtml" />
     <Content Include="Views\San_pham\KhuyenMai.cshtml" />
     <Content Include="Views\tai_khoan\Register.cshtml" />
+    <Content Include="Views\San_pham\BaoHanh.cshtml" />
+    <Content Include="Views\San_pham\TTVanChuyen.cshtml" />
+    <Content Include="Views\San_pham\LoaiBac.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

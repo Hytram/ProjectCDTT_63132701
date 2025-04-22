@@ -184,6 +184,10 @@ namespace ProjectCDTN_63132701.Controllers
             return View(sanPham);
         }
 
+
+
+
+
         public ActionResult GioHang()
         {
             if (Session["UserRole"] == null || Session["UserRole"].ToString().Trim() != "User")
@@ -508,7 +512,17 @@ namespace ProjectCDTN_63132701.Controllers
         }
 
 
-        public ActionResult DichVu()
+        public ActionResult BaoHanh()
+        {
+            return View();
+        }
+
+        public ActionResult TTVanChuyen()
+        {
+            return View();
+        }
+
+        public ActionResult LoaiBac()
         {
             return View();
         }
@@ -536,11 +550,43 @@ namespace ProjectCDTN_63132701.Controllers
         }
 
 
+
+
+
+
+
+
         // GET: san_pham
         public ActionResult Index()
         {
-            return View();
+            // Lấy 4 sản phẩm đầu tiên cho mỗi loại
+            var firstProductOfEachType = db.SanPhams
+                                         .Where(sp => sp.MaLoaiSP == 1)
+                                         .FirstOrDefault();
+
+            var secondProductOfEachType = db.SanPhams
+                                                .Where(sp => sp.MaLoaiSP == 2)
+                                                .FirstOrDefault();
+
+            var thirdProductOfEachType = db.SanPhams
+                                               .Where(sp => sp.MaLoaiSP == 3)
+                                               .FirstOrDefault();
+
+            var fourthProductOfEachType = db.SanPhams
+                                                .Where(sp => sp.MaLoaiSP == 4)
+                                                .FirstOrDefault();
+
+            
+            var products = new List<SanPham> {
+        firstProductOfEachType,
+        secondProductOfEachType,
+        thirdProductOfEachType,
+        fourthProductOfEachType
+    }.Where(sp => sp != null).ToList(); 
+
+            return View(products);
         }
+
 
         // GET: san_pham/Details/5
         public ActionResult Details(int? id)

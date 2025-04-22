@@ -20,7 +20,7 @@
             <div class="carousel-caption d-flex flex-column align-items-start text-white">
                 <h1>WELCOME TO KIM YẾN</h1>
                 <p>Thời trang - Độc đáo - Giá trị bền vững</p>
-               
+
             </div>
         </div>
 
@@ -40,7 +40,7 @@
             <div class="carousel-caption d-flex flex-column align-items-start text-white">
                 <h1>WELCOME TO KIM YẾN</h1>
                 <p>Thời trang - Độc đáo - Giá trị bền vững</p>
-               
+
             </div>
         </div>
     </div>
@@ -88,112 +88,70 @@
 <section class="trendy-collection py-5 bg-light">
     <div class="container">
         <h2 class="text-center mb-4">BỘ SƯU TẬP MỚI</h2>
-        <div class="row text-center">
-            <!-- Sản phẩm 1 -->
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="~/Images/mau12.jpg" alt="Earrings" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">Dây mảnh đính đá</h5>
-                        <p class="card-text">Giá: 850.000 đ</p>
-                        <a href="#" class="btn btn-outline-dark">Xem ngay</a>
+        <div class="product-container">
+            @foreach (var product in Model)
+            {
+                <div class="product-card">
+                    <img src="~/Images/@product.AnhSanPham" alt="@product.TenSP">
+                    <div class="product-info">
+                        <h3>@product.TenSP</h3>
+                        <p class="price">@product.DonGia.ToString("N0") đ</p>
+                        <a href="@Url.Action("ChiTietSanPham", "San_pham", new { id = product.MaSP })" class="btn-submit">Xem ngay</a>
                     </div>
                 </div>
-            </div>
-            <!-- Sản phẩm 2 -->
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="~/Images/mau13.jpg" alt="Bracelets" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">Dây charm </h5>
-                        <p class="card-text">Giá: 1.200.000 đ</p>
-                        <a href="#" class="btn btn-outline-dark">Xem ngay</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Sản phẩm 3 -->
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="~/Images/mau14.jpg" alt="Necklace" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">Combo đính nơ</h5>
-                        <p class="card-text">Giá: 1.650.000 đ</p>
-                        <a href="#" class="btn btn-outline-dark">Xem ngay</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Sản phẩm 4 -->
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="~/Images/mau4.jpg" alt="Rings" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">Combo đính đá sang trọng</h5>
-                        <p class="card-text">Giá: 2.990.000 đ</p>
-                        <a href="#" class="btn btn-outline-dark">Xem ngay</a>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </section>
+
+<div class="message-box">
+    <p> " Không chỉ là một thương hiệu trang sức, chúng tôi là một phong trào đang thực hiện sứ mệnh cách mạng hóa trải nghiệm trang sức. "</p>
+</div>
+
+
+<table class="custom-table">
+    <tr>
+        <td><img src="~/Images/mau11.jpg" class="table-img" /></td>
+        <td class="text-center"><a href="@Url.Action("BaoHanh", "San_pham")">Chính sách bảo hành</a></td>
+        <td><img src="~/Images/anh12.jpg" class="table-img" /></td>
+        <td class="text-center"><a href="@Url.Action("LoaiBac", "San_pham")">Chất lượng bạc</a></td>
+    </tr>
+    <tr>
+        <td class="text-center"><a href="@Url.Action("ThuongHieu", "San_pham")">Lịch sử thương hiệu</a></td>
+        <td><img src="~/Images/shop5.jpg" class="table-img" /></td>
+        <td class="text-center">
+            <a href="@Url.Action("DichVu", "TrangChu")">Chính sách vận chuyển</a>
+        </td>
+        <td><img src="~/Images/mau12.jpg" class="table-img" /></td>
+    </tr>
+</table>
+
+
 
 
 <!-- Bộ sưu tập mùa hè -->
 <section class="autumn-collection py-5">
     <div class="container">
         <h2 class="text-center mb-4">BỘ SƯU TẬP MÙA HÈ</h2>
-        <div class="row">
-            <!-- Card 1 -->
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="~/Images/mau6.jpg" alt="Rings" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">Combo sang trọng</h5>
-                        <p class="card-text">Giá: 1.790.000 đ</p>
-                        <a href="#" class="btn btn-outline-dark">Xem ngay</a>
+        <div class="product-container">
+            @foreach (var product in Model)
+            {
+                <div class="product-card">
+                    <img src="~/Images/@product.AnhSanPham" alt="@product.TenSP">
+                    <div class="product-info">
+                        <h3>@product.TenSP</h3>
+                        <p class="price">@product.DonGia.ToString("N0") đ</p>
+                        <a href="@Url.Action("ChiTietSanPham", "SanPham", new { id = product.MaSP })" class="btn-submit">Xem ngay</a>
                     </div>
                 </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="~/Images/mau9.jpg" alt="Necklace" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">Dây mảnh lấp lánh</h5>
-                        <p class="card-text">Giá: 1.990.000 đ</p>
-                        <a href="#" class="btn btn-outline-dark">Xem ngay</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="~/Images/anh12.jpg" alt="Bracelets" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title">Dây mảnh ngọc trai</h5>
-                        <p class="card-text">Giá: 990.000 đ</p>
-                        <a href="#" class="btn btn-outline-dark">Xem ngay</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="col-md-3">
-                <div class="card">
-                    <img src="~/Images/mau11.jpg" alt="Earrings" class="card-img-top">
-                    <div class="card-body">
-                        <h5 class="card-title"> Combo ngọc trai</h5>
-                        <p class="card-text">Giá: 1.300.000 đ</p>
-                        <a href="#" class="btn btn-outline-dark">Xem ngay</a>
-                    </div>
-                </div>
-            </div>
-
+            }
         </div>
     </div>
 </section>
+
+
+
+
 
 
 

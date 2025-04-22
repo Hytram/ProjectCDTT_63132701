@@ -1,6 +1,5 @@
 ﻿/* Cấu hình chung */
 body {
-    /*font-family: 'Arial', sans-serif;*/
     margin: 0;
     padding: 0;
     background-color: #f5f6f7;
@@ -10,7 +9,7 @@ body {
 /* Phần About */
 .about-section {
     padding: 80px 0;
-    background-color: #f5f0eb;
+    background-color: #FBF9F6;
 }
     .about-section .container {
         display: flex;
@@ -37,6 +36,14 @@ body {
     line-height: 1.8;
     color: #555;
 }
+.about-section p {
+    text-align: justify; 
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin: 0 auto; 
+    max-width: 800px; 
+}
 
 /* Phần Design Story */
 .design-story-container {
@@ -49,6 +56,7 @@ body {
     justify-content: center;
     gap: 40px;
     margin-bottom: 50px;
+    display: flex;
 }
 
     .design-story-section.reverse {
@@ -60,7 +68,7 @@ body {
     }
 
     .design-story-section h2 {
-        font-size: 26px;
+        font-size: 28px;
         color: #6d4c41;
         margin-bottom: 15px;
     }
@@ -69,23 +77,32 @@ body {
         font-size: 16px;
         color: #555;
         line-height: 1.6;
+        text-align: justify;
     }
 
-    .design-story-section img {
-        width: 100%;
-        max-width: 450px;
-        border-radius: 10px;
-        transition: transform 0.3s ease;
-    }
+.design-story-section img {
+    width: 70%;
+    max-width: 350px;
+    display: block;
+    margin-left: auto; /* Căn phải */
+    transition: transform 0.3s ease;
+}
 
-        .design-story-section img:hover {
-            transform: scale(1.05);
-        }
+.design-story-section img:hover {
+    transform: scale(1.05);
+}
+
+        
+.design-story p {
+    text-align: justify; 
+    color: #555;
+    line-height: 1.6;
+}
 
 /* PHẦN TRANG SỨC (High Jewelry) */
 .high-jewelry {
     padding: 80px 0;
-    background-color: #f5f0eb;
+    background-color: #FBF9F6;
     text-align: center;
 }
 
@@ -124,7 +141,7 @@ body {
     .text-box:hover {
         background-color: #6b4f41; /* Màu nâu  */
         transform: scale(1.05); 
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Đổ bóng */
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
     }
 
 
@@ -194,4 +211,59 @@ body {
         color: #6d4c41;
         font-size: 18px;
         margin-bottom: 8px;
+    }
+
+.new-image-section {
+    background-color:#FBF9F6;
+    padding: 40px 0;
+}
+
+    .new-image-section h2 {
+        text-align: center;
+        padding: 20px 0; 
+        color: #333; 
+        font-size: 28px; 
+        margin-bottom: 30px; 
+    }
+
+    .new-image-section .row {
+        display: flex;
+        justify-content: space-between; 
+    }
+
+    .new-image-section .image-container {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .new-image-section img {
+        width: 100%;
+        height: auto; 
+        border-radius: 10px; 
+    }
+
+    .new-image-section .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 0.3s ease; 
+    }
+
+    .new-image-section .image-container:hover .overlay {
+        opacity: 1; 
+    }
+
+    .new-image-section .overlay .text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white; 
+        font-size: 24px;
+        text-align: justify;
+        padding: 10px;
+        border-radius: 5px;
     }

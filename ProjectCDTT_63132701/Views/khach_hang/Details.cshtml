@@ -14,40 +14,33 @@
     <a href="javascript:history.back()" class="back-button">
         <i class="fa-solid fa-chevron-left"></i> Quay lại
     </a>
-    <h2 >Chi tiết khách hàng</h2>
+    <h2>Chi tiết khách hàng</h2>
 
-    <dl class="dl-horizontal">
-        <div class="row mb-2">
-            <dt class="col-sm-3">Họ tên:</dt>
-            <dd class="col-sm-9">@Model.HoTen</dd>
+    <div class="row">
+        <!-- Cột trái -->
+        <div class="col-md-6">
+            <div class="mb-3">
+                <strong>Họ tên:</strong> @Model.HoTen
+            </div>
+            <div class="mb-3">
+                <strong>Email:</strong> @Model.Email
+            </div>
+            <div class="mb-3">
+                <strong>Mật khẩu:</strong> @Model.MatKhau
+            </div>
         </div>
 
-        <div class="row mb-2">
-            <dt class="col-sm-3">Email:</dt>
-            <dd class="col-sm-9">@Model.Email</dd>
+        <!-- Cột phải -->
+        <div class="col-md-6">
+            <div class="mb-3">
+                <strong>Số điện thoại:</strong> @Model.SoDienThoai
+            </div>
+            <div class="mb-3">
+                <strong>Địa chỉ:</strong> @Model.DiaChi
+            </div>
+            <div class="mb-3">
+                <strong>Vai trò:</strong> @(Model.VaiTro == "Admin" ? "Quản trị viên" : "Khách hàng")
+            </div>
         </div>
-
-        <div class="row mb-2">
-            <dt class="col-sm-3">Mật khẩu:</dt>
-            <dd class="col-sm-9">@Model.MatKhau</dd>
-        </div>
-
-        <div class="row mb-2">
-            <dt class="col-sm-3">Số điện thoại:</dt>
-            <dd class="col-sm-9">@Model.SoDienThoai</dd>
-        </div>
-
-        <div class="row mb-2">
-            <dt class="col-sm-3">Địa chỉ:</dt>
-            <dd class="col-sm-9">@Model.DiaChi</dd>
-        </div>
-
-        <div class="row mb-2">
-            <dt class="col-sm-3">Vai trò:</dt>
-            <dd class="col-sm-9">
-                @(Model.VaiTro == "Admin" ? "Quản trị viên" : "Khách hàng")
-            </dd>
-
-        </div>
-    </dl>
+    </div>
 </div>

@@ -35,25 +35,40 @@
 
             <!-- Biểu tượng yêu thích và giỏ hàng -->
             <div class="header-right">
-                
-                <div>
-                    @if (Session["UserId"] == null)
-                    {
-                        <a href="@Url.Action("Login", "Tai_khoan")" style="text-decoration: none; color: inherit;">
-                            <i class="fa-solid fa-user"></i>
-                        </a>
-                    }
-                    else
-                    {
-                        <a href="@Url.Action("Logout", "Tai_khoan")" style="text-decoration: none; color: inherit;">
-                            <i class="fa-solid fa-sign-out-alt"></i>
-                        </a>
-                    }
+                <div style="display: none;">
+                    <a href="@Url.Action("YeuThich", "San_pham")" style="text-decoration: none; color: inherit;">
+                        <i class="far fa-heart"></i>
+                        <span id="wishlist-count" style="@(Session["FavoriteCount"] != null && (int)Session["FavoriteCount"] > 0 ? "background-color: red; color: white;" : "background-color: #ddd; color: black;")">
+                            @(Session["FavoriteCount"] ?? 0)
+                        </span>
+                    </a>
+                </div>
+
+                <div style="display: none;">
+                    <a href="@Url.Action("GioHang", "San_pham")" style="text-decoration: none; color: inherit;">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span style="@(Session["CartCount"] != null && (int)Session["CartCount"] > 0 ? "background-color: red; color: white;" : "background-color: #ddd; color: black;")">
+                            @(Session["CartCount"] ?? 0)
+                        </span>
+                    </a>
                 </div>
             </div>
-        </div>
-    </div>
 
+            @if (Session["UserId"] == null)
+            {
+                <a href="@Url.Action("Login", "Tai_khoan")" style="text-decoration: none; color: inherit;">
+                    <i class="fa-solid fa-user"></i>
+                </a>
+            }
+            else
+            {
+                <a href="@Url.Action("Logout", "Tai_khoan")" style="text-decoration: none; color: inherit;">
+                    <i class="fa-solid fa-sign-out-alt"></i>
+                </a>
+            }
+        </div>
+            </div>
+       
     <!-- MENU NAV -->
     <div class="nav-container">
         <ul class="nav_menu">

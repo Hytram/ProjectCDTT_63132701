@@ -1,0 +1,59 @@
+﻿h2 {
+    color: #000000;
+    font-size: 28px;
+    font-weight: bold;
+    margin: 20px auto;
+    padding: 20px;
+    text-align: center;
+}
+.thong-tin-vat-lieu,
+.thong-tin,
+.goi-y{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 40px;
+    margin-bottom: 30px;
+}
+
+.thong-tin-vat-lieu {
+    background-color: #F0D8DD; /* màu bạc Ý */
+}
+
+.thong-tin {
+    background-color: #f3f3f3; /* màu khác cho bạc Thái */
+}
+
+.hinh-anh {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+    .hinh-anh img {
+        max-width: 60%;
+        height: auto;
+        border-radius: 12px;
+    }
+
+.goiy {
+    display: flex;
+    gap: 40px; /* Khoảng cách giữa hai cột */
+    padding: 40px;
+    margin-bottom: 30px;
+    background-color: #f3f3f3;
+    align-items: stretch; /* Đảm bảo các phần tử đều có chiều cao bằng nhau */
+}
+
+.noi-dung,
+.cam-ket {
+    flex: 1;
+    text-align: justify;
+    display: flex;
+    flex-direction: column; /* Đảm bảo các phần tử trong mỗi cột xếp theo chiều dọc */
+    justify-content: space-between; /* Căn đều các phần tử trong cột */
+}
+
+.cam-ket {
+    padding: 20px;
+}
