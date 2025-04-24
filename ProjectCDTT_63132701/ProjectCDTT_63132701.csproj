@@ -243,12 +243,17 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\11.jpg" />
     <Content Include="Images\12.jpg" />
+    <Content Include="Images\13.jpg" />
+    <Content Include="Images\14.jpg" />
+    <Content Include="Images\15.jpg" />
+    <Content Include="Images\16.jpg" />
     <Content Include="Images\anh12.jpg" />
     <Content Include="Images\banner.jpg" />
     <Content Include="Images\bia1.jpg" />
     <Content Include="Images\bia2.jpg" />
     <Content Include="Images\bia3.jpg" />
     <Content Include="Images\bia4.jpg" />
+    <Content Include="Images\bia5.jpg" />
     <Content Include="Images\bongtai1.jpg" />
     <Content Include="Images\bongtai10.jpg" />
     <Content Include="Images\bongtai11.jpg" />
@@ -319,6 +324,7 @@
     <Content Include="Images\mau26.jpg" />
     <Content Include="Images\mau27.jpg" />
     <Content Include="Images\mau28.jpg" />
+    <Content Include="Images\mau29.jpg" />
     <Content Include="Images\mau3.jpg" />
     <Content Include="Images\mau4.jpg" />
     <Content Include="Images\mau5.jpg" />

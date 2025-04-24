@@ -48,11 +48,7 @@ namespace ProjectCDTT_63132701.Controllers
             return View(hoaDon);
         }
 
-
-
-
-
-
+       
         // GET: Don_hang/Details/5
         public ActionResult Details(int? id)
         {

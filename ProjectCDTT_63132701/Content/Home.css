@@ -219,13 +219,17 @@ a.category-btn:hover {
 
 
 .message-box {
+    font-family: "Playwrite AU SA", cursive;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
     background-color: #F0D8DD;
-    padding: 20px; 
-    margin: 20px 0; 
-    text-align: center; 
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
     font-size: 28px;
     color: #333;
-    margin-bottom:70px;
+    margin-bottom: 70px;
 }
 
 
