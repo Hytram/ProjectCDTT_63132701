@@ -469,6 +469,7 @@
     <Content Include="Views\San_pham\BaoHanh.cshtml" />
     <Content Include="Views\San_pham\TTVanChuyen.cshtml" />
     <Content Include="Views\San_pham\LoaiBac.cshtml" />
+    <Content Include="Views\San_pham\HoaDon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

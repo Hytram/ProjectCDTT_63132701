@@ -33,6 +33,9 @@ namespace ProjectCDTT_63132701.Controllers
                 Session["CartCount"] = gioHang != null ? db.ChiTietGioHangs.Where(c => c.MaGH == gioHang.MaGH).Sum(c => (int?)c.SoLuong) ?? 0 : 0;
                 int wishlistCount = db.YeuThiches.Count(y => y.MaKH == user.MaKH);
                 Session["FavoriteCount"] = wishlistCount;
+                int confirmedOrderCount = db.HoaDons.Count(h => h.MaKH == user.MaKH && h.TrangThai == "Shipping");
+                Session["ConfirmedOrderCount"] = confirmedOrderCount;
+
 
                 if (user.VaiTro == "Admin")
                 {

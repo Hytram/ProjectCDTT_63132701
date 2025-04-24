@@ -18,10 +18,12 @@
     <div id="menu">
         <div class="header-container">
             <!-- Tìm kiếm -->
-            <div class="header-left">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Tìm kiếm">
+            <div class="header-left position-relative">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm sản phẩm..." autocomplete="off">
+                <div id="searchResult" class="search-dropdown"></div>
             </div>
+
 
             <!-- Logo -->
             <div class="header-center">
@@ -34,7 +36,7 @@
             <!-- Biểu tượng yêu thích và giỏ hàng -->
             <div class="header-right">
                 <div>
-                    <a href="@Url.Action("YeuThich", "San_pham")" style="text-decoration: none; color: inherit;">
+                    <a href="@Url.Action("YeuThich", "San_pham")" style="text-decoration: none; color: inherit;" title="Yêu thích">
                         <i class="far fa-heart"></i>
                         <span id="wishlist-count" style="@(Session["FavoriteCount"] != null && (int)Session["FavoriteCount"] > 0 ? "background-color: red; color: white;" : "background-color: #ddd; color: black;")">
                             @(Session["FavoriteCount"] ?? 0)
@@ -43,10 +45,19 @@
                 </div>
 
                 <div>
-                    <a href="@Url.Action("GioHang", "San_pham")" style="text-decoration: none; color: inherit;">
+                    <a href="@Url.Action("GioHang", "San_pham")" style="text-decoration: none; color: inherit;" title="Giỏ hàng">
                         <i class="fas fa-shopping-bag"></i>
                         <span style="@(Session["CartCount"] != null && (int)Session["CartCount"] > 0 ? "background-color: red; color: white;" : "background-color: #ddd; color: black;")">
                             @(Session["CartCount"] ?? 0)
+                        </span>
+                    </a>
+                </div>     
+                
+                <div>
+                    <a href="@Url.Action("HoaDon", "San_pham")" style="text-decoration: none; color: inherit;" title="Hoá đơn">
+                        <i class="fas fa-receipt"></i>
+                        <span style="@(Session["ConfirmedOrderCount"] != null && (int)Session["ConfirmedOrderCount"] > 0 ? "background-color: red; color: white;" : "background-color: #ddd; color: black;")">
+                            @(Session["ConfirmedOrderCount"] ?? 0)
                         </span>
                     </a>
                 </div>
@@ -194,6 +205,35 @@
             });
         });
     });
+
+    $('#searchInput').on('input', function () {
+        var keyword = $(this).val();
+        if (keyword.length >= 1) {
+            $.ajax({
+                url: '@Url.Action("SearchProduct", "San_pham")',
+                data: { keyword: keyword },
+                success: function (data) {
+                    var resultHtml = '';
+                    if (data.length > 0) {
+                        resultHtml += '<ul class="list-group">';
+                        $.each(data, function (i, sp) {
+                            resultHtml += '<li class="list-group-item">';
+                            resultHtml += '<a href="/san_pham/ChiTietSanPham/' + sp.MaSP + '" style="text-decoration: none; color: black">';
+                            resultHtml += '<img src="/Images/' + sp.AnhSanPham + '" alt="" style="width:30px; height:30px; margin-right:10px;">';
+                            resultHtml += sp.TenSP + '</a></li>';
+                        });
+                        resultHtml += '</ul>';
+                    } else {
+                        resultHtml = '<p class="text-muted m-2">Không tìm thấy sản phẩm</p>';
+                    }
+                    $('#searchResult').html(resultHtml).fadeIn();
+                }
+            });
+        } else {
+            $('#searchResult').fadeOut().empty();
+        }
+    });
+
     </script>
 
 

@@ -75,26 +75,41 @@ namespace ProjectCDTT_63132701.Controllers
         public ActionResult DuyetDonHang(int id)
         {
             var donHang = db.DonHangs.FirstOrDefault(dh => dh.MaDH == id);
+            var hoaDon = db.HoaDons.FirstOrDefault(hd => hd.MaDH == id);
+            var vanChuyen = db.VanChuyens.FirstOrDefault(vc => vc.MaDH == id);
+
             if (donHang != null)
             {
-                var vanChuyen = db.VanChuyens.FirstOrDefault(vc => vc.MaDH == id);
-
                 if (donHang.TrangThai == "Confirmed")
                 {
                     donHang.TrangThai = "Pending";
+
+                    if (hoaDon != null)
+                    {
+                        hoaDon.TrangThai = "Pending";
+                    }
+
                     if (vanChuyen != null)
                     {
                         vanChuyen.TrangThai = "Pending";
                     }
+
                     TempData["SuccessMessage"] = "Đã hủy duyệt đơn hàng.";
                 }
                 else
                 {
                     donHang.TrangThai = "Confirmed";
+
+                    if (hoaDon != null)
+                    {
+                        hoaDon.TrangThai = "Shipping";
+                    }
+
                     if (vanChuyen != null)
                     {
                         vanChuyen.TrangThai = "Shipping";
                     }
+
                     TempData["SuccessMessage"] = "Đã duyệt đơn hàng thành công.";
                 }
 

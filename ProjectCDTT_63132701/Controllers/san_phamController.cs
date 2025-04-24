@@ -185,9 +185,6 @@ namespace ProjectCDTN_63132701.Controllers
         }
 
 
-
-
-
         public ActionResult GioHang()
         {
             if (Session["UserRole"] == null || Session["UserRole"].ToString().Trim() != "User")
@@ -390,18 +387,39 @@ namespace ProjectCDTN_63132701.Controllers
             return RedirectToAction("GioHang", "San_pham");
         }
 
-
-        public ActionResult ChiTietHoaDon(int? id)
+        public ActionResult HoaDon()
         {
+            // chỉ user mới xem được
+            if (Session["UserRole"] == null || Session["UserRole"].ToString().Trim() != "User")
+                return RedirectToAction("Login", "Tai_khoan");
+
+            int maKhachHang = (int)Session["UserId"];
+
+            // Lấy tất cả hóa đơn của khách
+            var hoaDons = db.HoaDons
+                            .Where(hd => hd.MaKH == maKhachHang)
+                            .Where(hd => hd.TrangThai == "Shipping")
+                            .OrderByDescending(hd => hd.NgayTao)
+                            .ToList();
+
+            return View(hoaDons);
+        }
+
+        public ActionResult ChiTietHoaDon()
+        {
+            if (Session["UserRole"] == null || Session["UserRole"].ToString().Trim() != "User")
+            {
+                return RedirectToAction("Login", "Tai_khoan");
+            }
+            var maKhachHang = (int)Session["UserId"];
             var hoaDon = db.HoaDons
-                .Where(h => h.MaDH == id)
                 .Include(h => h.KhachHang)
-                .Include(h => h.ChiTietHoaDons)
-                .Include(h => h.ChiTietHoaDons.Select(ct => ct.SanPham))
-                .FirstOrDefault();
+                .Include(h => h.ChiTietHoaDons.Select(ct => ct.SanPham)) 
+                .FirstOrDefault(g => g.MaKH == maKhachHang && g.TrangThai == "Shipping");
+
             if (hoaDon == null)
             {
-                return HttpNotFound();
+                TempData["ErrorMessage"] = "Hiện quý khách không có đơn hàng nào!";
             }
             return View(hoaDon);
         }
@@ -549,6 +567,22 @@ namespace ProjectCDTN_63132701.Controllers
             }
         }
 
+        [HttpGet]
+        public JsonResult SearchProduct(string keyword)
+        {
+            var matchedProducts = db.SanPhams
+                .Where(sp => sp.TenSP.Contains(keyword))
+                .Select(sp => new {
+                    sp.MaSP,
+                    sp.TenSP,
+                    sp.AnhSanPham
+                }).ToList();
+
+            return Json(matchedProducts, JsonRequestBehavior.AllowGet);
+        }
+
+
+
         // GET: san_pham
         public ActionResult Index()
         {
@@ -681,10 +715,6 @@ namespace ProjectCDTN_63132701.Controllers
             ViewBag.MaLoaiSP = new SelectList(db.LoaiSanPhams, "MaLoaiSP", "TenLoaiSP", sanPham.MaLoaiSP);
             return View(sanPham);
         }
-
-
-
-
 
 
         // GET: san_pham/Delete/5
