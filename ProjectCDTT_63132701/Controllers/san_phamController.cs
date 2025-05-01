@@ -389,13 +389,11 @@ namespace ProjectCDTN_63132701.Controllers
 
         public ActionResult HoaDon()
         {
-            // chỉ user mới xem được
             if (Session["UserRole"] == null || Session["UserRole"].ToString().Trim() != "User")
                 return RedirectToAction("Login", "Tai_khoan");
 
             int maKhachHang = (int)Session["UserId"];
 
-            // Lấy tất cả hóa đơn của khách
             var hoaDons = db.HoaDons
                             .Where(hd => hd.MaKH == maKhachHang)
                             .Where(hd => hd.TrangThai == "Shipping")
@@ -405,7 +403,7 @@ namespace ProjectCDTN_63132701.Controllers
             return View(hoaDons);
         }
 
-        public ActionResult ChiTietHoaDon()
+        public ActionResult ChiTietHoaDon(int id)
         {
             if (Session["UserRole"] == null || Session["UserRole"].ToString().Trim() != "User")
             {
@@ -415,7 +413,7 @@ namespace ProjectCDTN_63132701.Controllers
             var hoaDon = db.HoaDons
                 .Include(h => h.KhachHang)
                 .Include(h => h.ChiTietHoaDons.Select(ct => ct.SanPham)) 
-                .FirstOrDefault(g => g.MaKH == maKhachHang && g.TrangThai == "Shipping");
+                .FirstOrDefault(g => g.MaKH == maKhachHang && g.MaDH == id && g.TrangThai == "Shipping");
 
             if (hoaDon == null)
             {

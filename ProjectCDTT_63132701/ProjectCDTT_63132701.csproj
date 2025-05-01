@@ -230,6 +230,7 @@
     <Content Include="Content\khuyenmai.css" />
     <Content Include="Content\loaibac.css" />
     <Content Include="Content\login.css" />
+    <Content Include="Content\pagination.css" />
     <Content Include="Content\qlsp.css" />
     <Content Include="Content\rootcss.css" />
     <Content Include="Content\sanpham.css" />

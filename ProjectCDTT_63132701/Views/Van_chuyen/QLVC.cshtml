@@ -7,6 +7,10 @@
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="~/Content/qlsp.css" />
+    <link rel="stylesheet" href="~/Content/pagination.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/jquery.simplePagination.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.6/simplePagination.min.css" />
 </head>
 
 <h2>Danh sách vận chuyển</h2>
@@ -14,7 +18,7 @@
     @* @Html.ActionLink("Thêm đơn vận chuyển", "Create", null, new { @class = "btn-submit" })*@
 </p>
 
-<table class="table table-bordered">
+<table class="table table-bordered" id="tableQLVC">
     <thead>
         <tr>
             <th>Khách hàng</th>
@@ -55,3 +59,26 @@
         }
     </tbody>
 </table>
+<div id="pagination" class="mt-3"></div>
+<script>
+    $(document).ready(function () {
+        var itemsPerPage = 10;
+        var items = $("#tableQLVC tbody tr");
+        var numItems = items.length;
+
+        $('#pagination').pagination({
+            items: numItems,
+            itemsOnPage: itemsPerPage,
+            cssStyle: 'light-theme',
+            prevText: '←',
+            nextText: '→',
+            onPageClick: function (pageNumber) {
+                var showFrom = itemsPerPage * (pageNumber - 1);
+                var showTo = showFrom + itemsPerPage;
+                items.hide().slice(showFrom, showTo).show();
+            }
+        });
+
+        items.hide().slice(0, itemsPerPage).show();
+    });
+</script>
