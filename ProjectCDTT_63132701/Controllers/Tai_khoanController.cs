@@ -151,11 +151,6 @@ namespace ProjectCDTT_63132701.Controllers
             }
         }
 
-
-
-
-
-
         // GET: Hiển thị form đặt lại mật khẩu qua email
         public ActionResult ResetPassword(string email, string token)
         {
@@ -235,21 +230,6 @@ namespace ProjectCDTT_63132701.Controllers
                 return View();
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         [HttpGet]
         public ActionResult Logout()
