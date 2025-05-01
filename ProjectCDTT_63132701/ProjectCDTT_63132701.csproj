@@ -225,6 +225,7 @@
     <Content Include="Content\delete.css" />
     <Content Include="Content\details.css" />
     <Content Include="Content\dichvu.css" />
+    <Content Include="Content\donhang.css" />
     <Content Include="Content\giohang.css" />
     <Content Include="Content\Home.css" />
     <Content Include="Content\khuyenmai.css" />
@@ -470,6 +471,11 @@
     <Content Include="Views\San_pham\TTVanChuyen.cshtml" />
     <Content Include="Views\San_pham\LoaiBac.cshtml" />
     <Content Include="Views\San_pham\HoaDon.cshtml" />
+    <Content Include="Views\Khach_hang\EditProfile.cshtml" />
+    <Content Include="Views\tai_khoan\ForgotPassword.cshtml" />
+    <Content Include="Views\tai_khoan\ResetPassword.cshtml" />
+    <Content Include="Views\tai_khoan\TokenInvalid.cshtml" />
+    <Content Include="Views\tai_khoan\SuccessPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
