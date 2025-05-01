@@ -20,6 +20,76 @@ namespace ProjectCDTT_63132701.Controllers
             return View(khachHangs);
         }
 
+
+
+        public ActionResult EditProfile()
+        {
+            // Kiểm tra nếu người dùng chưa đăng nhập
+            if (Session["UserRole"] == null || Session["UserRole"].ToString().Trim() != "User")
+            {
+                return RedirectToAction("Login", "Tai_khoan"); // Chuyển hướng đến trang đăng nhập
+            }
+
+            int maKhachHang = (int)Session["UserId"]; // Lấy ID khách hàng từ Session
+
+            // Lấy thông tin khách hàng từ database
+            var khachHang = db.KhachHangs.SingleOrDefault(kh => kh.MaKH == maKhachHang);
+
+            if (khachHang == null)
+            {
+                return HttpNotFound(); // Nếu không tìm thấy khách hàng
+            }
+
+            return View(khachHang); // Trả về View với thông tin khách hàng
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditProfile(KhachHang khachHang)
+        {
+            if (ModelState.IsValid)
+            {
+                int maKhachHang = (int)Session["UserId"]; // đảm bảo lấy đúng khách hàng đang đăng nhập
+
+                var existingKhachHang = db.KhachHangs.SingleOrDefault(kh => kh.MaKH == maKhachHang);
+
+                if (existingKhachHang != null)
+                {
+                    existingKhachHang.HoTen = khachHang.HoTen;
+                    existingKhachHang.SoDienThoai = khachHang.SoDienThoai;
+                    existingKhachHang.DiaChi = khachHang.DiaChi;
+
+                    try
+                    {
+                        db.SaveChanges();
+                        return RedirectToAction("Index", "San_pham");
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError("", "Lỗi khi lưu thay đổi: " + ex.Message);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Không tìm thấy khách hàng.");
+                }
+            }
+
+            return View(khachHang);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
         // GET: Khach_hang
         public ActionResult Index()
         {

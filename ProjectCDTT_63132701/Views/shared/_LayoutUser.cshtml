@@ -51,31 +51,43 @@
                             @(Session["CartCount"] ?? 0)
                         </span>
                     </a>
-                </div>     
-                
-                <div>
-                    <a href="@Url.Action("HoaDon", "San_pham")" style="text-decoration: none; color: inherit;" title="Hoá đơn">
-                        <i class="fas fa-receipt"></i>
-                        <span style="@(Session["ConfirmedOrderCount"] != null && (int)Session["ConfirmedOrderCount"] > 0 ? "background-color: red; color: white;" : "background-color: #ddd; color: black;")">
-                            @(Session["ConfirmedOrderCount"] ?? 0)
-                        </span>
-                    </a>
                 </div>
 
-                <div>
-                    @if (Session["UserId"] == null)
-                    {
-                        <a href="@Url.Action("Login", "Tai_khoan")" style="text-decoration: none; color: inherit;">
-                            <i class="fa-solid fa-user"></i>
-                        </a>
-                    }
-                    else
-                    {
-                        <a href="@Url.Action("Logout", "Tai_khoan")" style="text-decoration: none; color: inherit;">
-                            <i class="fa-solid fa-sign-out-alt"></i>
-                        </a>
-                    }
+                <!-- Biểu tượng người dùng với dropdown -->
+                <div class="dropdown">
+                    <a href="#" class="text-decoration-none" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                        @if (Session["UserId"] == null)
+                        {
+                            <li>
+                                <a href="@Url.Action("Login", "Tai_khoan")" class="dropdown-item">
+                                    <i class="fas fa-sign-in-alt"></i> Đăng nhập
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="@Url.Action("Logout", "Tai_khoan")" class="dropdown-item">
+                                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("HoaDon", "San_pham")" class="dropdown-item">
+                                    <i class="fas fa-receipt"></i> Đơn hàng
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("EditProfile", "Khach_hang")" class="dropdown-item">
+                                    <i class="fas fa-user-cog"></i> Thông tin tài khoản
+                                </a>
+                            </li>
+                        }
+                    </ul>
                 </div>
+
             </div>
         </div>
     </div>
@@ -147,7 +159,7 @@
                 <h5>LIÊN HỆ</h5>
                 <div>
                     <p>Email: kimyenjewelry@gmail.com</p>
-                    <p>Địa chỉ:66 Trần Quý Cáp, Diên Khánh, Khánh Hoà </p>
+                    <p>Địa chỉ: 66 Trần Quý Cáp, Diên Khánh, Khánh Hoà </p>
                     <p>Giờ hoạt động: 8:00 ~ 21:00</p>
                 </div>
                 <div class="footer-socials">
