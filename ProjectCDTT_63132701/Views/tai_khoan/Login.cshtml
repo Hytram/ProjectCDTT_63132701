@@ -19,6 +19,7 @@
         <div class="login-right">
             <div class="login-form-wrapper">
                 <h5>ĐĂNG NHẬP</h5>
+
                 @using (Html.BeginForm("Login", "Tai_khoan", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
@@ -44,13 +45,20 @@
                     <div class="button-container">
                         <button type="submit" class="btn btn-login">ĐĂNG NHẬP</button>
                     </div>
+
                 }
-                <p><a href="@Url.Action("ForgotPassword", "tai_khoan")">Quên mật khẩu?</a></p>
+                @if (ViewBag.Message != null)
+                {
+                    <div style="color: green; margin-bottom: 15px;">@ViewBag.Message</div>
+                }
+
+                <p><a href="@Url.Action("ForgotPassword", "tai_khoan")">Quên mật khẩu</a></p>
                 <p>Chưa có tài khoản? <a href="/Tai_khoan/Register">Đăng ký</a></p>
             </div>
         </div>
     </div>
 </div>
+
 <script>
     function togglePasswordVisibility() {
         const passwordField = document.getElementById("password");

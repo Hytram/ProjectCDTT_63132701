@@ -220,4 +220,12 @@
 .search-dropdown li:hover {
     background-color: #f5f5f5;
 }
+.dropdown-menu .dropdown-item {
+    color: #000000;
+    background-color: transparent !important;
+}
 
+    /* Khi hover: nền hồng, chữ trắng */
+    .dropdown-menu .dropdown-item:hover {
+        background-color: #fff !important;
+        color: #000000 !important; 

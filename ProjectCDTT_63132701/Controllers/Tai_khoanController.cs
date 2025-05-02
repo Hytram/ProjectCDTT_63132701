@@ -47,7 +47,7 @@ namespace ProjectCDTT_63132701.Controllers
                 }
             }
 
-            ViewBag.Message = "Sai thông tin đăng nhập";
+            ViewBag.Message = "Sai thông tin đăng nhập!!";
             return View();
         }
 
@@ -64,7 +64,7 @@ namespace ProjectCDTT_63132701.Controllers
             {
                 if (db.KhachHangs.Any(k => k.Email.ToLower() == email.ToLower()))
                 {
-                    ViewBag.Message = "Email đã được sử dụng.";
+                    ViewBag.Message = "Email đã được sử dụng!!";
                     return View();
                 }
 
@@ -122,7 +122,7 @@ namespace ProjectCDTT_63132701.Controllers
                 EmailService.Send(email, "Đặt lại mật khẩu", $"Nhấn vào đây để đặt lại mật khẩu: <a href='{resetLink}'>Reset mật khẩu</a>");
             }
 
-            ViewBag.Message = "Nếu email tồn tại, bạn sẽ nhận được hướng dẫn qua email.";
+            ViewBag.Message = "Vui lòng kiểm tra email, bạn sẽ nhận được hướng dẫn qua email!!";
             return View();
         }
 
@@ -182,7 +182,7 @@ namespace ProjectCDTT_63132701.Controllers
 
             if (matKhauMoi != xacNhanMatKhau)
             {
-                ModelState.AddModelError("", "Mật khẩu mới và xác nhận không khớp.");
+                ModelState.AddModelError("", "Mật khẩu mới và xác nhận không khớp!!");
                 ViewBag.Email = email;
                 ViewBag.Token = token;
                 return View();
@@ -194,7 +194,7 @@ namespace ProjectCDTT_63132701.Controllers
                 khachHang.Token = null;
                 db.SaveChanges();
 
-                ViewBag.ThongBao = "Đặt lại mật khẩu thành công. Bạn có thể đăng nhập lại.";
+                ViewBag.ThongBao = "Đặt lại mật khẩu thành công. Bạn có thể đăng nhập lại!!";
                 return View("SuccessPassword");
             }
             catch (Exception ex)
@@ -226,7 +226,7 @@ namespace ProjectCDTT_63132701.Controllers
             else
             {
                 // Nếu mật khẩu không khớp
-                ViewBag.Message = "Mật khẩu và xác nhận mật khẩu không khớp!";
+                ViewBag.Message = "Mật khẩu và xác nhận mật khẩu không khớp!!";
                 return View();
             }
         }
