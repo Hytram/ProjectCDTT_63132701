@@ -62,7 +62,8 @@ namespace ProjectCDTT_63132701.Controllers
                     try
                     {
                         db.SaveChanges();
-                        return RedirectToAction("Index", "San_pham");
+                        TempData["Message"]="Chỉnh sửa thành công!";
+                        return RedirectToAction("EditProfile", "Khach_hang");
                     }
                     catch (Exception ex)
                     {
