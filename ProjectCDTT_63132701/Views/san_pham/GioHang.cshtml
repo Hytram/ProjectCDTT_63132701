@@ -13,6 +13,12 @@
     <link rel="stylesheet" href="~/Content/giohang.css" />
 </head>
 
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success" id="Message">
+        @TempData["Message"]
+    </div>
+}
 <div class="container">
     <a href="javascript:history.back()" class="back-button">
         <i class="fa-solid fa-chevron-left"></i> Quay lại
@@ -100,7 +106,7 @@
                     </div>
                     <button id="btnTinhGia" class="btn-add-to-cart">Tính Giá Vận Chuyển</button>
                 </div>
-               
+
 
                 <div class="summary-row">
                     <span class="label">Giá vận chuyển:</span>
@@ -121,11 +127,29 @@
                     <input type="hidden" id="inputDiaChiChiTiet" name="DiaChiChiTiet" />
                     <input type="hidden" id="inputDonViVC" name="DonViVanChuyen" />
                     <input type="hidden" id="inputGiaVanChuyen" name="GiaVanChuyen" />
-                    <button type="submit" class="btn-pink">MUA HÀNG</button>
+                    <button type="button" class="btn-pink" id="openConfirmModal">MUA HÀNG</button>
                 </form>
+
+                <div class="modal fade" id="confirmOrderModal" tabindex="-1" aria-labelledby="confirmOrderModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmOrderModalLabel">Xác nhận đặt hàng</h5>
+                            </div>
+                            <div class="modal-body">
+                                Bạn có chắc chắn muốn đặt hàng với tổng số tiền là <strong id="modalTotalPrice">...</strong> không?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                <button type="button" id="btnConfirmOrder" class="btn btn-primary">Xác nhận</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-                }
-            </div>
+        }
+    </div>
 </div>
 
 <script>
@@ -183,11 +207,11 @@
 
         $('#DonViVanChuyen').on('change', function () {
             const donViVanChuyen = $(this).val();
-            $('#inputDonViVC').val(donViVanChuyen); 
+            $('#inputDonViVC').val(donViVanChuyen);
         });
 
         $('form').on('submit', function () {
-            const diaChiCuThe = $('#diaChiCuThe').val(); 
+            const diaChiCuThe = $('#diaChiCuThe').val();
 
             $('#inputDiaChiChiTiet').val(diaChiCuThe);
         });
@@ -195,7 +219,7 @@
         $('#btnTinhGia').on('click', function () {
             const tinhThanh = $('#inputTinhThanh').val();
             const donViVanChuyen = $('#DonViVanChuyen').val();
-            const diaChiChiTiet = $('#diaChiChiTiet').val(); 
+            const diaChiChiTiet = $('#diaChiChiTiet').val();
 
             const totalPrice = @totalPrice;
 
@@ -209,12 +233,12 @@
                 success: function (response) {
                     if (response.success) {
                         const shippingCost = parseFloat(response.cost);
-                        const maGiaVanChuyen = response.maGiaVanChuyen; 
+                        const maGiaVanChuyen = response.maGiaVanChuyen;
                         $('#shippingCost').text(shippingCost.toFixed(0) + ' đ');
 
                         const finalTotal = totalPrice + shippingCost;
                         $('#finalTotal').text(finalTotal.toFixed(0) + ' đ');
-                        $('#inputMaGiaVanChuyen').val(maGiaVanChuyen); 
+                        $('#inputMaGiaVanChuyen').val(maGiaVanChuyen);
                         $('#inputGiaVanChuyen').val(finalTotal.toFixed(0));
                     } else {
                         alert(response.message);
@@ -223,4 +247,26 @@
             });
         });
     });
+
+    $('#openConfirmModal').on('click', function () {
+        const finalTotal = $('#finalTotal').text();
+        $('#modalTotalPrice').text(finalTotal);
+        $('#confirmOrderModal').modal('show');
+    });
+
+    $('#btnConfirmOrder').on('click', function () {
+        $('#confirmOrderModal').modal('hide');
+        $('form').submit();
+    });
+
+    setTimeout(function () {
+        var message = document.getElementById("Message");
+        if (message) {
+            message.style.transition = "opacity 0.5s ease";
+            message.style.opacity = 0;
+            setTimeout(function () {
+                message.remove();
+            }, 500);
+        }
+    }, 3000);
 </script>
