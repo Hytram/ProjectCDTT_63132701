@@ -396,7 +396,6 @@ namespace ProjectCDTN_63132701.Controllers
 
             var hoaDons = db.HoaDons
                             .Where(hd => hd.MaKH == maKhachHang)
-                            .Where(hd => hd.TrangThai == "Shipping")
                             .OrderByDescending(hd => hd.NgayTao)
                             .ToList();
 

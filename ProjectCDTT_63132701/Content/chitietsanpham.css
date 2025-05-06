@@ -173,7 +173,19 @@ body {
             color: #f5a8a8;
         }
 
+.back-button {
+    display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #888;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
 
+    .back-button:hover {
+        color: #000;
+    }
 
 @media (max-width: 768px) {
     .button-group {

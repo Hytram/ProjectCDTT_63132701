@@ -21,6 +21,11 @@ namespace ProjectCDTT_63132701.Controllers
         }
 
 
+
+
+
+
+
         // GET: Don_hang
         public ActionResult Index(int? id)
         {
@@ -37,7 +42,6 @@ namespace ProjectCDTT_63132701.Controllers
                 return HttpNotFound();
             }
 
-            // Nếu bạn có bảng ChiTietDonHang thì load luôn
             var chiTietHoaDon = db.ChiTietHoaDons
                                    .Where(ct => ct.MaDH == id)
                                    .Include("SanPham")
@@ -228,4 +232,5 @@ namespace ProjectCDTT_63132701.Controllers
             base.Dispose(disposing);
         }
     }
+
 }

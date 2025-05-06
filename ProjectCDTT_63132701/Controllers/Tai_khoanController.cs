@@ -36,7 +36,7 @@ namespace ProjectCDTT_63132701.Controllers
                 Session["CartCount"] = gioHang != null ? db.ChiTietGioHangs.Where(c => c.MaGH == gioHang.MaGH).Sum(c => (int?)c.SoLuong) ?? 0 : 0;
                 Session["FavoriteCount"] = db.YeuThiches.Count(y => y.MaKH == user.MaKH);
                 Session["ConfirmedOrderCount"] = db.HoaDons.Count(h => h.MaKH == user.MaKH && h.TrangThai == "Shipping");
-
+                
                 if (user.VaiTro == "Admin")
                 {
                     return RedirectToAction("QLSP", "San_pham");
@@ -78,10 +78,11 @@ namespace ProjectCDTT_63132701.Controllers
                     VaiTro = "User"
                 };
 
+
                 db.KhachHangs.Add(newKhachHang);
                 db.SaveChanges();
 
-                ViewBag.Message = "Đăng ký thành công! Vui lòng đăng nhập.";
+                TempData["Message"] = "Đăng ký thành công! Chuyển hướng đến đăng nhập.";
                 return RedirectToAction("Login");
             }
             catch (Exception ex)
@@ -109,16 +110,13 @@ namespace ProjectCDTT_63132701.Controllers
             var user = db.KhachHangs.SingleOrDefault(u => u.Email == email);
             if (user != null)
             {
-                // Tạo token
                 string token = Guid.NewGuid().ToString();
                 user.Token = token;
-                user.TokenHetHan = DateTime.UtcNow.AddHours(1);  // Token hết hạn sau 1 giờ
+                user.TokenHetHan = DateTime.UtcNow.AddHours(1); 
                 db.SaveChanges();
 
-                // Tạo link reset
                 string resetLink = Url.Action("ResetPassword", "tai_khoan", new { email = user.Email, token = token }, Request.Url.Scheme);
-                Console.WriteLine("Link gửi đi: " + resetLink);
-                // Gửi email
+    
                 EmailService.Send(email, "Đặt lại mật khẩu", $"Nhấn vào đây để đặt lại mật khẩu: <a href='{resetLink}'>Reset mật khẩu</a>");
             }
 
@@ -140,97 +138,79 @@ namespace ProjectCDTT_63132701.Controllers
                     Port = 587,
                     EnableSsl = true,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
-                    UseDefaultCredentials = false,
-                    Credentials = new NetworkCredential(fromEmail, fromPassword)
-                };
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(fromEmail, fromPassword)
+                    };
 
-                var message = new MailMessage(fromEmail, toEmail, subject, body);
-                message.IsBodyHtml = true;
+                    var message = new MailMessage(fromEmail, toEmail, subject, body);
+                    message.IsBodyHtml = true;
 
-                smtp.Send(message);
-            }
-        }
-
-        // GET: Hiển thị form đặt lại mật khẩu qua email
-        public ActionResult ResetPassword(string email, string token)
-        {
-            var khachHang = db.KhachHangs.SingleOrDefault(k => k.Email == email && k.Token == token);
-
-            // Kiểm tra token hợp lệ và chưa hết hạn
-            if (khachHang == null || khachHang.TokenHetHan < DateTime.UtcNow)
-            {
-                // Token không hợp lệ hoặc đã hết hạn, chuyển hướng đến trang TokenInvalid
-                return RedirectToAction("TokenInvalid");
+                    smtp.Send(message);
+                }
             }
 
-            ViewBag.Email = email;
-            ViewBag.Token = token;
-            return View();
-        }
-
-
-        [HttpPost]
-        public ActionResult ResetPassword(string email, string token, string matKhauMoi, string xacNhanMatKhau)
-        {
-            var khachHang = db.KhachHangs.SingleOrDefault(k => k.Email == email && k.Token == token);
-
-            // Kiểm tra token hợp lệ và chưa hết hạn
-            if (khachHang == null || khachHang.TokenHetHan < DateTime.UtcNow)
+            // GET: Hiển thị form đặt lại mật khẩu qua email
+            public ActionResult ResetPassword(string email, string token)
             {
-                return RedirectToAction("TokenInvalid");
-            }
+                var khachHang = db.KhachHangs.SingleOrDefault(k => k.Email == email && k.Token == token);
 
-            if (matKhauMoi != xacNhanMatKhau)
-            {
-                ModelState.AddModelError("", "Mật khẩu mới và xác nhận không khớp!!");
+                // Kiểm tra token hợp lệ và chưa hết hạn
+                if (khachHang == null || khachHang.TokenHetHan < DateTime.UtcNow)
+                {
+                    // Token không hợp lệ hoặc đã hết hạn, chuyển hướng đến trang TokenInvalid
+                    return RedirectToAction("TokenInvalid");
+                }
+
                 ViewBag.Email = email;
                 ViewBag.Token = token;
                 return View();
             }
 
-            try
-            {
-                khachHang.MatKhau = matKhauMoi;
-                khachHang.Token = null;
-                db.SaveChanges();
 
-                ViewBag.ThongBao = "Đặt lại mật khẩu thành công. Bạn có thể đăng nhập lại!!";
-                return View("SuccessPassword");
-            }
-            catch (Exception ex)
+            [HttpPost]
+            public ActionResult ResetPassword(string email, string token, string matKhauMoi, string xacNhanMatKhau)
             {
-                ModelState.AddModelError("", "Lỗi lưu mật khẩu: " + ex.Message);
-                ViewBag.Email = email;
-                ViewBag.Token = token;
+                var khachHang = db.KhachHangs.SingleOrDefault(k => k.Email == email && k.Token == token);
+
+                // Kiểm tra token hợp lệ và chưa hết hạn
+                if (khachHang == null || khachHang.TokenHetHan < DateTime.UtcNow)
+                {
+                    return RedirectToAction("TokenInvalid");
+                }
+
+                if (matKhauMoi != xacNhanMatKhau)
+                {
+                    ModelState.AddModelError("", "Mật khẩu mới và xác nhận không khớp!!");
+                    ViewBag.Email = email;
+                    ViewBag.Token = token;
+                    return View();
+                }
+
+                try
+                {
+                    khachHang.MatKhau = matKhauMoi;
+                    khachHang.Token = null;
+                    db.SaveChanges();
+
+                    ViewBag.ThongBao = "Đặt lại mật khẩu thành công. Bạn có thể đăng nhập lại!!";
+                    return View("SuccessPassword");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Lỗi lưu mật khẩu: " + ex.Message);
+                    ViewBag.Email = email;
+                    ViewBag.Token = token;
+                    return View();
+                }
+
+            }
+
+            public ActionResult TokenInvalid()
+            {
                 return View();
-            }
-
         }
 
-        public ActionResult TokenInvalid()
-        {
-            return View();
-        }
-
-        public ActionResult SuccessPassword(string matKhauMoi, string xacNhanMatKhau)
-        {
-            // Kiểm tra và thực hiện logic reset mật khẩu
-
-            if (matKhauMoi == xacNhanMatKhau)
-            {
-                // Cập nhật mật khẩu vào cơ sở dữ liệu
-                // ...
-
-                return View("SuccessPassword");  // Gọi view SuccessPassword
-            }
-            else
-            {
-                // Nếu mật khẩu không khớp
-                ViewBag.Message = "Mật khẩu và xác nhận mật khẩu không khớp!!";
-                return View();
-            }
-        }
-
+            
         [HttpGet]
         public ActionResult Logout()
         {
