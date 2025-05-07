@@ -36,10 +36,21 @@
                     <td>@String.Format("{0:N0} đ", hd.TongTien)</td>
                     <td>@hd.TrangThai</td>
                     <td class="text-center">
+                        <!-- Nút Xem -->
                         <a href="@Url.Action("ChiTietHoaDon", "San_pham", new { id = hd.MaDH })"
                            class="btn btn-sm btn-info">
                             <i class="fas fa-eye"></i>
                         </a>
+
+                        <!-- Nếu trạng thái Pending thì cho hiện nút Hủy -->
+                        @if (hd.TrangThai == "Pending")
+                        {
+                            <a href="@Url.Action("ChiTietHoaDon", "San_pham", new { id = hd.MaDH, huy = true })"
+                               class="btn btn-sm btn-danger ms-2"
+                               onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng #@hd.MaDH không?');">
+                                <i class="fas fa-times"></i>
+                            </a>
+                        }
                     </td>
                 </tr>
             }

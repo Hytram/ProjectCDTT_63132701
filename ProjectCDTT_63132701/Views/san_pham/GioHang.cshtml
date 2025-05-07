@@ -151,7 +151,6 @@
 <script>
     $(document).ready(function () {
         $.getJSON("https://provinces.open-api.vn/api/", function (provinces) {
-            $('#tinhThanh').append('<option value="">-- Chọn Tỉnh/Thành --</option>');
             provinces.forEach(function (province) {
                 $('#tinhThanh').append(
                     `<option value="${province.code}" data-name="${province.name}">${province.name}</option>`

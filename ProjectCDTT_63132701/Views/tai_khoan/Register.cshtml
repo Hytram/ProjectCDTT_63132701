@@ -23,7 +23,6 @@
                 {
                     @Html.AntiForgeryToken()
                     <div class="row">
-                        <!-- Cột trái -->
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="hoTen">Họ và tên</label>
@@ -38,12 +37,7 @@
                                 <label for="matKhau">Mật khẩu</label>
                                 <input type="password" name="matKhau" class="form-control" id="matKhau" placeholder="Nhập mật khẩu" required />
                             </div>
-
-
-
                         </div>
-
-                        <!-- Cột phải -->
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="soDienThoai">Số điện thoại</label>
@@ -75,3 +69,19 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var message = '@TempData["Message"]';
+            if (message) {
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "timeOut": "4000"
+                };
+                toastr.success(message);
+            }
+        });
+    </script>
+}
