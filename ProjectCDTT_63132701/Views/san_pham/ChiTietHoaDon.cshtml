@@ -56,4 +56,15 @@
     <div class="d-flex justify-content-end mt-3">
         <h5>Tổng thanh toán: @Model.TongTien.ToString("N0") đ</h5>
     </div>
+
+    @if (Model.TrangThai == "Pending")
+    {
+        <form class="d-flex justify-content-center" action="@Url.Action("HuyDonHang", "San_pham")" method="post" onsubmit="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?');">
+            <input type="hidden" name="maDH" value="@Model.MaDH" />
+            <button type="submit" class="btn btn-danger mt-3">
+                <i class="fa-solid fa-xmark"></i> Hủy đơn hàng
+            </button>
+        </form>
+    }
+
 </div>

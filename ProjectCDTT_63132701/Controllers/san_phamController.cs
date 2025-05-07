@@ -396,7 +396,6 @@ namespace ProjectCDTN_63132701.Controllers
 
             var hoaDons = db.HoaDons
                             .Where(hd => hd.MaKH == maKhachHang)
-                            .Where(hd => hd.TrangThai == "Shipping")
                             .OrderByDescending(hd => hd.NgayTao)
                             .ToList();
 
@@ -413,13 +412,38 @@ namespace ProjectCDTN_63132701.Controllers
             var hoaDon = db.HoaDons
                 .Include(h => h.KhachHang)
                 .Include(h => h.ChiTietHoaDons.Select(ct => ct.SanPham)) 
-                .FirstOrDefault(g => g.MaKH == maKhachHang && g.MaDH == id && g.TrangThai == "Shipping");
+                .FirstOrDefault(g => g.MaKH == maKhachHang && g.MaDH == id);
 
             if (hoaDon == null)
             {
                 TempData["ErrorMessage"] = "Hiện quý khách không có đơn hàng nào!";
             }
             return View(hoaDon);
+        }
+
+        [HttpPost]
+        public ActionResult HuyDonHang(int maDH)
+        {
+            var hoaDon = db.HoaDons.FirstOrDefault(h => h.MaDH == maDH);
+            if (hoaDon == null)
+            {
+                TempData["ErrorMessage"] = "Không tìm thấy đơn hàng hoặc không thể hủy.";
+                return RedirectToAction("HoaDon");
+            }
+            var vanChuyen = db.VanChuyens.FirstOrDefault(v => v.MaDH == maDH);
+            var chiTietDonHang = db.ChiTietDonHangs.Where(c => c.MaDH == maDH);
+            var chiTietHoaDon = db.ChiTietHoaDons.Where(c => c.MaDH == maDH);
+            var donHang = db.DonHangs.FirstOrDefault(h => h.MaDH == maDH);
+
+            db.ChiTietDonHangs.RemoveRange(chiTietDonHang);
+            db.ChiTietHoaDons.RemoveRange(chiTietHoaDon);
+            db.VanChuyens.Remove(vanChuyen);
+            db.HoaDons.Remove(hoaDon);
+            db.DonHangs.Remove(donHang);
+            db.SaveChanges();
+
+            TempData["SuccessMessage"] = "Hủy đơn hàng thành công!";
+            return RedirectToAction("HoaDon");
         }
 
         [HttpPost]
