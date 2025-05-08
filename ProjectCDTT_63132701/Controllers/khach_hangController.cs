@@ -161,6 +161,7 @@ namespace ProjectCDTT_63132701.Controllers
             {
                 db.Entry(khachHang).State = EntityState.Modified;
                 db.SaveChanges();
+                ViewBag.Success = true;
                 return RedirectToAction("QLKH");
             }
             return View(khachHang);

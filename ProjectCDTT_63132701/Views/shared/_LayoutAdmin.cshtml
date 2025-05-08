@@ -67,8 +67,8 @@
                 </a>
             }
         </div>
-            </div>
-       
+    </div>
+
     <!-- MENU NAV -->
     <div class="nav-container">
         <ul class="nav_menu">
@@ -77,16 +77,16 @@
                 @Html.ActionLink("QLSP", "../San_pham/QLSP", new { @class = "nav-link" })
             </li>
             @*<li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Sản phẩm
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li>@Html.ActionLink("Nhẫn bạc", "Nhan", "san_pham", new { }, new { @class = "dropdown-item" })</li>
-                    <li>@Html.ActionLink("Dây chuyền bạc", "Day_Chuyen", "san_pham", new { }, new { @class = "dropdown-item" })</li>
-                    <li>@Html.ActionLink("Vòng tay bạc", "Lac_Tay", "san_pham", new { }, new { @class = "dropdown-item" })</li>
-                    <li>@Html.ActionLink("Bông tai bạc", "Bong_Tai", "san_pham", new { }, new { @class = "dropdown-item" })</li>
-                </ul>
-            </li>*@
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sản phẩm
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>@Html.ActionLink("Nhẫn bạc", "Nhan", "san_pham", new { }, new { @class = "dropdown-item" })</li>
+                        <li>@Html.ActionLink("Dây chuyền bạc", "Day_Chuyen", "san_pham", new { }, new { @class = "dropdown-item" })</li>
+                        <li>@Html.ActionLink("Vòng tay bạc", "Lac_Tay", "san_pham", new { }, new { @class = "dropdown-item" })</li>
+                        <li>@Html.ActionLink("Bông tai bạc", "Bong_Tai", "san_pham", new { }, new { @class = "dropdown-item" })</li>
+                    </ul>
+                </li>*@
 
             <li class="nav-item">
                 @Html.ActionLink("QLDH", "../Don_hang/QLDH", new { @class = "nav-link" })
@@ -158,3 +158,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+@RenderSection("Scripts", required: false)
