@@ -23,24 +23,60 @@
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.MaDH)
         <div class="row mt-4">
-            <!-- Thông tin Khách hàng -->
             <div class="col-md-6">
-                <p><strong>Họ Tên Khách Hàng:</strong> @Model.KhachHang.HoTen</p>
-                <p><strong>Email:</strong> @Model.KhachHang.Email</p>
-                <p><strong>Số điện thoại:</strong> @Model.KhachHang.SoDienThoai</p>
+                <div class="mb-3">
+                    @Html.Label("HoTen", "Họ Tên Khách Hàng", new { @class = "form-label" })
+                    @Html.TextBox("HoTen", Model.KhachHang.HoTen, new { @class = "form-control" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.Label("Email", "Email", new { @class = "form-label" })
+                    @Html.TextBox("Email", Model.KhachHang.Email, new { @class = "form-control" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.Label("SoDienThoai", "Số điện thoại", new { @class = "form-label" })
+                    @Html.TextBox("SoDienThoai", Model.KhachHang.SoDienThoai, new { @class = "form-control" })
+                </div>
             </div>
 
-            <!-- Thông tin Đơn hàng -->
             <div class="col-md-6">
-                <p><strong>Mã Đơn Hàng:</strong> @Model.MaDH</p>
-                <p><strong>Ngày Tạo Đơn:</strong> @(Model.NgayTao.HasValue ? Model.NgayTao.Value.ToString("dd/MM/yyyy") : "Không có thông tin")</p>
-                <p>
-                    <strong>Trạng Thái Đơn Hàng:</strong>
-                    @Html.DropDownListFor(model => model.DonHang.TrangThai, new SelectList(
-                 new List<string> { "Pending", "Confirmed", "Processing", "Shipping", "Completed", "Cancelled" },
-                 Model.DonHang.TrangThai), new { @class = "form-control" })
-                </p>
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.MaDH, "Mã Đơn Hàng", new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.MaDH, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MaDH, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="mb-3">
+                    @Html.Label("NgayTao", "Ngày Tạo Đơn", new { @class = "form-label" })
+                    @Html.TextBox("NgayTao", Model.NgayTao.HasValue ? Model.NgayTao.Value.ToString("dd/MM/yyyy") : "", new { @class = "form-control" })
+                </div>
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.DonHang.TrangThai, "Trạng Thái Đơn Hàng", new { @class = "form-label" })
+                    @Html.DropDownListFor(model => model.DonHang.TrangThai, new List<SelectListItem>
+                    {
+                        new SelectListItem { Value = "Pending", Text = "Chưa duyệt", Selected = Model.DonHang.TrangThai == "Pending" },
+                        new SelectListItem { Value = "Confirmed", Text = "Đã duyệt", Selected = Model.DonHang.TrangThai == "Confirmed" }
+                    }, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DonHang.TrangThai, "", new { @class = "text-danger" })
+                </div>
+
             </div>
+            <div class="modal fade" id="confirmOrderModal" tabindex="-1" aria-labelledby="confirmOrderModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmOrderModalLabel"></h5>
+                        </div>
+                        <div class="modal-body"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                            <button type="button" id="btnConfirmOrder" class="btn btn-primary">Xác nhận</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <h3>Chi Tiết Đơn Hàng</h3>
@@ -69,15 +105,57 @@
             <h4>Tổng Tiền: @String.Format("{0:N0} ₫", Model.TongTien) </h4>
         </div>
 
-        <!-- Form để chỉnh sửa thông tin đơn hàng -->
         <div class="text-center mt-4">
             <div class="d-inline-flex gap-2">
-                <button type="submit" class="btn-submit">
+                <button type="button" class="btn-submit" data-bs-toggle="modal" data-bs-target="#confirmOrderModal" data-action="save">
                     <i class="fa-solid fa-check"></i> Lưu thông tin
                 </button>
-
-                @Html.ActionLink("Hủy", "QLDH", null, new { @class = " btn-cancel text-decoration-none" })
+                <a href="javascript:void(0)" class="btn-cancel text-decoration-none" data-bs-toggle="modal" data-bs-target="#confirmOrderModal" data-action="cancel">
+                    Hủy
+                </a>
             </div>
         </div>
+
     }
 </div>
+<script>
+    $(document).ready(function () {
+    $('#confirmOrderModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var action = button.data('action');
+        var modal = $(this);
+
+        if (action === 'save') {
+            modal.find('.modal-title').text('Xác nhận lưu thông tin');
+            modal.find('.modal-body').text('Bạn có chắc chắn muốn lưu thông tin này?');
+            $('#btnConfirmOrder').text('Lưu thông tin');
+        } else if (action === 'cancel') {
+            modal.find('.modal-title').text('Xác nhận hủy');
+            modal.find('.modal-body').text('Bạn có chắc chắn muốn hủy?');
+            $('#btnConfirmOrder').text('Xác nhận');
+        }
+
+        $('#btnConfirmOrder').off('click').on('click', function () {
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                "positionClass": "toast-bottom-right",
+                "timeOut": 1000
+            };
+            if (action === 'save') {
+                toastr.success('Lưu thành công! Đang chuyển trang...');
+                setTimeout(function () {
+                    $('form').submit();
+                }, 1000);
+            } else if (action === 'cancel') {
+                toastr.info('Đã hủy! Đang quay lại...');
+                setTimeout(function () {
+                    window.location.href = '@Url.Action("QLDH", "Don_hang")';
+                }, 1000);
+            }
+            modal.modal('hide');
+        });
+    });
+});
+
+</script>

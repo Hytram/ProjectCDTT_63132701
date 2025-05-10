@@ -197,6 +197,7 @@
     <Compile Include="Models\KhachHang.cs">
       <DependentUpon>Model_63132701.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\KhachHangMetadata.cs" />
     <Compile Include="Models\LichSuTruyCap.cs">
       <DependentUpon>Model_63132701.tt</DependentUpon>
     </Compile>

@@ -186,9 +186,8 @@ namespace ProjectCDTT_63132701.Controllers
                 if (existingHoaDon != null)
                 {
                     existingHoaDon.DonHang.TrangThai = hoaDon.DonHang.TrangThai;
-                    // Bạn có thể cập nhật thêm các thông tin khác nếu cần.
-
                     db.SaveChanges();
+                    ViewBag.Success = true;
                     return RedirectToAction("QLDH", new { id = hoaDon.MaDH });
                 }
                 return HttpNotFound();

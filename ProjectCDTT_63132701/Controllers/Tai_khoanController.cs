@@ -36,20 +36,17 @@ namespace ProjectCDTT_63132701.Controllers
                 Session["CartCount"] = gioHang != null ? db.ChiTietGioHangs.Where(c => c.MaGH == gioHang.MaGH).Sum(c => (int?)c.SoLuong) ?? 0 : 0;
                 Session["FavoriteCount"] = db.YeuThiches.Count(y => y.MaKH == user.MaKH);
                 Session["ConfirmedOrderCount"] = db.HoaDons.Count(h => h.MaKH == user.MaKH && h.TrangThai == "Shipping");
-                
-                if (user.VaiTro == "Admin")
-                {
-                    return RedirectToAction("QLSP", "San_pham");
-                }
-                else
-                {
-                    return RedirectToAction("Index", "San_pham");
-                }
+
+                TempData["Message"] = "Đăng nhập thành công!";
+                TempData["UserRole"] = user.VaiTro.Trim();
+                return View();
             }
 
             ViewBag.Message = "Sai thông tin đăng nhập!!";
             return View();
         }
+
+
 
         public ActionResult Register()
         {
@@ -83,7 +80,7 @@ namespace ProjectCDTT_63132701.Controllers
                 db.SaveChanges();
 
                 TempData["Message"] = "Đăng ký thành công! Chuyển hướng đến đăng nhập.";
-                return RedirectToAction("Login");
+                return View();
             }
             catch (Exception ex)
             {

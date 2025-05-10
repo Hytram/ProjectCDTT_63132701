@@ -6,7 +6,10 @@
 }
 
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="~/Content/create.css" />
 </head>
 
@@ -84,10 +87,26 @@
 
         <div class="text-center mt-4">
             <div class="d-inline-flex gap-2">
-                <button type="submit" class="btn-submit">
-                    <i class="fa-solid fa-check"></i> Lưu sản phẩm
+                <button type="button" class="btn-submit" data-bs-toggle="modal" data-bs-target="#confirmOrderModal" data-action="save">
+                    <i class="fa-solid fa-check"></i> Lưu thông tin
                 </button>
-                @Html.ActionLink("Hủy", "QLSP", null, new { @class = " btn-cancel text-decoration-none" })
+                <a href="javascript:void(0)" class="btn-cancel text-decoration-none" data-bs-toggle="modal" data-bs-target="#confirmOrderModal" data-action="cancel">
+                    Hủy
+                </a>
+            </div>
+        </div>
+        <div class="modal fade" id="confirmOrderModal" tabindex="-1" aria-labelledby="confirmOrderModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmOrderModalLabel"></h5>
+                    </div>
+                    <div class="modal-body"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="button" id="btnConfirmOrder" class="btn btn-primary">Xác nhận</button>
+                    </div>
+                </div>
             </div>
         </div>
     }
@@ -108,5 +127,44 @@
                 this.value = this.value.replace(/[^0-9]/g, "");
             });
         }
+    });
+
+    $(document).ready(function () {
+        $('#confirmOrderModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var action = button.data('action');
+            var modal = $(this);
+
+            if (action === 'save') {
+                modal.find('.modal-title').text('Xác nhận lưu thông tin');
+                modal.find('.modal-body').text('Bạn có chắc chắn muốn lưu thông tin này?');
+                $('#btnConfirmOrder').text('Lưu thông tin');
+            } else if (action === 'cancel') {
+                modal.find('.modal-title').text('Xác nhận hủy');
+                modal.find('.modal-body').text('Bạn có chắc chắn muốn hủy?');
+                $('#btnConfirmOrder').text('Xác nhận');
+            }
+
+            $('#btnConfirmOrder').off('click').on('click', function () {
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-bottom-right",
+                    "timeOut": 1000
+                };
+            if (action === 'save') {
+                toastr.success('Lưu thành công! Đang chuyển trang...');
+                setTimeout(function () {
+                    $('form').submit();
+                }, 1000);
+            } else if (action === 'cancel') {
+                toastr.info('Đã hủy! Đang quay lại...');
+                setTimeout(function () {
+                    window.location.href = '@Url.Action("QLSP", "San_pham")';
+                }, 1000);
+            }
+            modal.modal('hide');
+            });
+        });
     });
 </script>

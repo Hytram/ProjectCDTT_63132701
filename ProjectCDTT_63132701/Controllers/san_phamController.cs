@@ -486,8 +486,7 @@ namespace ProjectCDTN_63132701.Controllers
 
             int wishlistCount = db.YeuThiches.Count(y => y.MaKH == maKhachHang.Value);
             Session["FavoriteCount"] = wishlistCount;
-
-            return Json(new { success = true, count = wishlistCount });
+            return Json(new { success = true, count = wishlistCount , message="Thêm vào wishlist thành công!"});
         }
 
 
@@ -532,7 +531,7 @@ namespace ProjectCDTN_63132701.Controllers
             int wishlistCount = db.YeuThiches.Count(y => y.MaKH == maKhachHang.Value);
             Session["FavoriteCount"] = wishlistCount;
 
-            return Json(new { success = true, count = wishlistCount });
+            return Json(new { success = true, count = wishlistCount, message = "Xóa khỏi wishlist thành công!" });
         }
 
         public JsonResult GetWishlistInfo()
