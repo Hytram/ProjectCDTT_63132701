@@ -95,38 +95,50 @@ namespace ProjectCDTT_63132701.Controllers
             return View(vc);
         }
 
-        // GET: Van_chuyen/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            VanChuyen vanChuyen = db.VanChuyens.Find(id);
-            if (vanChuyen == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.MaDH = new SelectList(db.DonHangs, "MaDH", "TrangThai", vanChuyen.MaDH);
-            return View(vanChuyen);
-        }
+       // GET: Van_chuyen/Edit/5
+public ActionResult Edit(int? id)
+{
+    if (id == null)
+    {
+        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+    }
+    VanChuyen vanChuyen = db.VanChuyens.Find(id);
+    if (vanChuyen == null)
+    {
+        return HttpNotFound();
+    }
 
+    ViewBag.MaDH = new SelectList(db.DonHangs, "MaDH", "TrangThai", vanChuyen.MaDH); // Đảm bảo giá trị MaDH được truyền lên.
+    return View(vanChuyen);
+}
         // POST: Van_chuyen/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MaVanChuyen,MaDH,DonViVanChuyen,TrangThai,NgayTao,ThoiGianGiao,ThoiGianNhan")] VanChuyen vanChuyen)
+        public ActionResult Edit(VanChuyen vanChuyen)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(vanChuyen).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("QLVC");
+                var existing = db.VanChuyens.Find(vanChuyen.MaVanChuyen);
+                if (existing != null)
+                {
+                    // Chỉ cập nhật trường được phép thay đổi
+                    existing.DonViVanChuyen = vanChuyen.DonViVanChuyen;
+                    existing.ThoiGianGiao = vanChuyen.ThoiGianGiao;
+                    existing.ThoiGianNhan = vanChuyen.ThoiGianNhan;
+
+                    db.SaveChanges();
+                    return RedirectToAction("QLVC");
+                }
+                return HttpNotFound();
             }
-            ViewBag.MaDH = new SelectList(db.DonHangs, "MaDH", "TrangThai", vanChuyen.MaDH);
+
             return View(vanChuyen);
         }
+
+
+
+
+
 
         // GET: Van_chuyen/Delete/5
         public ActionResult Delete(int? id)
@@ -150,25 +162,26 @@ namespace ProjectCDTT_63132701.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            VanChuyen vanChuyen = db.VanChuyens.Find(id);
+            var vanChuyen = db.VanChuyens.Find(id);
 
-            if (vanChuyen != null)
+            if (vanChuyen == null)
+            {
+                return HttpNotFound(); // Nếu không tìm thấy đơn vị vận chuyển
+            }
+
+            try
             {
                 db.VanChuyens.Remove(vanChuyen);
                 db.SaveChanges();
             }
-
-            return RedirectToAction("QLVC", "vanChuyen"); 
-        }
-
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            catch (Exception ex)
             {
-                db.Dispose();
+                // Log lỗi hoặc thông báo cho người dùng
+                ModelState.AddModelError("", "Không thể xóa đơn vị vận chuyển: " + ex.Message);
+                return View(vanChuyen); // Quay lại view với thông báo lỗi
             }
-            base.Dispose(disposing);
+
+            return RedirectToAction("QLVC", "Van_chuyen");
         }
     }
-}
+    }

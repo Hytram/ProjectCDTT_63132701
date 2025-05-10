@@ -18,27 +18,46 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
+
+        <!-- Giữ lại các giá trị không sửa đổi -->
         @Html.HiddenFor(model => model.MaVanChuyen)
+        @Html.HiddenFor(model => model.MaDH)
+        @Html.HiddenFor(model => model.TrangThai)
+        @Html.HiddenFor(model => model.NgayTao)
 
         <div class="row">
             <div class="col-md-6">
                 <div class="mb-3">
-                    @Html.LabelFor(model => model.MaDH, "Mã đơn hàng", new { @class = "form-label" })
-                    @Html.DropDownList("MaDH", null, htmlAttributes: new { @class = "form-select" })
-                    @Html.ValidationMessageFor(model => model.MaDH, "", new { @class = "text-danger" })
+                    @Html.Label("Mã đơn hàng", new { @class = "form-label" })
+                    <p class="form-control-plaintext">@Model.MaDH</p>
                 </div>
+                <div class="mb-3">
+                    @Html.LabelFor(model => model.TrangThai, "Trạng thái", new { @class = "form-label" })
+                    <p class="form-control-plaintext">
+                        @if (Model.TrangThai == "Pending")
+                        {
+                            @:Chưa duyệt
+                        }
+                        else if (Model.TrangThai == "Shipping")
+                        {
+                            @:Chờ Vận chuyển
+                        }
+                        else
+                        {
+                            @Model.TrangThai
+                        }
+                    </p>
 
+                </div>
                 <div class="mb-3">
                     @Html.LabelFor(model => model.DonViVanChuyen, "Đơn vị vận chuyển", new { @class = "form-label" })
-                    @Html.TextBoxFor(model => model.DonViVanChuyen, new { @class = "form-control" })
+                    @Html.DropDownListFor(
+                        model => model.DonViVanChuyen,
+                        new SelectList(new[] { "J&TExpress", "GiaoHangNhanh" }, Model.DonViVanChuyen),
+                        new { @class = "form-select" })
                     @Html.ValidationMessageFor(model => model.DonViVanChuyen, "", new { @class = "text-danger" })
                 </div>
 
-                <div class="mb-3">
-                    @Html.LabelFor(model => model.TrangThai, "Trạng thái", new { @class = "form-label" })
-                    @Html.TextBoxFor(model => model.TrangThai, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
-                </div>
             </div>
 
             <div class="col-md-6">
@@ -67,7 +86,6 @@
                 <button type="submit" class="btn-submit">
                     <i class="fa-solid fa-check"></i> Lưu thông tin
                 </button>
-
                 @Html.ActionLink("Hủy", "QLVC", null, new { @class = " btn-cancel text-decoration-none" })
             </div>
         </div>

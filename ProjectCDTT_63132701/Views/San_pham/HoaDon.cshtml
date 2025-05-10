@@ -34,7 +34,15 @@
                     <td>@hd.MaDH</td>
                     <td>@hd.NgayTao</td>
                     <td>@String.Format("{0:N0} đ", hd.TongTien)</td>
-                    <td>@hd.TrangThai</td>
+                    <td>
+                        @{
+                            string trangThaiHienThi = hd.TrangThai == "Pending" ? "Chưa duyệt"
+                                                    : hd.TrangThai == "Shipping" ? "Chờ Vận chuyển"
+                                                    : hd.TrangThai;
+                        }
+                        @trangThaiHienThi
+                    </td>
+
                     <td class="text-center">
                         <!-- Nút Xem -->
                         <a href="@Url.Action("ChiTietHoaDon", "San_pham", new { id = hd.MaDH })"
