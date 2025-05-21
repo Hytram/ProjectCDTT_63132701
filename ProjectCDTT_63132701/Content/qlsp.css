@@ -42,3 +42,16 @@ td {
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         color: white;
     }
+.modal-btn {
+    background-color: #F7858F;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+    .modal-btn:hover {
+        background-color: #e06c78;
+        color: white;
+    }

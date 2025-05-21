@@ -15,19 +15,28 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-wrapper">
-        <a href="javascript:history.back()" class="back-button">
-            <i class="fa-solid fa-chevron-left"></i> Quay lại
-        </a>
-        <h2 class="form-title">Thêm sản phẩm mới</h2>
+<div class="form-wrapper">
+    <a href="javascript:history.back()" class="back-button">
+        <i class="fa-solid fa-chevron-left"></i> Quay lại
+    </a>
+    <h2 class="form-title">Thêm sản phẩm mới</h2>
 
-        <div class="form-row">
-            <div class="form-group">
-                @Html.LabelFor(m => m.TenSP, "Tên sản phẩm :")
-                @Html.TextBoxFor(m => m.TenSP, new { @class = "long-input" })
-            </div>
+    <div class="form-row">
+        <div class="form-group">
+            @Html.LabelFor(m => m.TenSP, "Tên sản phẩm :")
+            @Html.TextBoxFor(m => m.TenSP, new { @class = "long-input" })
         </div>
-
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            @Html.LabelFor(m => m.MoTa, "Mô tả sản phẩm :")
+            @Html.TextAreaFor(m => m.MoTa, new { @class = "form-label", rows = "3", placeholder = "Nhập mô tả chi tiết về sản phẩm..." })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.MaLoaiSP, "Loại sản phẩm :")
+            @Html.DropDownListFor(m => m.MaLoaiSP, (SelectList)ViewBag.MaLoaiSP, "-- Chọn danh mục --")
+        </div>
+    </div>
         <div class="form-row">
             <div class="form-group radio-group">
                 @Html.Label("Loại bạc :")
@@ -46,10 +55,7 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group">
-                @Html.LabelFor(m => m.MaLoaiSP, "Loại sản phẩm :")
-                @Html.DropDownListFor(m => m.MaLoaiSP, (SelectList)ViewBag.MaLoaiSP, "-- Chọn danh mục --")
-            </div>
+            
         </div>
 
         <div class="form-row">
@@ -73,22 +79,22 @@
             </div>
         </div>
     </div>
-}
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const donGiaInput = document.getElementById("DonGia");
-        const soLuongInput = document.getElementById("SoLuong");
+    }
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const donGiaInput = document.getElementById("DonGia");
+            const soLuongInput = document.getElementById("SoLuong");
 
-        if (donGiaInput) {
-            donGiaInput.addEventListener("input", function () {
-                this.value = this.value.replace(/[^0-9]/g, "");
-            });
-        }
+            if (donGiaInput) {
+                donGiaInput.addEventListener("input", function () {
+                    this.value = this.value.replace(/[^0-9]/g, "");
+                });
+            }
 
-        if (soLuongInput) {
-            soLuongInput.addEventListener("input", function () {
-                this.value = this.value.replace(/[^0-9]/g, "");
-            });
-        }
-    });
-</script>
+            if (soLuongInput) {
+                soLuongInput.addEventListener("input", function () {
+                    this.value = this.value.replace(/[^0-9]/g, "");
+                });
+            }
+        });
+    </script>

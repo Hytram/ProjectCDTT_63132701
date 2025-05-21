@@ -64,24 +64,26 @@
 </div>
 @section Scripts {
     <script>
-    function togglePasswordVisibility() {
-        const passwordField = document.getElementById("password");
-        const eyeIcon = document.getElementById("eye-icon");
+        function togglePasswordVisibility() {
+            const passwordField = document.getElementById("password");
+            const eyeIcon = document.getElementById("eye-icon");
 
-        if (passwordField.type === "password") {
-            passwordField.type = "text";
-            eyeIcon.classList.remove("fa-eye");
-            eyeIcon.classList.add("fa-eye-slash");
-        } else {
-            passwordField.type = "password";
-            eyeIcon.classList.remove("fa-eye-slash");
-            eyeIcon.classList.add("fa-eye");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                eyeIcon.classList.remove("fa-eye");
+                eyeIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordField.type = "password";
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye");
+            }
         }
-    }
-     $(document).ready(function () {
-        @if (TempData["Message"] != null)
-        {
-            <text>
+
+        $(document).ready(function () {
+            @* Thông báo đăng nhập thành công *@
+            @if (TempData["Message"] != null)
+            {
+                <text>
                 toastr.options = {
                     "closeButton": true,
                     "progressBar": true,
@@ -97,8 +99,24 @@
                         window.location.href = '@Url.Action("Index", "San_pham")';
                     }
                 }, 1000);
-            </text>
-        }
-    });
+                </text>
+            }
+
+            @* Thông báo đăng nhập thất bại *@
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <text>
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true,
+                    "positionClass": "toast-bottom-right",
+                    "timeOut": 3000
+                };
+                toastr.error('@TempData["ErrorMessage"]');
+                </text>
+            }
+        });
     </script>
+}
+
 }

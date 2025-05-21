@@ -137,7 +137,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                                <button type="button" id="btnConfirmOrder" class="btn btn-primary">Xác nhận</button>
+                                <button type="button" id="btnConfirmOrder" class="btn modal-btn">Xác nhận</button>
                             </div>
                         </div>
                     </div>
@@ -147,6 +147,7 @@
         }
     </div>
 </div>
+
 
 <script>
     $(document).ready(function () {
@@ -207,16 +208,19 @@
 
         $('form').on('submit', function () {
             const diaChiCuThe = $('#diaChiCuThe').val();
-
             $('#inputDiaChiChiTiet').val(diaChiCuThe);
         });
 
-        $('#btnTinhGia').on('click', function () {
+        $('#btnTinhGia').on('click', function (e) {
+            e.preventDefault();
+
             const tinhThanh = $('#inputTinhThanh').val();
             const donViVanChuyen = $('#DonViVanChuyen').val();
-            const diaChiChiTiet = $('#diaChiChiTiet').val();
 
-            const totalPrice = @totalPrice;
+            if (!tinhThanh || !donViVanChuyen) {
+                toastr.error("Vui lòng chọn Tỉnh/Thành và Đơn vị vận chuyển trước khi tính giá.");
+                return;
+            }
 
             $.ajax({
                 url: '@Url.Action("GetShippingCost", "San_pham")',
@@ -231,43 +235,60 @@
                         const maGiaVanChuyen = response.maGiaVanChuyen;
                         $('#shippingCost').text(shippingCost.toFixed(0) + ' đ');
 
+                        const totalPrice = @totalPrice;
                         const finalTotal = totalPrice + shippingCost;
                         $('#finalTotal').text(finalTotal.toFixed(0) + ' đ');
                         $('#inputMaGiaVanChuyen').val(maGiaVanChuyen);
-                        $('#inputGiaVanChuyen').val(finalTotal.toFixed(0));
+                        $('#inputGiaVanChuyen').val(shippingCost.toFixed(0)); // lưu phí vận chuyển thực tế
                     } else {
-                        alert(response.message);
+                        toastr.error(response.message);
                     }
+                },
+                error: function () {
+                    toastr.error("Có lỗi xảy ra khi tính giá vận chuyển.");
                 }
             });
         });
-    });
 
-    $('#openConfirmModal').on('click', function () {
-        const finalTotal = $('#finalTotal').text();
-        $('#modalTotalPrice').text(finalTotal);
-        $('#confirmOrderModal').modal('show');
-    });
+        $('#openConfirmModal').on('click', function () {
+            const tinhThanh = $('#inputTinhThanh').val();
+            const quanHuyen = $('#inputQuanHuyen').val();
+            const phuongXa = $('#inputPhuongXa').val();
+            const donViVanChuyen = $('#inputDonViVC').val();
+            const giaVanChuyen = parseFloat($('#inputGiaVanChuyen').val());
 
-    $('#btnConfirmOrder').on('click', function () {
-        $('#confirmOrderModal').modal('hide');
-        $('form').submit();
+            if (!tinhThanh || !quanHuyen || !phuongXa || !donViVanChuyen || !giaVanChuyen || giaVanChuyen <= 0) {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    positionClass: "toast-bottom-right",
+                    timeOut: 4000
+                };
+                toastr.error("Bạn chưa chọn địa chỉ hoặc chưa tính phí vận chuyển.");
+                return;
+            }
+
+
+            const finalTotal = $('#finalTotal').text();
+            $('#modalTotalPrice').text(finalTotal);
+            $('#confirmOrderModal').modal('show');
+        });
+
+        $('#btnConfirmOrder').on('click', function () {
+            $('#confirmOrderModal').modal('hide');
+            $('form').submit();
+        });
+
+        // Hiển thị toastr từ TempData
+        var message = '@TempData["Message"]';
+        if (message) {
+            toastr.options = {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-bottom-right",
+                timeOut: 4000
+            };
+            toastr.success(message);
+        }
     });
 </script>
-
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            var message = '@TempData["Message"]';
-            if (message) {
-                toastr.options = {
-                    "closeButton": true,
-                    "progressBar": true,
-                    "positionClass": "toast-bottom-right",
-                    "timeOut": "4000"
-                };
-                toastr.success(message);
-            }
-        });
-    </script>
-}

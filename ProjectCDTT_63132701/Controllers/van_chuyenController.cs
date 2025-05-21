@@ -148,7 +148,10 @@ public ActionResult Edit(int? id)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            VanChuyen vanChuyen = db.VanChuyens.Find(id);
+            var vanChuyen = db.VanChuyens.
+                Include(vc => vc.DonHang).
+                FirstOrDefault(vc => vc.MaVanChuyen == id);
+
             if (vanChuyen == null)
             {
                 return HttpNotFound();
@@ -163,6 +166,8 @@ public ActionResult Edit(int? id)
         public ActionResult DeleteConfirmed(int id)
         {
             var vanChuyen = db.VanChuyens.Find(id);
+            var donHang = db.DonHangs.Find(vanChuyen.MaDH);
+            var hoaDon = db.HoaDons.Find(vanChuyen.MaDH);
 
             if (vanChuyen == null)
             {
@@ -171,6 +176,8 @@ public ActionResult Edit(int? id)
 
             try
             {
+                db.DonHangs.Remove(donHang);
+                db.HoaDons.Remove(hoaDon);
                 db.VanChuyens.Remove(vanChuyen);
                 db.SaveChanges();
             }

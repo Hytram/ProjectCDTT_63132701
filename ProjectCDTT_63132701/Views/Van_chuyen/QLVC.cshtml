@@ -56,7 +56,16 @@
                     }
                 </td>
 
-                <td>@Html.DisplayFor(modelItem => item.DonViVanChuyen)</td>
+                <td>
+                    @if (item.DonViVanChuyen == "J&TExpress")
+                    {
+                        @:J&TExpress
+                    }
+                    else if (item.DonViVanChuyen == "GiaoHangNhanh")
+                    {
+                        @:Giao hàng nhanh
+                    }
+                </td>
                 <td>@String.Format("{0:N0} đ", item.GiaVanChuyen)</td>
 
                 <td>

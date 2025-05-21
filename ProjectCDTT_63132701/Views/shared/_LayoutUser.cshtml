@@ -11,6 +11,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
 
 </head>
 <body>
@@ -145,14 +148,14 @@
                 <h5>GỌI MUA HÀNG <span>(Phím 1) (8:00 - 21:00)</span></h5>
                 <div class="footer-contact">
                     <i class="fas fa-phone-alt"></i>
-                    <p>1900 000 123</p>
+                    <p>1900 123 123</p>
                 </div>
                 <p>Tất cả các ngày trong tuần</p>
 
                 <h5>GÓP Ý, KHIẾU NẠI <span>(Phím 3) (8:00 - 21:00)</span></h5>
                 <div class="footer-contact">
                     <i class="fas fa-phone-alt"></i>
-                    <p>1900 000 123</p>
+                    <p>1900 123 123</p>
                 </div>
                 <p>Tất cả các ngày trong tuần</p>
             </div>
@@ -166,22 +169,32 @@
                     <p>Giờ hoạt động: 8:00 ~ 21:00</p>
                 </div>
                 <div class="footer-socials">
-                    <i class="fab fa-facebook"></i>
-                    <i class="fab fa-instagram"></i>
-                    <i class="fab fa-youtube"></i>
-                    <i class="fab fa-zalo"></i>
-                    <i class="fab fa-tiktok"></i>
+                    <a href="https://www.facebook.com/hieuvangkimyen/?locale=vi_VN" target="_blank">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+
+                    <a href="https://www.instagram.com/hy.traam?..." target="_blank">
+                        <i class="fab fa-instagram" style="color: #C13584; font-size: 24px;"></i>
+                    </a>
+
+                    <a href="https://www.tiktok.com/vi-VN/" target="_blank">
+                        <i class="fab fa-tiktok" style="color: black;"></i>
+                    </a>
+
+                    <a href="https://www.youtube.com/" target="_blank">
+                        <i class="fab fa-youtube" style="color: red;"></i>
+                    </a>
+
                 </div>
 
             </div>
 
             <!-- Fanpage -->
             <div class="footer-section">
-                <h5>HỆ THỐNG SHOWROOM</h5>
-                <img src="~/Images/shop1.jpg" alt="Hệ thống showroom">
-
+                <h5 id="showroomBtn" style="cursor:pointer;">VỊ TRÍ SHOWROOM</h5>
+                <div id="map" style="height: 200px; width: 90%; margin-top:20px;"></div>
             </div>
-        </div>
+
     </footer>
 
 
@@ -250,8 +263,37 @@
     });
 
     </script>
+    <script>
+        let map; // biến toàn cục lưu bản đồ
+        const lat = 12.258742690539655;
+        const lon = 109.09995430472334;
+
+        function initMap() {
+            if (!map) {
+                map = L.map('map').setView([lat, lon], 15);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '&copy; OpenStreetMap contributors'
+                }).addTo(map);
+                L.marker([lat, lon]).addTo(map)
+                    .bindPopup('Showroom của chúng tôi ở đây!')
+                    .openPopup();
+            }
+        }
+
+        $(document).ready(function () {
+            initMap(); // Tự động khởi tạo bản đồ ngay khi trang tải
+
+            $("#showroomBtn, #showroomImg").click(function () {
+                $("#map").toggle();
+            });
+        });
+
+    </script>
 
 
+    </script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
-@RenderSection("Scripts", required: false)
+

@@ -28,9 +28,16 @@ body {
 }
 .long-input {
     width: 100%;
-    max-width: 87%;
+    max-width: 96%; 
     box-sizing: border-box;
 }
+.form-group textarea {
+    width: 100%; /* Chiếm toàn bộ chiều ngang */
+    height: 93px; /* Giữ chiều cao cố định */
+    resize: none; /* Ngừng khả năng thay đổi kích thước của textarea */
+    overflow-y: auto;
+}
+
 
 
 .form-title {
@@ -56,25 +63,27 @@ body {
     
 }
 
-    .form-group label {
-        font-size: 16px;
-        margin-bottom: 6px;
-        color: #333;
+.form-group label {
+    font-size: 16px;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 10px 12px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+}
+    .form-group textarea {
+        height: 80px !important;
+        resize: none !important;
+        overflow-y: auto !important;
     }
 
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        padding: 10px 12px;
-        font-size: 15px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        width: 100%;
-    }
-
-    .form-group textarea {
-        resize: vertical;
-    }
 
 .radio-group {
     flex-direction: row;
@@ -83,12 +92,12 @@ body {
     margin-top: 8px;
 }
 
-    .radio-group label {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 15px;
-    }
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+}
 
 .btn-submit {
     margin-left: 210px;
@@ -100,11 +109,22 @@ body {
     transition: background-color 0.3s ease;
     margin-bottom: 50px;
 }
-
-    .btn-submit:hover {
-        background-color: #e06c78;
-        color: white;
-    }
+.modal-btn {
+    background-color: #F7858F;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+.modal-btn:hover {
+    background-color: #e06c78;
+    color: white;
+}
+.btn-submit:hover {
+    background-color: #e06c78;
+    color: white;
+}
 .btn-cancel {
     margin-right: 290px;
     background-color: #b0bec5;
@@ -117,10 +137,10 @@ body {
     margin-bottom: 50px;
 }
 
-    .btn-cancel:hover {
-        background-color: #90a4ae;
-        color: white;
-    }
+.btn-cancel:hover {
+    background-color: #90a4ae;
+    color: white;
+}
 
 .btn-new {
     background-color: #F7858F;
@@ -136,10 +156,10 @@ body {
 }
 
 
-    .btn-new:hover {
-        background-color: #e06c78;
-        color: white;
-    } 
+.btn-new:hover {
+    background-color: #e06c78;
+    color: white;
+} 
 
 .form-wrapper .form-control,
 .form-wrapper .form-select,
@@ -157,13 +177,13 @@ body {
     align-items: center;
 }
 
-    .action-buttons .btn {
-        flex: 1;
-        min-width: 150px;
-        padding: 10px 20px;
-        font-weight: 500;
-        border-radius: 8px;
-    }
+.action-buttons .btn {
+    flex: 1;
+    min-width: 150px;
+    padding: 10px 20px;
+    font-weight: 500;
+    border-radius: 8px;
+}
 .row p {
     margin-bottom: 10px;
     font-size: 16px;

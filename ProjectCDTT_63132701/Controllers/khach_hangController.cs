@@ -49,7 +49,7 @@ namespace ProjectCDTT_63132701.Controllers
         {
             if (ModelState.IsValid)
             {
-                int maKhachHang = (int)Session["UserId"]; // đảm bảo lấy đúng khách hàng đang đăng nhập
+                int maKhachHang = (int)Session["UserId"];
 
                 var existingKhachHang = db.KhachHangs.SingleOrDefault(kh => kh.MaKH == maKhachHang);
 
@@ -62,7 +62,7 @@ namespace ProjectCDTT_63132701.Controllers
                     try
                     {
                         db.SaveChanges();
-                        TempData["Message"]="Chỉnh sửa thành công!";
+                        TempData["Message"] = "Chỉnh sửa thành công!";
                         return RedirectToAction("EditProfile", "Khach_hang");
                     }
                     catch (Exception ex)
@@ -78,6 +78,7 @@ namespace ProjectCDTT_63132701.Controllers
 
             return View(khachHang);
         }
+
 
 
 
@@ -129,7 +130,7 @@ namespace ProjectCDTT_63132701.Controllers
             {
                 db.KhachHangs.Add(khachHang);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("QLKH");
             }
 
             return View(khachHang);

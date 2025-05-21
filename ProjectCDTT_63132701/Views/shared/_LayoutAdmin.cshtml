@@ -13,7 +13,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
 </head>
 <body>
     <!-- HEADER -->
@@ -29,7 +30,7 @@
             <div class="header-center">
                 @*<a href="@Url.Action("Index", "san_pham")">*@
                 <img src="~/Images/logo.png" alt="Logo" style="cursor: pointer;">
-                
+
 
             </div>
 
@@ -135,27 +136,128 @@
                     <p>Giờ hoạt động: 8:00 ~ 21:00</p>
                 </div>
                 <div class="footer-socials">
-                    <i class="fab fa-facebook"></i>
-                    <i class="fab fa-instagram"></i>
-                    <i class="fab fa-youtube"></i>
-                    <i class="fab fa-zalo"></i>
-                    <i class="fab fa-tiktok"></i>
+                    <a href="https://www.facebook.com/hieuvangkimyen/?locale=vi_VN" target="_blank">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+
+                    <a href="https://www.instagram.com/hy.traam?..." target="_blank">
+                        <i class="fab fa-instagram" style="color: #C13584; font-size: 24px;"></i>
+                    </a>
+
+                    <a href="https://www.tiktok.com/vi-VN/" target="_blank">
+                        <i class="fab fa-tiktok" style="color: black;"></i>
+                    </a>
+
+                    <a href="https://www.youtube.com/" target="_blank">
+                        <i class="fab fa-youtube" style="color: red;"></i>
+                    </a>
                 </div>
 
             </div>
 
             <!-- Fanpage -->
             <div class="footer-section">
-                <h5>HỆ THỐNG SHOWROOM</h5>
-                <img src="~/Images/shop1.jpg" alt="Hệ thống showroom">
-
+                <h5 id="showroomBtn" style="cursor:pointer;">VỊ TRÍ SHOWROOM</h5>
+                <div id="map" style="height: 200px; width: 90%; margin-top:20px;"></div>
             </div>
         </div>
     </footer>
 
-
     <!-- Bootstrap JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        $.get('@Url.Action("GetWishlistInfo", "San_pham")', function (response) {
+            if (response.success) {
+                $("#wishlist-count").text(response.count);
+                $(".btn-favorite").each(function () {
+                    var productId = $(this).data("id");
+                    if (response.wishlist.includes(productId)) {
+                        $(this).find("i").removeClass("fa-regular").addClass("fa-solid").css("color", "red");
+                    }
+                });
+            }
+        });
+        $(document).on("click", ".btn-favorite", function (e) {
+            e.preventDefault();
+            var btn = $(this);
+            var maSP = btn.data("id");
+
+            $.ajax({
+                url: '@Url.Action("AddToWishlist", "San_pham")',
+                type: 'POST',
+                data: { MaSP: maSP },
+                success: function (response) {
+                    $("#wishlist-count").text(response.count);
+                    btn.find("i").removeClass("fa-regular").addClass("fa-solid").css("color", "red");
+                },
+                error: function () {
+                    alert("Có lỗi xảy ra, vui lòng thử lại.");
+                }
+            });
+        });
+    });
+
+    $('#searchInput').on('input', function () {
+        var keyword = $(this).val();
+        if (keyword.length >= 1) {
+            $.ajax({
+                url: '@Url.Action("SearchProduct", "San_pham")',
+                data: { keyword: keyword },
+                success: function (data) {
+                    var resultHtml = '';
+                    if (data.length > 0) {
+                        resultHtml += '<ul class="list-group">';
+                        $.each(data, function (i, sp) {
+                            resultHtml += '<li class="list-group-item">';
+                            resultHtml += '<a href="/san_pham/ChiTietSanPham/' + sp.MaSP + '" style="text-decoration: none; color: black">';
+                            resultHtml += '<img src="/Images/' + sp.AnhSanPham + '" alt="" style="width:30px; height:30px; margin-right:10px;">';
+                            resultHtml += sp.TenSP + '</a></li>';
+                        });
+                        resultHtml += '</ul>';
+                    } else {
+                        resultHtml = '<p class="text-muted m-2">Không tìm thấy sản phẩm</p>';
+                    }
+                    $('#searchResult').html(resultHtml).fadeIn();
+                }
+            });
+        } else {
+            $('#searchResult').fadeOut().empty();
+        }
+    });
+
+    </script>
+    <script>
+        let map; // biến toàn cục lưu bản đồ
+        const lat = 12.258742690539655;
+        const lon = 109.09995430472334;
+
+        function initMap() {
+            if (!map) {
+                map = L.map('map').setView([lat, lon], 15);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 19,
+                    attribution: '&copy; OpenStreetMap contributors'
+                }).addTo(map);
+                L.marker([lat, lon]).addTo(map)
+                    .bindPopup('Showroom của chúng tôi ở đây!')
+                    .openPopup();
+            }
+        }
+
+        $(document).ready(function () {
+            initMap(); // Tự động khởi tạo bản đồ ngay khi trang tải
+
+            $("#showroomBtn, #showroomImg").click(function () {
+                $("#map").toggle();
+            });
+        });
+
+    </script>
+
+
+    </script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
-@RenderSection("Scripts", required: false)

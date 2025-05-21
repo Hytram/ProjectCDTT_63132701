@@ -42,7 +42,7 @@ namespace ProjectCDTT_63132701.Controllers
                 return View();
             }
 
-            ViewBag.Message = "Sai thông tin đăng nhập!!";
+            TempData["ErrorMessage"] = "Sai thông tin đăng nhập!!";
             return View();
         }
 
@@ -107,19 +107,34 @@ namespace ProjectCDTT_63132701.Controllers
             var user = db.KhachHangs.SingleOrDefault(u => u.Email == email);
             if (user != null)
             {
-                string token = Guid.NewGuid().ToString();
-                user.Token = token;
-                user.TokenHetHan = DateTime.UtcNow.AddHours(1); 
-                db.SaveChanges();
+                try
+                {
+                    string token = Guid.NewGuid().ToString();
+                    user.Token = token;
+                    user.TokenHetHan = DateTime.UtcNow.AddHours(1);
+                    db.SaveChanges();
 
-                string resetLink = Url.Action("ResetPassword", "tai_khoan", new { email = user.Email, token = token }, Request.Url.Scheme);
-    
-                EmailService.Send(email, "Đặt lại mật khẩu", $"Nhấn vào đây để đặt lại mật khẩu: <a href='{resetLink}'>Reset mật khẩu</a>");
+                    var scheme = Request?.Url?.Scheme ?? "https";
+                    string resetLink = Url.Action("ResetPassword", "tai_khoan", new { email = user.Email, token = token }, scheme);
+
+                    EmailService.Send(email, "Đặt lại mật khẩu", $"Nhấn vào đây để đặt lại mật khẩu: <a href='{resetLink}'>Reset mật khẩu</a>");
+
+                    ViewBag.Message = "Vui lòng kiểm tra email, bạn sẽ nhận được hướng dẫn qua email!!";
+                }
+                catch (Exception )
+                {
+                    ViewBag.Message = null;
+                    TempData["Error"] = "Gửi mail thất bại!" ;
+                }
+            }
+            else
+            {
+                TempData["Error"] = "Email không tồn tại trong hệ thống!";
             }
 
-            ViewBag.Message = "Vui lòng kiểm tra email, bạn sẽ nhận được hướng dẫn qua email!!";
             return View();
         }
+
 
 
         public static class EmailService

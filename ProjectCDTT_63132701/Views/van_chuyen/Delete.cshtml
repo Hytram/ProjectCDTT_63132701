@@ -35,13 +35,14 @@
                 <dd class="col-sm-9">@Model.ThoiGianNhan</dd>
 
                 <dt class="col-sm-3">Trạng thái đơn hàng:</dt>
-                <dd class="col-sm-9">@Model.DonHang?.TrangThai</dd>
+                <dd class="col-sm-9"> @Model.DonHang?.TrangThai </dd>
+
             </dl>
 
             @using (Html.BeginForm("Delete", "Van_chuyen", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
-                @Html.HiddenFor(model => model.MaVanChuyen)
+                @Html.HiddenFor(model => model.MaDH)
 
                 <div class="d-flex justify-content-center gap-3 mt-4">
                     <button type="submit" class="btn-submit">

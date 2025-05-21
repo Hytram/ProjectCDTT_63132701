@@ -52,7 +52,7 @@
                     }
                 </td>
                 <td>
-                    <form action="@Url.Action("DuyetDonHang", "Don_hang")" method="post" style="display:inline;">
+                    <form id="form-@item.MaDH" action="@Url.Action("DuyetDonHang", "Don_hang")" method="post" style="display:inline;">
                         @Html.AntiForgeryToken()
                         <input type="hidden" name="id" value="@item.MaDH" />
 
@@ -60,6 +60,7 @@
                                 class="openConfirmModal btn @(item.TrangThai == "Confirmed" ? "btn-success" : "btn-secondary") btn-sm"
                                 data-title="@(item.TrangThai == "Confirmed" ? "Xác nhận hủy duyệt đơn hàng" : "Xác nhận duyệt đơn hàng")"
                                 data-message="@(item.TrangThai == "Confirmed" ? "Bạn có chắc chắn muốn hủy duyệt đơn hàng này không?" : "Bạn có chắc chắn muốn duyệt đơn hàng này không?")"
+                                data-form="form-@item.MaDH"
                                 title="@(item.TrangThai == "Confirmed" ? "Hủy duyệt" : "Duyệt đơn")">
                             <i class="fa-solid fa-check"></i>
                         </button>
@@ -74,7 +75,7 @@
                                 <div class="modal-body"></div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                                    <button type="button" id="btnConfirmOrder" class="btn btn-primary">Xác nhận</button>
+                                    <button type="button" id="btnConfirmOrder" class="btn modal-btn">Xác nhận</button>
                                 </div>
                             </div>
                         </div>
@@ -103,16 +104,16 @@
 <div id="pagination" class="mt-3"></div>
 
 <script>
-    setTimeout(function () {
-        var message = document.getElementById("successMessage");
-        if (message) {
-            message.style.transition = "opacity 0.5s ease";
-            message.style.opacity = 0;
-            setTimeout(function () {
-                message.remove();
-            }, 500);
-        }
-    }, 3000);
+    //setTimeout(function () {
+    //    var message = document.getElementById("successMessage");
+    //    if (message) {
+    //        message.style.transition = "opacity 0.5s ease";
+    //        message.style.opacity = 0;
+    //        setTimeout(function () {
+    //            message.remove();
+    //        }, 500);
+    //    }
+    //}, 3000);
 
     $(document).ready(function () {
         var itemsPerPage = 10;
@@ -139,7 +140,7 @@
     $(document).on('click', '.openConfirmModal', function () {
         var title = $(this).data('title');
         var message = $(this).data('message');
-
+        currentFormId = $(this).data('form');
         $('#confirmOrderModalLabel').text(title);
         $('#confirmOrderModal .modal-body').text(message);
 
@@ -150,7 +151,9 @@
 
     $('#btnConfirmOrder').on('click', function () {
         $('#confirmOrderModal').modal('hide');
-        $('form').submit();
+        if (currentFormId) {
+            $('#' + currentFormId).submit();
+        }
     });
 </script>
 @section Scripts {

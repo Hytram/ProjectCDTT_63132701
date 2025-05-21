@@ -36,35 +36,50 @@
                     @Html.TextBoxFor(model => model.MaDH, null, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
                     @Html.ValidationMessageFor(model => model.MaDH, "", new { @class = "text-danger" })
                 </div>
+                @*<div class="mb-3">
+            @Html.LabelFor(model => model.TrangThai, "Trạng thái", new { @class = "form-label" })
+            <p class="form-control-plaintext">
+                @if (Model.TrangThai == "Pending")
+                {
+                    @:Chưa duyệt
+                }
+                else if (Model.TrangThai == "Shipping")
+                {
+                    @:Chờ Vận chuyển
+                }
+                else
+                {
+                    @Model.TrangThai
+                }
+            </p>
+
+        </div>*@
                 <div class="mb-3">
                     @Html.LabelFor(model => model.TrangThai, "Trạng thái", new { @class = "form-label" })
-                    <p class="form-control-plaintext">
-                        @if (Model.TrangThai == "Pending")
-                        {
-                            @:Chưa duyệt
-                        }
-                        else if (Model.TrangThai == "Shipping")
-                        {
-                            @:Chờ Vận chuyển
-                        }
-                        else
-                        {
-                            @Model.TrangThai
-                        }
-                    </p>
-
+                    @Html.TextBoxFor(model => model.TrangThai, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
                 </div>
-                <div class="mb-3">
+
+                @*<div class="mb-3">
                     @Html.LabelFor(model => model.DonViVanChuyen, "Đơn vị vận chuyển", new { @class = "form-label" })
                     @Html.TextBoxFor(model => model.DonViVanChuyen, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.DonViVanChuyen, "", new { @class = "text-danger" })
-                </div>
+                </div>*@
 
                 <div class="mb-3">
-                    @Html.LabelFor(model => model.TrangThai, "Trạng thái", new { @class = "form-label" })
-                    @Html.TextBoxFor(model => model.TrangThai, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
+                    @Html.LabelFor(model => model.DonViVanChuyen, "Đơn vị vận chuyển", new { @class = "form-label" })
+                    @Html.DropDownListFor(model => model.DonViVanChuyen, new List<SelectListItem>
+                    {
+                        new SelectListItem { Value = "J&TExpress", Text = "J&TExpress", Selected = Model.DonViVanChuyen == "J&TExpress" },
+                        new SelectListItem { Value = "GiaoHangNhanh", Text = "Giao hàng nhanh", Selected = Model.DonHang.TrangThai == "GiaoHangNhanh" }
+                    }, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DonViVanChuyen, "", new { @class = "text-danger" })
                 </div>
+                @*<div class="mb-3">
+            @Html.LabelFor(model => model.TrangThai, "Trạng thái", new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.TrangThai, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
+        </div>*@
             </div>
 
             <div class="col-md-6">
@@ -106,7 +121,7 @@
                     <div class="modal-body"></div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                        <button type="button" id="btnConfirmOrder" class="btn btn-primary">Xác nhận</button>
+                        <button type="button" id="btnConfirmOrder" class="btn modal-btn">Xác nhận</button>
                     </div>
                 </div>
             </div>
