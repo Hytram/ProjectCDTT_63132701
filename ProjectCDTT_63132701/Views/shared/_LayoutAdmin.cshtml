@@ -21,9 +21,10 @@
     <div id="menu">
         <div class="header-container">
             <!-- Tìm kiếm -->
-            <div class="header-left">
-                <i class="fas fa-map-marker-alt"></i>
-                <input type="text" placeholder="Tìm kiếm">
+            <div class="header-left position-relative">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm khách hàng..." autocomplete="off">
+                <div id="searchResult" class="search-dropdown"></div>
             </div>
 
             <!-- Logo -->
@@ -199,33 +200,34 @@
         });
     });
 
-    $('#searchInput').on('input', function () {
-        var keyword = $(this).val();
-        if (keyword.length >= 1) {
-            $.ajax({
-                url: '@Url.Action("SearchProduct", "San_pham")',
-                data: { keyword: keyword },
-                success: function (data) {
-                    var resultHtml = '';
-                    if (data.length > 0) {
-                        resultHtml += '<ul class="list-group">';
-                        $.each(data, function (i, sp) {
-                            resultHtml += '<li class="list-group-item">';
-                            resultHtml += '<a href="/san_pham/ChiTietSanPham/' + sp.MaSP + '" style="text-decoration: none; color: black">';
-                            resultHtml += '<img src="/Images/' + sp.AnhSanPham + '" alt="" style="width:30px; height:30px; margin-right:10px;">';
-                            resultHtml += sp.TenSP + '</a></li>';
-                        });
-                        resultHtml += '</ul>';
-                    } else {
-                        resultHtml = '<p class="text-muted m-2">Không tìm thấy sản phẩm</p>';
-                    }
-                    $('#searchResult').html(resultHtml).fadeIn();
+$('#searchInput').on('input', function () {
+    var keyword = $(this).val();
+    if (keyword.length >= 1) {
+        $.ajax({
+            url: '@Url.Action("SearchCustomer", "Khach_hang")', // Đổi controller và action phù hợp
+            data: { keyword: keyword },
+            success: function (data) {
+                var resultHtml = '';
+                if (data.length > 0) {
+                    resultHtml += '<ul class="list-group">';
+                    $.each(data, function (i, kh) {
+                        resultHtml += '<li class="list-group-item">';
+                        resultHtml += '<a href="/Khach_hang/Details/' + kh.MaKH + '" style="text-decoration: none; color: black">';
+                        resultHtml += '<i class="fas fa-user" style="margin-right:10px;"></i>';
+                        resultHtml += kh.HoTen + ' - <small>' + kh.Email + '</small></a></li>';
+                    });
+                    resultHtml += '</ul>';
+                } else {
+                    resultHtml = '<p class="text-muted m-2">Không tìm thấy khách hàng</p>';
                 }
-            });
-        } else {
-            $('#searchResult').fadeOut().empty();
-        }
-    });
+                $('#searchResult').html(resultHtml).fadeIn();
+            }
+        });
+    } else {
+        $('#searchResult').fadeOut().empty();
+    }
+});
+
 
     </script>
     <script>
@@ -256,8 +258,6 @@
 
     </script>
 
-
-    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

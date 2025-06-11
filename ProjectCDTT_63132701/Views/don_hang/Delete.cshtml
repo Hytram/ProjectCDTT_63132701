@@ -3,6 +3,26 @@
 @{
     ViewBag.Title = "Delete";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    var trangThaiDonHangMap = new Dictionary<string, string>
+{
+        { "Pending", "Chờ xác nhận" },
+        { "Confirmed", "Đã xác nhận" },
+        { "Processing", "Đang xử lý" },
+        { "Shipping", "Đang giao hàng" },
+        { "Completed", "Hoàn thành" },
+        { "Cancelled", "Đã hủy" }
+    };
+
+    var trangThaiHoaDonMap = new Dictionary<string, string>
+{
+        { "Pending", "Chờ xử lý" },
+        { "Shipping", "Đang vận chuyển" },
+        { "Delivered", "Đã giao hàng" }
+    };
+
+    string trangThaiDonHangViet = trangThaiDonHangMap.ContainsKey(Model.TrangThai) ? trangThaiDonHangMap[Model.TrangThai] : Model.TrangThai;
+    string trangThaiHoaDonViet = Model.HoaDon != null && trangThaiHoaDonMap.ContainsKey(Model.HoaDon.TrangThai) ? trangThaiHoaDonMap[Model.HoaDon.TrangThai] : (Model.HoaDon?.TrangThai ?? "");
 }
 
 <head>
@@ -23,7 +43,7 @@
                 <dd class="col-sm-9">@Html.DisplayFor(model => model.TongTien)</dd>
 
                 <dt class="col-sm-3">Trạng thái đơn hàng:</dt>
-                <dd class="col-sm-9">@Html.DisplayFor(model => model.TrangThai)</dd>
+                <dd class="col-sm-9">@trangThaiDonHangViet</dd>
 
                 <dt class="col-sm-3">Ngày tạo:</dt>
                 <dd class="col-sm-9">@Html.DisplayFor(model => model.NgayTao)</dd>
@@ -35,7 +55,7 @@
                 <dd class="col-sm-9">@Html.DisplayFor(model => model.KhachHang.HoTen)</dd>
 
                 <dt class="col-sm-3">Trạng thái hóa đơn:</dt>
-                <dd class="col-sm-9">@Html.DisplayFor(model => model.HoaDon.TrangThai)</dd>
+                <dd class="col-sm-9">@trangThaiHoaDonViet</dd>
             </dl>
 
             @using (Html.BeginForm("Delete", "don_hang", FormMethod.Post))

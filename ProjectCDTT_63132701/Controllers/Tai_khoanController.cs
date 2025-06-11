@@ -121,10 +121,10 @@ namespace ProjectCDTT_63132701.Controllers
 
                     ViewBag.Message = "Vui lòng kiểm tra email, bạn sẽ nhận được hướng dẫn qua email!!";
                 }
-                catch (Exception )
+                catch (Exception)
                 {
                     ViewBag.Message = null;
-                    TempData["Error"] = "Gửi mail thất bại!" ;
+                    TempData["Error"] = "Gửi mail thất bại!";
                 }
             }
             else
@@ -142,7 +142,7 @@ namespace ProjectCDTT_63132701.Controllers
             public static void Send(string toEmail, string subject, string body)
             {
                 var fromEmail = "caohuyentramdk@gmail.com";
-                var fromPassword = "owxq irnl rway gudj"; // Dùng App Password nếu là Gmail
+                var fromPassword = "pmdq ebwv biiw reqi"; // Dùng App Password nếu là Gmail
 
                 var smtp = new SmtpClient
                 {
@@ -150,84 +150,84 @@ namespace ProjectCDTT_63132701.Controllers
                     Port = 587,
                     EnableSsl = true,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
-                        UseDefaultCredentials = false,
-                        Credentials = new NetworkCredential(fromEmail, fromPassword)
-                    };
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(fromEmail, fromPassword)
+                };
 
-                    var message = new MailMessage(fromEmail, toEmail, subject, body);
-                    message.IsBodyHtml = true;
+                var message = new MailMessage(fromEmail, toEmail, subject, body);
+                message.IsBodyHtml = true;
 
-                    smtp.Send(message);
-                }
+                smtp.Send(message);
+            }
+        }
+
+        // GET: Hiển thị form đặt lại mật khẩu qua email
+        public ActionResult ResetPassword(string email, string token)
+        {
+            var khachHang = db.KhachHangs.SingleOrDefault(k => k.Email == email && k.Token == token);
+
+            // Kiểm tra token hợp lệ và chưa hết hạn
+            if (khachHang == null || khachHang.TokenHetHan < DateTime.UtcNow)
+            {
+                // Token không hợp lệ hoặc đã hết hạn, chuyển hướng đến trang TokenInvalid
+                return RedirectToAction("TokenInvalid");
             }
 
-            // GET: Hiển thị form đặt lại mật khẩu qua email
-            public ActionResult ResetPassword(string email, string token)
+            ViewBag.Email = email;
+            ViewBag.Token = token;
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult ResetPassword(string email, string token, string matKhauMoi, string xacNhanMatKhau)
+        {
+            var khachHang = db.KhachHangs.SingleOrDefault(k => k.Email == email && k.Token == token);
+
+            // Kiểm tra token hợp lệ và chưa hết hạn
+            if (khachHang == null || khachHang.TokenHetHan < DateTime.UtcNow)
             {
-                var khachHang = db.KhachHangs.SingleOrDefault(k => k.Email == email && k.Token == token);
+                return RedirectToAction("TokenInvalid");
+            }
 
-                // Kiểm tra token hợp lệ và chưa hết hạn
-                if (khachHang == null || khachHang.TokenHetHan < DateTime.UtcNow)
-                {
-                    // Token không hợp lệ hoặc đã hết hạn, chuyển hướng đến trang TokenInvalid
-                    return RedirectToAction("TokenInvalid");
-                }
-
+            if (matKhauMoi != xacNhanMatKhau)
+            {
+                ModelState.AddModelError("", "Mật khẩu mới và xác nhận không khớp!!");
                 ViewBag.Email = email;
                 ViewBag.Token = token;
                 return View();
             }
 
-
-            [HttpPost]
-            public ActionResult ResetPassword(string email, string token, string matKhauMoi, string xacNhanMatKhau)
+            try
             {
-                var khachHang = db.KhachHangs.SingleOrDefault(k => k.Email == email && k.Token == token);
+                khachHang.MatKhau = matKhauMoi;
+                khachHang.Token = null;
+                db.SaveChanges();
 
-                // Kiểm tra token hợp lệ và chưa hết hạn
-                if (khachHang == null || khachHang.TokenHetHan < DateTime.UtcNow)
-                {
-                    return RedirectToAction("TokenInvalid");
-                }
-
-                if (matKhauMoi != xacNhanMatKhau)
-                {
-                    ModelState.AddModelError("", "Mật khẩu mới và xác nhận không khớp!!");
-                    ViewBag.Email = email;
-                    ViewBag.Token = token;
-                    return View();
-                }
-
-                try
-                {
-                    khachHang.MatKhau = matKhauMoi;
-                    khachHang.Token = null;
-                    db.SaveChanges();
-
-                    ViewBag.ThongBao = "Đặt lại mật khẩu thành công. Bạn có thể đăng nhập lại!!";
-                    return View("SuccessPassword");
-                }
-                catch (Exception ex)
-                {
-                    ModelState.AddModelError("", "Lỗi lưu mật khẩu: " + ex.Message);
-                    ViewBag.Email = email;
-                    ViewBag.Token = token;
-                    return View();
-                }
-
+                ViewBag.ThongBao = "Đặt lại mật khẩu thành công. Bạn có thể đăng nhập lại!!";
+                return View("SuccessPassword");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Lỗi lưu mật khẩu: " + ex.Message);
+                ViewBag.Email = email;
+                ViewBag.Token = token;
+                return View();
             }
 
-            public ActionResult TokenInvalid()
-            {
-                return View();
         }
 
-            
+        public ActionResult TokenInvalid()
+        {
+            return View();
+        }
+
+
         [HttpGet]
         public ActionResult Logout()
         {
-            Session.Clear(); 
-            Session.Abandon(); 
+            Session.Clear();
+            Session.Abandon();
             return RedirectToAction("Index", "San_pham");
         }
 

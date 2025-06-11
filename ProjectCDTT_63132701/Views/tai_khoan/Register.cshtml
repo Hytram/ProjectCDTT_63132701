@@ -1,10 +1,10 @@
 ﻿@model ProjectCDTT_63132701.Models.KhachHang
 @{
     ViewBag.Title = "Register";
-    Layout = "~/Views/shared/_LayoutUser.cshtml";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
 }
 <head>
-    <link rel="stylesheet" href="~/Content/login.css" />
+    <link rel="stylesheet" href="~/Content/register.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
@@ -29,33 +29,34 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 @Html.LabelFor(m => m.HoTen, "Họ và tên")
-                                @Html.EditorFor(m => m.HoTen, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập họ tên" } })
-                                @Html.ValidationMessageFor(m => m.HoTen, "", new { @class = "text-danger" })
+                                @Html.EditorFor(m => m.HoTen, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập họ tên", id = "hoTen" } })
+                                <small id="hoTenError" style="color: red;"></small>
                             </div>
 
                             <div class="form-group">
                                 @Html.LabelFor(m => m.Email, "Email")
-                                @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập email" } })
-                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập email", id = "email" } })
+                                <small id="emailError" style="color: red;"></small>
                             </div>
 
                             <div class="form-group">
                                 @Html.LabelFor(m => m.MatKhau, "Mật khẩu")
-                                @Html.EditorFor(m => m.MatKhau, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập mật khẩu", type = "password" } })
-                                @Html.ValidationMessageFor(m => m.MatKhau, "", new { @class = "text-danger" })
+                                @Html.EditorFor(m => m.MatKhau, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập mật khẩu", type = "password", id = "password" } })
+                                <small id="passwordError" style="color: red;"></small>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 @Html.LabelFor(m => m.SoDienThoai, "Số điện thoại")
-                                @Html.EditorFor(m => m.SoDienThoai, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập số điện thoại" } })
-                                @Html.ValidationMessageFor(m => m.SoDienThoai, "", new { @class = "text-danger" })
+                                @Html.EditorFor(m => m.SoDienThoai, new { htmlAttributes = new { @class = "form-control", placeholder = "Nhập số điện thoại", id = "soDienThoai" } })
+                                <small id="soDienThoaiError" style="color: red;"></small>
                             </div>
 
                             <div class="form-group">
                                 @Html.LabelFor(m => m.DiaChi, "Địa chỉ")
-                                @Html.TextAreaFor(m => m.DiaChi, new { @class = "form-control", placeholder = "Nhập địa chỉ", style = "height: 130px; resize: none;" })
-                                @Html.ValidationMessageFor(m => m.DiaChi, "", new { @class = "text-danger" })
+                                @Html.TextAreaFor(m => m.DiaChi, new { @class = "form-control", placeholder = "Nhập địa chỉ", style = "height: 130px; resize: none;", id = "diaChi" })
+                                <small id="diaChiError" style="color: red;"></small>
+
                             </div>
                         </div>
                     </div>
@@ -69,10 +70,11 @@
                         </div>
                     }
                 }
-
-                <p> Đã có tài khoản? <a href="/Tai_khoan/Login">Đăng nhập</a></p>
+                <div class="login-links">
+                    <p> Đã có tài khoản? <a href="/Tai_khoan/Login">Đăng nhập</a></p>
+                  </div>
+                </div>
             </div>
-        </div>
     </div>
 </div>
 
@@ -92,6 +94,73 @@
                 setTimeout(function () {
                     window.location.href = '@Url.Action("Login", "Tai_khoan")';
                 }, 1000);
+            }
+        });
+    </script>
+    <script>
+        const form = document.querySelector('form');
+        const hoTenInput = document.getElementById('hoTen');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const soDienThoaiInput = document.getElementById('soDienThoai');
+        const diaChiInput = document.getElementById('diaChi');
+
+        const hoTenError = document.getElementById('hoTenError');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+        const soDienThoaiError = document.getElementById('soDienThoaiError');
+        const diaChiError = document.getElementById('diaChiError');
+
+        form.addEventListener('submit', function (e) {
+            let isValid = true;
+
+            const hoTen = hoTenInput.value.trim();
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+            const soDienThoai = soDienThoaiInput.value.trim();
+            const diaChi = diaChiInput.value.trim();
+
+            const hoTenRegex = /[^a-z0-9A-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễếệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]/u;
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
+            const soDienThoaiRegex = /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/
+
+            if (!hoTenRegex.test(hoTen)) {
+                hoTenError.textContent = "Họ tên phải viết hoa chữ cái đầu, không chứa số.";
+                isValid = false;
+            } else {
+                hoTenError.textContent = "";
+            }
+
+            if (!emailRegex.test(email)) {
+                emailError.textContent = "Email không hợp lệ. Ví dụ: example@gmail.com";
+                isValid = false;
+            } else {
+                emailError.textContent = "";
+            }
+
+            if (!passwordRegex.test(password)) {
+                passwordError.textContent = "Mật khẩu phải có ít nhất 6 ký tự gồm chữ hoa, chữ thường, số, ký tự đặc biệt.";
+                isValid = false;
+            } else {
+                passwordError.textContent = "";
+            }
+
+            if (!soDienThoaiRegex.test(soDienThoai)) {
+                soDienThoaiError.textContent = "Số điện thoại 10 chữ số, bắt đầu bằng 0 hoặc +84.";
+                isValid = false;
+            } else {
+                soDienThoaiError.textContent = "";
+            }
+            if (diaChiInput == "") {
+                diaChiError.textContent = "Địa chỉ không được để trống!"
+                isValid = false
+            } else {
+                diaChiError.textContent = "";
+            }
+
+            if (!isValid) {
+                e.preventDefault();
             }
         });
     </script>

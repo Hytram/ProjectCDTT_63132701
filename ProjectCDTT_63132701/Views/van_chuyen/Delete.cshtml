@@ -3,6 +3,21 @@
 @{
     ViewBag.Title = "Xóa đơn vị vận chuyển";
     Layout = "~/Views/shared/_LayoutAdmin.cshtml";
+
+    // Hàm helper chuyển trạng thái sang tiếng Việt
+    Func<string, string> TranslateStatus = (status) =>
+    {
+        switch (status)
+        {
+            case "Pending": return "Đang chờ";
+            case "Confirmed": return "Đã xác nhận";
+            case "Processing": return "Đang xử lý";
+            case "Shipping": return "Đang vận chuyển";
+            case "Completed": return "Hoàn thành";
+            case "Cancelled": return "Đã hủy";
+            default: return status;
+        }
+    };
 }
 
 <head>
@@ -14,7 +29,7 @@
     <a href="javascript:history.back()" class="back-button">
         <i class="fa-solid fa-chevron-left"></i> Quay lại
     </a>
-    <h2 class="mb-4">Bạn có chắc chắn muốn xóa đơn vị vận chuyển này?</h2>
+    <h2 class="mb-4">Bạn có chắc chắn muốn xóa đơn đơn hàng vận chuyển này?</h2>
 
     <div class="row">
         <div class="col-md-12">
@@ -23,10 +38,10 @@
                 <dd class="col-sm-9">@Model.DonViVanChuyen</dd>
 
                 <dt class="col-sm-3">Trạng thái:</dt>
-                <dd class="col-sm-9">@Model.TrangThai</dd>
+                <dd class="col-sm-9">@TranslateStatus(Model.TrangThai)</dd>
 
                 <dt class="col-sm-3">Ngày tạo:</dt>
-                <dd class="col-sm-9">@Model.NgayTao?.ToString("dd/MM/yyyy")</dd>
+                <dd class="col-sm-9">@Model.NgayTao")</dd>
 
                 <dt class="col-sm-3">Thời gian giao:</dt>
                 <dd class="col-sm-9">@Model.ThoiGianGiao</dd>
@@ -35,8 +50,10 @@
                 <dd class="col-sm-9">@Model.ThoiGianNhan</dd>
 
                 <dt class="col-sm-3">Trạng thái đơn hàng:</dt>
-                <dd class="col-sm-9"> @Model.DonHang?.TrangThai </dd>
+                <dd class="col-sm-9">@TranslateStatus(Model.DonHang?.TrangThai ?? "")</dd>
 
+                <dt class="col-sm-3">Trạng thái hóa đơn:</dt>
+                <dd class="col-sm-9">@TranslateStatus(Model.DonHang?.HoaDon?.TrangThai ?? "")</dd>
             </dl>
 
             @using (Html.BeginForm("Delete", "Van_chuyen", FormMethod.Post))

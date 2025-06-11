@@ -112,6 +112,20 @@ namespace ProjectCDTT_63132701.Controllers
             }
             return View(khachHang);
         }
+        [HttpGet]
+        public JsonResult SearchCustomer(string keyword)
+        {
+            var matchedCustomers = db.KhachHangs
+                .Where(kh => kh.HoTen.Contains(keyword))
+                .Select(kh => new {
+                    kh.MaKH,
+                    kh.HoTen,
+                    kh.Email
+                }).ToList();
+
+            return Json(matchedCustomers, JsonRequestBehavior.AllowGet);
+        }
+
 
         // GET: Khach_hang/Create
         public ActionResult Create()

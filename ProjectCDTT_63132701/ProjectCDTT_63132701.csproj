@@ -258,11 +258,13 @@
     <Content Include="Content\donhang.css" />
     <Content Include="Content\giohang.css" />
     <Content Include="Content\Home.css" />
+    <Content Include="Content\images\register.css" />
     <Content Include="Content\khuyenmai.css" />
     <Content Include="Content\loaibac.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\pagination.css" />
     <Content Include="Content\qlsp.css" />
+    <Content Include="Content\register.css" />
     <Content Include="Content\rootcss.css" />
     <Content Include="Content\sanpham.css" />
     <Content Include="Content\Style.css" />
@@ -513,7 +515,6 @@
     <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Content\images\" />
     <Folder Include="Views\account\" />
   </ItemGroup>
   <ItemGroup>

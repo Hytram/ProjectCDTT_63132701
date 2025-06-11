@@ -23,7 +23,7 @@
 
         <div class="login-right">
             <div class="login-form-wrapper">
-                <h5>Cập nhật thông tin của khách hàng: @Model.HoTen</h5>
+                <h5>Cập nhật thông tin của khách hàng</br> @Model.HoTen</h5>
                 @using (Html.BeginForm("EditProfile", "Khach_hang", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
@@ -89,7 +89,7 @@
                 toastr.options = {
                     "closeButton": true,
                     "progressBar": true,
-                    "positionClass": "toast-top-right",
+                    "positionClass": "toast-bottom-right",
                     "timeOut": "4000"
                 };
                 toastr.success(message);

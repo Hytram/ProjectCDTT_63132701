@@ -306,11 +306,16 @@ namespace ProjectCDTN_63132701.Controllers
             int maKhachHang = (int)Session["UserId"];
             var gioHang = db.GioHangs.Include("ChiTietGioHangs.SanPham")
                                      .FirstOrDefault(g => g.MaKH == maKhachHang && g.TrangThai == "Pending");
+
             if (gioHang == null || !gioHang.ChiTietGioHangs.Any())
             {
                 TempData["Message"] = "Giỏ hàng của bạn trống";
                 return RedirectToAction("Index", "San_pham");
             }
+
+            // 👉 Tính tổng tiền sản phẩm:
+            decimal tongTienSanPham = gioHang.ChiTietGioHangs.Sum(item => item.SanPham.DonGia * item.SoLuong);
+            decimal tongTienDonHang = tongTienSanPham + giaVanChuyen;
 
             string GenerateTrackingNumber()
             {
@@ -320,7 +325,7 @@ namespace ProjectCDTN_63132701.Controllers
             DonHang donHang = new DonHang
             {
                 MaKH = maKhachHang,
-                TongTien = giaVanChuyen,
+                TongTien = tongTienDonHang, // ✅ Đã đúng
                 NgayTao = DateTime.Now,
                 TrangThai = "Pending",
                 MaVanDon = GenerateTrackingNumber()
@@ -351,7 +356,7 @@ namespace ProjectCDTN_63132701.Controllers
                 MaKH = maKhachHang,
                 NgayTao = DateTime.Now,
                 TrangThai = "Pending",
-                TongTien = donHang.TongTien
+                TongTien = tongTienDonHang // ✅ Đã đúng
             };
             db.HoaDons.Add(hoaDon);
             db.SaveChanges();
@@ -386,6 +391,7 @@ namespace ProjectCDTN_63132701.Controllers
             TempData["Message"] = "Đặt hàng thành công!";
             return RedirectToAction("GioHang", "San_pham");
         }
+
 
         public ActionResult HoaDon()
         {
